@@ -1,0 +1,68 @@
+@extends('layout.main_admin')
+
+@section('profileAdmin')
+
+<div class="container">
+
+    <h3 style="margin-top: 30px;">My Profile</h3>
+
+    <form action="" id="formDaftar" method="POST">
+        @csrf
+        <div class="mb-6">
+          <label for="exampleInputEmail1" class="form-label" style="margin-top:20px">Username</label>
+          <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" style="width: 70%;" placeholder="Username">
+          @error('username')
+          <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
+         @enderror
+        </div>
+        <div class="mb-6">
+            <label for="exampleInputAlamat" class="form-label">Full Name</label>
+            <input type="text" name="full_name" class="form-control" id="full_name" style="width: 70%;" placeholder="Full Name">
+            @error('full_name')
+            <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
+           @enderror
+          </div>
+          <div class="mb-6">
+            <label for="exampleInputAlamat" class="form-label">Address</label>
+            <input type="text" name="alamat" class="form-control" id="address" style="width: 70%;" placeholder="Address">
+            @error('alamat')
+            <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
+           @enderror
+          </div>
+          <div class="mb-6">
+            <label for="exampleInputAlamat" class="form-label">Phone Number</label>
+            <input type="text" name="phone" class="form-control" id="phone" style="width: 70%;" placeholder="Phone Number">
+            @error('phone')
+            <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
+           @enderror
+          </div>
+          <div class="mb-6">
+            <label for="exampleInputAlamat" class="form-label">Email</label>
+            <input type="text" name="email" class="form-control" id="phone" style="width: 70%;" placeholder="Email">
+            @error('email')
+            <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
+           @enderror
+          </div>
+        <div class="mb-6">
+          <label for="exampleInputPassword1" class="form-label">New Password</label>
+          <input type="password" name="password" class="form-control" id="password" style="width: 70%;"placeholder="Password">
+          @error('password')
+          <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
+         @enderror
+        </div>
+        <div class="mb-6">
+            <label for="exampleInputPassword1" class="form-label">Current Password</label>
+            <input type="password" name="newpassword" class="form-control" id="newpassword" style="width: 70%;"placeholder="New Password">
+            @error('newpassword')
+            <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
+           @enderror
+          </div>
+        <br>
+        <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%;" value="" >Edit</button>
+      </form>
+
+
+
+</div>
+
+@endsection

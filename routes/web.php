@@ -78,3 +78,5 @@ Route::prefix('admin')->group(function () {
     //do add new size :
     Route::post('/masters/products/sizes',[AdminController::class,'doAddnewSize']);
 });
+
+

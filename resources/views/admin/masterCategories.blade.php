@@ -67,12 +67,27 @@
                 <td>{{$kat->id}}</td>
                 <td>{{$kat->nama}}</td>
                 <td>
-                    <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 15%;" value="">
+                    @if ($kat->deleted_at==null)
+                        <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 15%;" value="">
+                            <a href="{{url('/admin/edit/category/'.$kat->id)}}" style="text-decoration: none; color: white">Edit</a>
+                       </button>
+                    @else
+                    <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 15%;" value="" disabled>
                         <a href="{{url('/admin/edit/category/'.$kat->id)}}" style="text-decoration: none; color: white">Edit</a>
-                    </button>
-                    <button type="submit" name="btnsubmit" class="btn btn-danger" id="btnsubmit" style="width: 15%;" value="" >
-                    <a href="" style="text-decoration: none; color: white">Delete</a>
-                    </button>
+                   </button>
+                    @endif
+
+
+                    @if ($kat->deleted_at==null)
+                        <button type="submit" name="btnsubmit" class="btn btn-danger" id="btnsubmit" style="width: 15%;" value="" >
+                             <a href="{{url('/admin/doDeleteKategori/'.$kat->id)}}" style="text-decoration: none; color: white">Delete</a>
+                        </button>
+                    @else
+                        <button type="submit" name="btnsubmit" class="btn btn-info" id="btnsubmit" style="width: 15%;" value="" >
+                             <a href="{{url('/admin/doDeleteKategori/'.$kat->id)}}" style="text-decoration: none; color: white">Restore</a>
+                        </button>
+                    @endif
+
                 </td>
             </tr>
             @endforeach

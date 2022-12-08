@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarScroll">
-        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px; float: right;">
           <li class="nav-item dropdown">
             <a class="nav-link {{$activeMaster}} dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Masters
@@ -14,6 +14,7 @@
               <li><a class="dropdown-item" href="{{url('/admin/masters/users')}}">Users</a></li>
               <li><a class="dropdown-item" href="{{url('/admin/masters/categories')}}">Categories</a></li>
               <li><a class="dropdown-item" href="{{url('/admin/masters/products')}}">Products</a></li>
+              <li><a class="dropdown-item" href="{{url('/admin/masters/promos')}}">Promo Codes</a></li>
               <li><a class="dropdown-item" href=""></a></li>
             </ul>
           </li>
@@ -23,8 +24,8 @@
               Transactions
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{{url('/admin/masters/users')}}">Transactions</a></li>
-              <li><a class="dropdown-item" href="{{url('/admin/masters/categories')}}">Reports</a></li>
+              <li><a class="dropdown-item" href="">Transactions</a></li>
+              <li><a class="dropdown-item" href="">Reports</a></li>
             </ul>
           </li>
 
@@ -37,7 +38,7 @@
               <img src="{{asset('profile.png')}}" alt="" style="width:25px;height: 25px; margin-top: -5px">
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">Profile</a></li>
+              <li><a class="dropdown-item" href="{{url('/admin/profile')}}">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="">Logout</a></li>
             </ul>
