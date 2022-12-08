@@ -77,6 +77,17 @@ Route::prefix('admin')->group(function () {
     Route::get('/toManageItem/{id}',[AdminController::class,'toManageItem']);
     //do add new size :
     Route::post('/masters/products/sizes',[AdminController::class,'doAddnewSize']);
+    //do delete stock and size :
+    Route::get('/doDeleteSizeStock/{id}',[AdminController::class,'doDeleteSizeStock']);
+    //do delete product :
+    Route::get('/doDeleteProduct/{id}',[AdminController::class,'doDeleteProduct']);
+    //to edit product :
+    Route::get('/products/edit/{id}',[AdminController::class,'toEditBaju'])->name('toEditBaju');
+    //do delete photo on edit :
+    Route::get('/doDeleteFoto/{id}',[AdminController::class,'doDeleteFoto']);
+    //do edit photo
+    Route::get('/doEditBaju',[AdminController::class,'doEditBaju']);
 });
+
 
 
