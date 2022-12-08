@@ -1,0 +1,47 @@
+.navbar-brand{
+    font-size: 36px !important;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.navbar{
+    background-color: white !important;
+    color: black Im !important;
+    height: 65px !important;
+}
+
+
+.navbar-nav{
+   margin-left: 70%;
+}
+
+
+#header{
+    background-color:white;
+    color: black;
+    text-align: center;
+    font-size: 12px;
+}
+
+.garis{
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+
+.banner{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: calc(100vh - 65px);
+}
+
+
+.footer{
+    height: 20px!important;
+    background-color: white !important;
+    color: black;
+}
+
+.body{
+    overflow: hidden;
+}
