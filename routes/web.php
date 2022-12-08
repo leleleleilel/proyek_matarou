@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//tes123
+//456
 Route::get('/', function () {
     return redirect('/login');
 });
