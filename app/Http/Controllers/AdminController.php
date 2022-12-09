@@ -170,6 +170,7 @@ class AdminController extends Controller
     public function doTambahAdmin(Request $request){
 
         $id_user = $request->id_user;
+
         $username = $request->username;
         $nama = $request->full_name;
         $alamat = $request->alamat;
@@ -179,16 +180,17 @@ class AdminController extends Controller
 
         $message = "";
 
-        $validate = $request->validate([
-            'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha',new CekUsername()],
-            'full_name'=>'required|max:50',
-            'alamat'=>'required|min:12',
-            'email'=>'required|email|unique:user,email',
-            'phone'=>['required','numeric',new CekPanjangTelepon()],
-            'password'=>['required', 'min:8', "regex:/^(?:(?=.*[@_!#$%^&*()<>?\/|}{~:])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/"],
-        ]);
 
         if($id_user==-1){
+            $validate = $request->validate([
+                'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha',new CekUsername()],
+                'full_name'=>'required|max:50',
+                'alamat'=>'required|min:12',
+                'email'=>'required|email|unique:user,email',
+                'phone'=>['required','numeric',new CekPanjangTelepon()],
+                'password'=>['required', 'min:8', "regex:/^(?:(?=.*[@_!#$%^&*()<>?\/|}{~:])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/"],
+            ]);
+
             User::create(
                 [
                     "username"=>$username,
@@ -205,21 +207,80 @@ class AdminController extends Controller
           $message = "Register New Admin Success!";
         }else{
             //edit
-
             $user = User::where('id',$id_user)->first();
-            $username_lama = $user->username;
 
-            if($username_lama!=$username){
-
+            if($user->role=="admin"){
+                $validate = $request->validate([
+                    'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha'],
+                    'full_name'=>'required|max:50',
+                    'alamat'=>'required|min:12',
+                    'email'=>'required|email',
+                    'phone'=>['required','numeric',new CekPanjangTelepon()],
+                    'password'=>['required', 'min:8', "regex:/^(?:(?=.*[@_!#$%^&*()<>?\/|}{~:])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/"],
+                ]);
             }else{
-
+                $validate = $request->validate([
+                    'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha'],
+                    'full_name'=>'required|max:50',
+                    'alamat'=>'required|min:12',
+                    'email'=>'required|email',
+                    'phone'=>['required','numeric',new CekPanjangTelepon()]
+                ]);
             }
 
+
+            $users = User::all();
+            $username_lama = $user->username;
+            $email_lama = $user->email;
+            $ada = false;
+
+            if($username_lama!=$username){
+                //periksa kembar atau ngga
+                foreach ($users as $usr) {
+                    if($usr->username==$username){
+                        $ada = true;
+                        break;
+                    }
+                }
+            }
+
+            if($ada == true){
+                $message = "Username has already taken!";
+            }else{
+                //email check
+                $ada_email = false;
+
+                if($email_lama!=$email){
+
+                    foreach ($users as $usr) {
+                        if($usr->email==$email){
+                            $ada_email=true;
+                            break;
+                        }
+                    }
+                }
+
+                if($ada_email==false){
+                    $user->nama = $nama;
+                    $user->username = $username;
+                    if($user->role=="admin"){
+                        $user->password = $password;
+                    }
+                    $user->alamat = $alamat;
+                    $user->no_telp = $no_telp;
+                    $user->email = $email;
+                    $user->save();
+
+                    $message = "User Edited!";
+                }else{
+                    $message = "Email has already taken!";
+                }
+            }
         }
 
         return redirect()->route('toMasterUsers')->with("message",[
             "isi"=>$message
-    ]);
+        ]);
     }
 
     public function toEditUsers(Request $request){

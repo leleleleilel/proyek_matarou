@@ -161,7 +161,7 @@
                     <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 45%;" value="">
                         <a href="{{url('/admin/edit/user/'.$user->id)}}" style="text-decoration: none; color: white">Edit</a>
                     </button>
-                    <button type="submit" name="btnsubmit" class="btn btn-danger" id="btnsubmit" style="width: 45%;" value="" >
+                    <button type="submit" name="btnsubmit" class="btn btn-danger" id="btnsubmit" style="width: 50%;" value="" >
                     <a href="" style="text-decoration: none; color: white">Delete</a>
                     </button>
                 </td>
