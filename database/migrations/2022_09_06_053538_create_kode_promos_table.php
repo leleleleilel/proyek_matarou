@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('kode_promo', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('kode');
             $table->integer('besar_potongan');
             $table->string('jenis_potongan');
             $table->date('valid_from');
