@@ -33,9 +33,15 @@
             <a class="nav-link {{$activeReviews}}" aria-current="page" href="{{url('/admin/reviews')}}">Reviews</a>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" style="margin-left: 3px">
+            @if (Session::has("current_user"))
+                @php
+                    $nama = Session::get("current_user")->nama;
+                @endphp
+                @endif
             <a class="nav-link {{$activeProfile}} dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="{{asset('profile.png')}}" alt="" style="width:25px;height: 25px; margin-top: -5px">
+
+              <img src="{{asset('profile.png')}}" alt="" style="width:25px;height: 25px; margin-top: -6px">{{$nama}}
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{url('/admin/profile')}}">Profile</a></li>

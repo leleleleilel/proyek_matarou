@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Str;
 
@@ -718,6 +719,8 @@ class AdminController extends Controller
         if(Auth::attempt($credential)){
             if(Auth::user()->role=="admin")
             {
+                $user = User::where('username',$username)->first();
+                Session::put("current_user",$user);
                 return redirect('admin/masters/users');
             }
         }
@@ -729,6 +732,7 @@ class AdminController extends Controller
 
     public function doLogout(Request $request){
         Auth::logout();
+        session()->forget('current_user');
         return redirect('admin/login');
     }
 
