@@ -686,4 +686,21 @@ class AdminController extends Controller
 
     }
 
+    public function doDeleteUser(Request $request){
+        $id = $request->id;
+        $message = "";
+
+        $user = User::withTrashed()->where('id',$id)->first();
+        if($user->trashed()){
+            $user->restore();
+            $message = "Restored!";
+        }else{
+            $user->delete();
+            $message = "Deleted!";
+        }
+        return redirect()->route('toMasterUsers')->with("message",[
+            "isi"=>$message
+        ]);
+    }
+
 }
