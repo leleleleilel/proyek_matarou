@@ -43,6 +43,8 @@ Route::prefix('customer')->group(function () {
 Route::prefix('admin')->group(function () {
     //login admin :
     Route::get('/login',[AdminController::class,'toLoginAdmin'])->name('toLoginAdmin');
+    //admin do login :
+    Route::post('/doLogin',[AdminController::class,'doLogin']);
     //master users :
     Route::get('/masters/users',[AdminController::class,'toMasterUsers'])->name('toMasterUsers');
     //master categories :

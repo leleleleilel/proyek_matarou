@@ -87,6 +87,8 @@
 
             @if (isset($user))
               <input type="text" name="email" class="form-control" id="phone" style="width: 70%;" placeholder="Email" value="{{$user->email}}">
+            @else
+            <input type="text" name="email" class="form-control" id="phone" style="width: 70%;" placeholder="Email" >
             @endif
 
 
@@ -160,11 +162,11 @@
                 <td>
 
                     @if ($user->deleted_at==null)
-                      <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 45%;" value="">
+                      <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" value="">
                         <a href="{{url('/admin/edit/user/'.$user->id)}}" style="text-decoration: none; color: white">Edit</a>
                       </button>
                     @else
-                      <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 45%;" value="" disabled>
+                      <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" value="" disabled>
                         <a href="{{url('/admin/edit/user/'.$user->id)}}" style="text-decoration: none; color: white">Edit</a>
                      </button>
                     @endif
@@ -172,11 +174,11 @@
 
 
                     @if ($user->deleted_at==null)
-                      <button type="submit" name="btnsubmit" class="btn btn-danger" id="btnsubmit" style="width: 50%;" value="" >
+                      <button type="submit" name="btnsubmit" class="btn btn-danger" id="btnsubmit" value="" >
                         <a href="{{url('/admin/doDeleteUser/'.$user->id)}}" style="text-decoration: none; color: white">Delete</a>
                       </button>
                     @else
-                      <button type="submit" name="btnsubmit" class="btn btn-info" id="btnsubmit" style="width: 50%;" value="" >
+                      <button type="submit" name="btnsubmit" class="btn btn-info" id="btnsubmit" value="" >
                         <a href="{{url('/admin/doDeleteUser/'.$user->id)}}" style="text-decoration: none; color: white">Restore</a>
                       </button>
                     @endif
