@@ -13,53 +13,113 @@
     @endif
 
     {{-- form  --}}
-    <h5 style="margin-top: 30px; color: darkslategray; font-weight: bold">Add New Admin : </h5>
+    @if ($mode==1)
+      <h5 style="margin-top: 30px; color: darkslategray; font-weight: bold">Add New Admin : </h5>
+    @else
+      <h5 style="margin-top: 30px; color: darkslategray; font-weight: bold">Edit User </h5>
+    @endif
+
     <form action="{{url('/admin/doTambahAdmin')}}" id="formDaftar" method="POST">
         @csrf
+
+        @if ($mode==2)
+          <input type="hidden" name="id_user" value="{{$user->id}}">
+        @else
+        <input type="hidden" name="id_user" value="-1">
+        @endif
+
         <div class="mb-6">
           <label for="exampleInputEmail1" class="form-label" style="margin-top:20px">Username</label>
+
+          @if (isset($user))
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" style="width: 70%;" placeholder="Username" value="{{$user->username}}">
+          @else
           <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" style="width: 70%;" placeholder="Username">
+          @endif
+
+
           @error('username')
           <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
          @enderror
         </div>
         <div class="mb-6">
             <label for="exampleInputAlamat" class="form-label">Full Name</label>
-            <input type="text" name="full_name" class="form-control" id="full_name" style="width: 70%;" placeholder="Full Name">
+
+            @if (isset($user))
+              <input type="text" name="full_name" class="form-control" id="full_name" style="width: 70%;" placeholder="Full Name" value="{{$user->nama}}">
+            @else
+              <input type="text" name="full_name" class="form-control" id="full_name" style="width: 70%;" placeholder="Full Name">
+            @endif
+
             @error('full_name')
             <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
            @enderror
           </div>
           <div class="mb-6">
             <label for="exampleInputAlamat" class="form-label">Address</label>
-            <input type="text" name="alamat" class="form-control" id="address" style="width: 70%;" placeholder="Address">
+
+            @if (isset($user))
+              <input type="text" name="alamat" class="form-control" id="address" style="width: 70%;" placeholder="Address" value="{{$user->alamat}}">
+            @else
+              <input type="text" name="alamat" class="form-control" id="address" style="width: 70%;" placeholder="Address">
+            @endif
+
             @error('alamat')
             <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
            @enderror
           </div>
           <div class="mb-6">
             <label for="exampleInputAlamat" class="form-label">Phone Number</label>
-            <input type="text" name="phone" class="form-control" id="phone" style="width: 70%;" placeholder="Phone Number">
+
+            @if (isset($user))
+                <input type="text" name="phone" class="form-control" id="phone" style="width: 70%;" placeholder="Phone Number" value="{{$user->no_telp}}">
+            @else
+               <input type="text" name="phone" class="form-control" id="phone" style="width: 70%;" placeholder="Phone Number">
+            @endif
+
+
             @error('phone')
             <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
            @enderror
           </div>
           <div class="mb-6">
             <label for="exampleInputAlamat" class="form-label">Email</label>
-            <input type="text" name="email" class="form-control" id="phone" style="width: 70%;" placeholder="Email">
+
+            @if (isset($user))
+              <input type="text" name="email" class="form-control" id="phone" style="width: 70%;" placeholder="Email" value="{{$user->email}}">
+            @endif
+
+
             @error('email')
             <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
            @enderror
           </div>
         <div class="mb-6">
           <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" name="password" class="form-control" id="password" style="width: 70%;"placeholder="Password">
+
+          @if (isset($user))
+            @if ($user->role=="admin")
+            <input type="password" name="password" class="form-control" id="password" style="width: 70%;"placeholder="Password" value="{{$user->password}}">
+            @else
+            <input type="password" name="password" class="form-control" id="password" style="width: 70%;"placeholder="Password" disabled>
+            @endif
+
+          @else
+            <input type="password" name="password" class="form-control" id="password" style="width: 70%;"placeholder="Password">
+          @endif
+
+
           @error('password')
           <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
          @enderror
         </div>
         <br>
-        <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%;" value="" >Insert New Admin</button>
+        @if ($mode==1)
+           <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%;" value="" >Insert New Admin</button>
+        @else
+           <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%;" value="" >Edit</button>
+        @endif
+
       </form>
 
     {{-- table --}}

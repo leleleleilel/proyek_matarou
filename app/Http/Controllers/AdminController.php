@@ -8,10 +8,12 @@ use App\Models\Dfoto;
 use App\Models\kategori;
 use App\Models\kode_promo;
 use App\Models\size;
+use App\Models\User;
 use App\Rules\CekPanjangTelepon;
 use App\Rules\CekUsername;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Str;
 
@@ -23,14 +25,15 @@ class AdminController extends Controller
     }
 
     public function toMasterUsers(){
-        $list_users = DB::select("select * from user");
+        $list_users = User::withTrashed()->get();
         return view('admin.masterUser',[
             "title"=>"Master User",
             "activeMaster"=>"active",
             "activeReports"=>"",
             "activeReviews"=>"",
             "activeProfile"=>"",
-            "users"=>$list_users
+            "users"=>$list_users,
+            "mode"=>1
         ]);
     }
 
@@ -165,6 +168,8 @@ class AdminController extends Controller
     }
 
     public function doTambahAdmin(Request $request){
+
+        $id_user = $request->id_user;
         $username = $request->username;
         $nama = $request->full_name;
         $alamat = $request->alamat;
@@ -178,13 +183,39 @@ class AdminController extends Controller
             'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha',new CekUsername()],
             'full_name'=>'required|max:50',
             'alamat'=>'required|min:12',
-            'email'=>'required|email',
+            'email'=>'required|email|unique:user,email',
             'phone'=>['required','numeric',new CekPanjangTelepon()],
             'password'=>['required', 'min:8', "regex:/^(?:(?=.*[@_!#$%^&*()<>?\/|}{~:])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/"],
         ]);
 
-        DB::insert("insert into user(username, password, nama, alamat, no_telp, email, role,status) VALUES (?, ?, ?, ?, ?, ?, ?,?)", [$username, $password, $nama,$alamat, $no_telp, $email, "admin",1]);
-        $message = "Register New Admin Success!";
+        if($id_user==-1){
+            User::create(
+                [
+                    "username"=>$username,
+                    "password"=>$password,
+                    "nama"=>$nama,
+                    "alamat"=>$alamat,
+                    "no_telp"=>$no_telp,
+                    "email"=>$email,
+                    "role"=>"admin",
+                    "deleted_at"=>null
+                ]
+            );
+
+          $message = "Register New Admin Success!";
+        }else{
+            //edit
+
+            $user = User::where('id',$id_user)->first();
+            $username_lama = $user->username;
+
+            if($username_lama!=$username){
+
+            }else{
+
+            }
+
+        }
 
         return redirect()->route('toMasterUsers')->with("message",[
             "isi"=>$message
@@ -194,14 +225,17 @@ class AdminController extends Controller
     public function toEditUsers(Request $request){
         $id = $request->id;
 
-        $list_users = DB::select("select * from user");
+        $list_users = User::withTrashed()->get();
+        $user = User::where('id',$id)->first();
         return view('admin.masterUser',[
             "title"=>"Master User",
             "activeMaster"=>"active",
             "activeReports"=>"",
             "activeReviews"=>"",
             "activeProfile"=>"",
-            "users"=>$list_users
+            "users"=>$list_users,
+            "user"=>$user,
+            "mode"=>2
         ]);
 
     }
@@ -506,16 +540,21 @@ class AdminController extends Controller
     }
 
     public function doDeleteFoto(Request $request){
-          $id = $request->id;
+          $id = $request->id; //id dari d_foto_baju
+          $img = Dfoto::where('id',$id);
+          $id_baju = $img->id_baju;
+          $img->forceDelete();
 
+          $message = "Image Deleted!";
 
-
+          return redirect('/admin/products/edit/'.$id_baju)->with("message",[
+            "isi"=>$message
+        ]);
 
     }
 
     public function doEditBaju(Request $request){
         $id_item = $request->id_item;
-
 
 
     }
