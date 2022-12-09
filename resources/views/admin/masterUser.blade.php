@@ -132,7 +132,6 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Username</th>
-            <th scope="col">Password</th>
             <th scope="col">Name</th>
             <th scope="col">Address</th>
             <th scope="col">Phone Number</th>
@@ -149,11 +148,6 @@
             <tr>
                 <td>{{$user->id}}</td>
                 <td>{{$user->username}}</td>
-                <td>
-                    @if ($user->role=="admin")
-                        {{$user->password}}
-                    @endif
-                </td>
                 <td>{{$user->nama}}</td>
                 <td>{{$user->alamat}}</td>
                 <td>{{$user->no_telp}}</td>
