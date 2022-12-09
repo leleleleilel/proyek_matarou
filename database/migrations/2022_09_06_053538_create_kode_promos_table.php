@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('valid_until');
             $table->integer('minimum_total');
             $table->integer('status');
+            $table->timestamp('deleted_at')->nullable()->default(null);
         });
     }
 

@@ -25,6 +25,8 @@ return new class extends Migration
                 ->references('id')->on('size')
                 ->onDelete('cascade');
             $table->integer('status');
+            $table->timestamp('deleted_at')->nullable()->default(null);
+            $table->integer('terjual')->default(0);
         });
     }
 

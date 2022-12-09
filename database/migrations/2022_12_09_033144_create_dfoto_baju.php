@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('baju', function (Blueprint $table) {
+        Schema::create('d_foto_baju', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->string('nama');
-            $table->longText('deskripsi');
-            $table->integer('harga');
-            $table->unsignedBigInteger('fk_kategori');
-            $table->foreign('fk_kategori')
-                ->references('id')->on('kategori')
+            $table->unsignedBigInteger('id_baju');
+            $table->foreign('id_baju')
+                ->references('id')->on('baju')
                 ->onDelete('cascade');
+            $table->text('nama_file');
             $table->integer('status');
             $table->timestamp('deleted_at')->nullable()->default(null);
         });
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('baju');
+        Schema::dropIfExists('dfoto_baju');
     }
 };

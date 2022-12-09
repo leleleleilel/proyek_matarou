@@ -57,7 +57,6 @@ class AdminController extends Controller
         $list_categories = kategori::all();
         $list_products = baju::withTrashed()->get();
         $list_dfotos = Dfoto::all();
-        $list_categories = kategori::all();
         return view('admin.masterProducts',[
             "title"=>"Master Product",
             "activeMaster"=>"active",

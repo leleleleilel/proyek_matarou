@@ -22,6 +22,7 @@ return new class extends Migration
                 ->references('nomornota')->on('h_trans')
                 ->onDelete('cascade');
             $table->integer('status');
+            $table->timestamp('deleted_at')->nullable()->default(null);
         });
     }
 
