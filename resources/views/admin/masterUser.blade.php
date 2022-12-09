@@ -99,9 +99,9 @@
 
         <br>
         @if ($mode==1)
-           <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%;" value="" >Insert New Admin</button>
+           <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%;">Insert New Admin</button>
         @else
-           <button type="submit" name="btnsubmit" class="btn btn-dark"s id="btnsubmit" style="width: 30%;" value="" >Edit</button>
+           <button type="submit" name="btnsubmit" class="btn btn-dark"s id="btnsubmit" style="width: 30%;">Edit</button>
         @endif
 
       </form>
