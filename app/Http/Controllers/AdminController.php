@@ -24,6 +24,24 @@ class AdminController extends Controller
 {
 
     public function toLoginAdmin(){
+        //jika blm ada users sama sekali (admin)maka tambahkan satu yaitu
+        //username: admin password : admin
+        $users = User::where('role','admin')->get();
+        if(sizeof($users)==0){
+            User::create(
+                [
+                    //saat membuat user baru, username = password
+                    "username"=>"admin",
+                    "password"=>Hash::make("admin"),
+                    "nama"=>"Admin",
+                    "alamat"=>"-",
+                    "no_telp"=>"-",
+                    "email"=>"-",
+                    "role"=>"admin",
+                    "deleted_at"=>null
+                ]
+            );
+        }
         return view('admin.loginadmin');
     }
 
@@ -387,6 +405,8 @@ class AdminController extends Controller
         $valid_from = $request->validfrom;
         $valid_until = $request->validuntil;
         $minimum_total = $request->minimum;
+        $kode ="";
+
 
         $message= "";
 
@@ -402,6 +422,15 @@ class AdminController extends Controller
 
         if($id_edit==-1){
             //insert
+            $kode = $this->generateRandomString(6);
+            $promos = kode_promo::all();
+
+            foreach ($promos as $promo) {
+                if($promo->kode==$kode){
+                    $kode = $this->generateRandomString(6);
+                }
+            }
+
             $new_kode_promo = new kode_promo();
             $new_kode_promo->nama = $nama;
             $new_kode_promo->besar_potongan = (int)$besar_potongan;
@@ -409,6 +438,7 @@ class AdminController extends Controller
             $new_kode_promo->valid_from = $valid_from;
             $new_kode_promo->valid_until = $valid_until;
             $new_kode_promo->minimum_total = (int)$minimum_total;
+            $new_kode_promo->kode =$kode;
             $new_kode_promo->save();
 
             $message = "Promo Code Added!";
@@ -823,5 +853,16 @@ class AdminController extends Controller
             "isi"=>$message
         ]);
     }
+
+    public  function generateRandomString($length = 20) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
 
 }

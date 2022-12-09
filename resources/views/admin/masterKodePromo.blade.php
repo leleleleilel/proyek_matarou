@@ -131,6 +131,7 @@ function rupiah($angka){
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Code</th>
             <th scope="col">Discount</th>
             <th scope="col">Discount Type</th>
             <th scope="col">Valid From</th>
@@ -147,6 +148,7 @@ function rupiah($angka){
             <tr>
                 <td>{{$promo->id}}</td>
                 <td>{{$promo->nama}}</td>
+                <td>{{$promo->kode}}</td>
                 @if ($promo->jenis_potongan=="Potongan")
                     <td>{{rupiah($promo->besar_potongan)}}</td>
                 @else
