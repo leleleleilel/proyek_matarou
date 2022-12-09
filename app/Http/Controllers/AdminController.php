@@ -177,7 +177,6 @@ class AdminController extends Controller
         $alamat = $request->alamat;
         $no_telp = $request->phone;
         $email = $request->email;
-        $password = $request->password;
 
         $message = "";
 
@@ -189,13 +188,13 @@ class AdminController extends Controller
                 'alamat'=>'required|min:12',
                 'email'=>'required|email|unique:user,email',
                 'phone'=>['required','numeric',new CekPanjangTelepon()],
-                'password'=>['required', 'min:8', "regex:/^(?:(?=.*[@_!#$%^&*()<>?\/|}{~:])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/"],
             ]);
 
             User::create(
                 [
+                    //saat membuat user baru, username = password
                     "username"=>$username,
-                    "password"=>Hash::make($password),
+                    "password"=>Hash::make($username),
                     "nama"=>$nama,
                     "alamat"=>$alamat,
                     "no_telp"=>$no_telp,
@@ -217,7 +216,7 @@ class AdminController extends Controller
                     'alamat'=>'required|min:12',
                     'email'=>'required|email',
                     'phone'=>['required','numeric',new CekPanjangTelepon()],
-                    'password'=>['required', 'min:8', "regex:/^(?:(?=.*[@_!#$%^&*()<>?\/|}{~:])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/"],
+
                 ]);
             }else{
                 $validate = $request->validate([
@@ -264,9 +263,6 @@ class AdminController extends Controller
                 if($ada_email==false){
                     $user->nama = $nama;
                     $user->username = $username;
-                    if($user->role=="admin"){
-                        $user->password = $password;
-                    }
                     $user->alamat = $alamat;
                     $user->no_telp = $no_telp;
                     $user->email = $email;
@@ -733,7 +729,7 @@ class AdminController extends Controller
 
     public function doLogout(Request $request){
         Auth::logout();
-
+        return redirect('admin/login');
     }
 
 }

@@ -96,30 +96,12 @@
             <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
            @enderror
           </div>
-        <div class="mb-6">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
 
-          @if (isset($user))
-            @if ($user->role=="admin")
-            <input type="password" name="password" class="form-control" id="password" style="width: 70%;"placeholder="Password" value="{{$user->password}}">
-            @else
-            <input type="password" name="password" class="form-control" id="password" style="width: 70%;"placeholder="Password" disabled>
-            @endif
-
-          @else
-            <input type="password" name="password" class="form-control" id="password" style="width: 70%;"placeholder="Password">
-          @endif
-
-
-          @error('password')
-          <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
-         @enderror
-        </div>
         <br>
         @if ($mode==1)
            <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%;" value="" >Insert New Admin</button>
         @else
-           <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%;" value="" >Edit</button>
+           <button type="submit" name="btnsubmit" class="btn btn-dark"s id="btnsubmit" style="width: 30%;" value="" >Edit</button>
         @endif
 
       </form>

@@ -89,6 +89,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/doEditBaju',[AdminController::class,'doEditBaju']);
     //do delete users
     Route::get('/doDeleteUser/{id}',[AdminController::class,'doDeleteUser']);
+    //do logout admin
+    Route::get('/doLogout',[AdminController::class,'doLogout']);
 });
 
 

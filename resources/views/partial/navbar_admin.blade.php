@@ -40,7 +40,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{url('/admin/profile')}}">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="">Logout</a></li>
+              <li><a class="dropdown-item" href="{{url('admin/doLogout')}}">Logout</a></li>
             </ul>
           </li>
         </ul>
