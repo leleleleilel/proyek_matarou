@@ -31,17 +31,23 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8 cardlogin">
-            <form action="#" method="POST">
+            <form action="{!!url('/admin/doLogin')!!}" method="POST">
             @csrf
                 <div class="mb-6">
                 <h1>Admin Login</h1>
                 <label for="exampleInputEmail1" class="form-label" style="margin-top:50px">Username</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp" style="width: 70%;" placeholder="Username">
+                @error('username')
+                <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
+               @enderror
                 </div>
                 <div class="mb-6">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" style="width: 70%;" placeholder="Password">
                 </div>
+                @error('password')
+                <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
+               @enderror
                 <br>
                 <button type="submit" name="buttonLogin" class="btn btn-dark" id="btnsubmitlogin">Login</button>
             </form>

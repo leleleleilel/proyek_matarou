@@ -12,8 +12,10 @@ use App\Models\User;
 use App\Rules\CekPanjangTelepon;
 use App\Rules\CekUsername;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Str;
 
@@ -193,7 +195,7 @@ class AdminController extends Controller
             User::create(
                 [
                     "username"=>$username,
-                    "password"=>$password,
+                    "password"=>Hash::make($password),
                     "nama"=>$nama,
                     "alamat"=>$alamat,
                     "no_telp"=>$no_telp,
@@ -700,6 +702,38 @@ class AdminController extends Controller
         return redirect()->route('toMasterUsers')->with("message",[
             "isi"=>$message
         ]);
+    }
+
+    public function doLogin(Request $request){
+
+        $username = $request->username;
+        $password = $request->password;
+
+        $validate = $request->validate([
+            'username'=>'required',
+            'password'=>'required'
+        ]);
+
+        $credential = [
+            "username" => $username,
+            "password" => $password
+        ];
+
+        if(Auth::attempt($credential)){
+            if(Auth::user()->role=="admin")
+            {
+                return redirect('admin/masters/users');
+            }
+        }
+        else
+        {
+            return redirect('admin/login');
+        }
+    }
+
+    public function doLogout(Request $request){
+        Auth::logout();
+
     }
 
 }
