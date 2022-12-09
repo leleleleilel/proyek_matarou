@@ -463,12 +463,16 @@ class AdminController extends Controller
     }
 
     public function toProfileAdmin(){
+
+        $user = Session::get('current_user');
+
         return view('admin.profile',[
             "title"=>"Profile",
             "activeMaster"=>"",
             "activeReports"=>"",
             "activeReviews"=>"",
             "activeProfile"=>"active",
+            "user"=>$user
         ]);
     }
 
