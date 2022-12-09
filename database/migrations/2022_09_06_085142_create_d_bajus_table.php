@@ -26,7 +26,6 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('status')->default(1);
             $table->timestamp('deleted_at')->nullable()->default(null);
-            $table->integer('terjual')->default(0);
         });
     }
 
