@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('fk_kategori')
                 ->references('id')->on('kategori')
                 ->onDelete('cascade');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamp('deleted_at')->nullable()->default(null);
         });
     }

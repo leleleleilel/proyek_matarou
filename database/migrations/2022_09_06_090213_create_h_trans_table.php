@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('fk_kode_promo')
                 ->references('id')->on('kode_promo')
                 ->onDelete('cascade');
-            $table->integer('status');
+            $table->integer('status')->default(1);
         });
     }
 

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreign('fk_size')
                 ->references('id')->on('size')
                 ->onDelete('cascade');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamp('deleted_at')->nullable()->default(null);
             $table->integer('terjual')->default(0);
         });

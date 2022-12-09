@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('fk_htrans')
                 ->references('nomornota')->on('h_trans')
                 ->onDelete('cascade');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamp('deleted_at')->nullable()->default(null);
         });
     }
