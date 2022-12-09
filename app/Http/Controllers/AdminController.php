@@ -210,25 +210,13 @@ class AdminController extends Controller
             //edit
             $user = User::where('id',$id_user)->first();
 
-            if($user->role=="admin"){
-                $validate = $request->validate([
-                    'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha'],
-                    'full_name'=>'required|max:50',
-                    'alamat'=>'required|min:12',
-                    'email'=>'required|email',
-                    'phone'=>['required','numeric',new CekPanjangTelepon()],
-
-                ]);
-            }else{
-                $validate = $request->validate([
-                    'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha'],
-                    'full_name'=>'required|max:50',
-                    'alamat'=>'required|min:12',
-                    'email'=>'required|email',
-                    'phone'=>['required','numeric',new CekPanjangTelepon()]
-                ]);
-            }
-
+            $validate = $request->validate([
+                'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha'],
+                'full_name'=>'required|max:50',
+                'alamat'=>'required|min:12',
+                'email'=>'required|email',
+                'phone'=>['required','numeric',new CekPanjangTelepon()]
+            ]);
 
             $users = User::all();
             $username_lama = $user->username;
@@ -464,7 +452,8 @@ class AdminController extends Controller
 
     public function toProfileAdmin(){
 
-        $user = Session::get('current_user');
+        $current_user = Session::get('current_user');
+        $user = User::where('id',$current_user->id)->first();
 
         return view('admin.profile',[
             "title"=>"Profile",
@@ -738,6 +727,91 @@ class AdminController extends Controller
         Auth::logout();
         session()->forget('current_user');
         return redirect('admin/login');
+    }
+
+    public function doEditProfile(Request $request){
+        $username = $request->username;
+        $nama = $request->full_name;
+        $alamat = $request->alamat;
+        $no_telp = $request->phone;
+        $email = $request->email;
+        $password = $request->password;
+        $new_password = $request->newpassword;
+
+          //validation
+          //edit
+          $id_user = Session::get('current_user')->id;
+          $user = User::where('id',$id_user)->first();
+
+          $validate = $request->validate([
+              'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha'],
+              'full_name'=>'required|max:50',
+              'alamat'=>'required|min:12',
+              'email'=>'required|email',
+              'phone'=>['required','numeric',new CekPanjangTelepon()],
+              'password'=>'required'
+          ]);
+
+          $users = User::all();
+          $username_lama = $user->username;
+          $email_lama = $user->email;
+          $ada = false;
+
+          if($username_lama!=$username){
+              //periksa kembar atau ngga
+              foreach ($users as $usr) {
+                  if($usr->username==$username){
+                      $ada = true;
+                      break;
+                  }
+              }
+          }
+
+          if($ada == true){
+              $message = "Username has already taken!";
+          }else{
+              //email check
+              $ada_email = false;
+
+              if($email_lama!=$email){
+
+                  foreach ($users as $usr) {
+                      if($usr->email==$email){
+                          $ada_email=true;
+                          break;
+                      }
+                  }
+              }
+
+              if($ada_email==false){
+                  if($password==Hash::check($password,$user->password)){
+                    if($new_password==""){
+                        $user->nama = $nama;
+                        $user->username = $username;
+                        $user->alamat = $alamat;
+                        $user->no_telp = $no_telp;
+                        $user->email = $email;
+                        $user->save();
+                    }else{
+                        $user->nama = $nama;
+                        $user->username = $username;
+                        $user->alamat = $alamat;
+                        $user->no_telp = $no_telp;
+                        $user->email = $email;
+                        $user->password = $new_password;
+                        $user->save();
+                    }
+                    $message = "User Profile Edited!";
+                  }else{
+                    $message = "Wrong Password! Failed to Edit!";
+                  }
+              }else{
+                  $message = "Email has already taken!";
+              }
+          }
+          return redirect()->route('toProfileAdmin')->with("message",[
+            "isi"=>$message
+        ]);
     }
 
 }

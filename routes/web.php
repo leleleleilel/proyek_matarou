@@ -85,12 +85,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/products/edit/{id}',[AdminController::class,'toEditBaju'])->name('toEditBaju');
     //do delete photo on edit :
     Route::get('/doDeleteFoto/{id}',[AdminController::class,'doDeleteFoto']);
-    //do edit photo
+    //do edit photo :
     Route::post('/doEditBaju',[AdminController::class,'doEditBaju']);
-    //do delete users
+    //do delete users :
     Route::get('/doDeleteUser/{id}',[AdminController::class,'doDeleteUser']);
-    //do logout admin
+    //do logout admin :
     Route::get('/doLogout',[AdminController::class,'doLogout']);
+    //do edit profile :
+    Route::post('/doEditProfile',[AdminController::class,'doEditProfile']);
 });
 
 

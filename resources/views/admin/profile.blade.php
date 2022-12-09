@@ -4,9 +4,15 @@
 
 <div class="container">
 
-    <h3 style="margin-top: 30px;">My Profile</h3>
+    <h3 style="margin-top: 30px; font-weight: bold">My Profile</h3>
 
-    <form action="" id="formDaftar" method="POST">
+    @if (Session::has("message"))
+      <h3 style="color: red">
+      {{Session::get("message.isi")}}
+      </h3>
+    @endif
+
+    <form action="{{url('admin/doEditProfile')}}" id="formDaftar" method="POST">
         @csrf
         <div class="mb-6">
           <label for="exampleInputEmail1" class="form-label" style="margin-top:20px">Username</label>
@@ -58,7 +64,7 @@
            @enderror
           </div>
         <br>
-        <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%;" value="" >Edit</button>
+        <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%; margin-bottom: 50px" value="" >Edit</button>
       </form>
 
 </div>
