@@ -43,7 +43,7 @@
     </div>
 
     <h3 style="margin-top: 1px">Item Details :</h3>
-    <form action="" id="formProducts" method="POST" enctype="multipart/form-data">
+    <form action="{{url('/admin/doEditBaju')}}" id="formProducts" method="POST" enctype="multipart/form-data">
          {{-- upload and edit image  --}}
         @csrf
         <input type="hidden" name="id_item" value="{{$item->id}}">
@@ -94,7 +94,8 @@
         @enderror
         </div>
         <br>
-        <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 30%;" value="" >Edit</button>
+        <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 20%;" value="" >Edit</button>
+        <a href="{{url('/admin/masters/products')}}" class="btn btn-dark" style=" width: 20%">Cancel</a>
     </form>
 
 

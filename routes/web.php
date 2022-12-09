@@ -86,7 +86,7 @@ Route::prefix('admin')->group(function () {
     //do delete photo on edit :
     Route::get('/doDeleteFoto/{id}',[AdminController::class,'doDeleteFoto']);
     //do edit photo
-    Route::get('/doEditBaju',[AdminController::class,'doEditBaju']);
+    Route::post('/doEditBaju',[AdminController::class,'doEditBaju']);
 });
 
 

@@ -556,6 +556,72 @@ class AdminController extends Controller
     public function doEditBaju(Request $request){
         $id_item = $request->id_item;
 
+        $nama = $request->name;
+        $deskripsi = $request->description;
+        $harga = $request->price;
+        $fk_kategori = $request->category;
+        $message = "";
+
+        $validate = $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'price'=>'required|numeric|gt:0',
+            'category'=>'required',
+            'photo.*' => 'mimes:png,jpg,jpeg|max:2048',
+        ]);
+
+        $old_details = baju::where('id',$id_item)->first();
+        $kode_barang = $old_details->kode;
+
+        if($old_details->nama!=$nama){
+              //membuat kode
+            $list_barang = baju::withTrashed()->get();
+            $str_kode_huruf = substr($nama,0,2);
+            $str_kode_huruf = strtoupper($str_kode_huruf);
+
+            $urutan = "";
+            foreach ($list_barang as $barang) {
+            if(strtoupper(substr($barang->kode,0,2))==$str_kode_huruf){
+                $urutan = substr($barang->kode,3,2);
+            }
+            }
+
+            $urutan = (int) $urutan;
+            $urutan = $urutan+1;
+            $kode_urut = "";
+
+            if($urutan>=0 && $urutan<10){
+                $kode_urut = "00".$urutan;
+            }else if($urutan>=10 && $urutan<100){
+                $kode_urut = "0".$urutan;
+            }else{
+                $kode_urut = $urutan;
+            }
+            $kode_barang = $str_kode_huruf.$kode_urut;
+        }
+
+        $old_details->nama = $nama;
+        $old_details->deskripsi = $deskripsi;
+        $old_details->harga = $harga;
+        $old_details->fk_kategori = $fk_kategori;
+        $old_details->kode = $kode_barang;
+        $old_details->save();
+
+        //upload foto
+        foreach($request->file("photo") as $photo){
+            $data = new Dfoto();
+            $namafile = Str::random(8).".".$photo->getClientOriginalExtension();
+            $photo-> move(public_path('public/image/bajus'), $namafile);
+            $data->nama_file= $namafile;
+            $data->id_baju = (int)$id_item;
+            $data->save();
+        }
+
+        $message = "Item Edited!";
+
+        return redirect('/admin/products/edit/'.$id_item)->with("message",[
+            "isi"=>$message
+        ]);
 
     }
 
