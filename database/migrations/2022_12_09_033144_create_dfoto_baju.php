@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        //push again
         Schema::create('d_foto_baju', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_baju');
