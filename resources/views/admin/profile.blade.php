@@ -50,16 +50,23 @@
            @enderror
           </div>
         <div class="mb-6">
-          <label for="exampleInputPassword1" class="form-label">New Password</label>
+          <label for="exampleInputPassword1" class="form-label">Current Password</label>
           <input type="password" name="password" class="form-control" id="password" style="width: 70%;"placeholder="Password">
           @error('password')
           <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
          @enderror
         </div>
         <div class="mb-6">
-            <label for="exampleInputPassword1" class="form-label">Current Password</label>
+            <label for="exampleInputPassword1" class="form-label">New Password</label>
             <input type="password" name="newpassword" class="form-control" id="newpassword" style="width: 70%;"placeholder="New Password">
             @error('newpassword')
+            <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
+           @enderror
+          </div>
+          <div class="mb-6">
+            <label for="exampleInputPassword1" class="form-label">Confirmation New Password</label>
+            <input type="password" name="confirm" class="form-control" id="confirm" style="width: 70%;"placeholder="Confirm New Password">
+            @error('confirm')
             <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
            @enderror
           </div>

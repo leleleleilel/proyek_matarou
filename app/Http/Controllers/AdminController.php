@@ -737,6 +737,7 @@ class AdminController extends Controller
         $email = $request->email;
         $password = $request->password;
         $new_password = $request->newpassword;
+        $confirm = $request->confirm;
 
           //validation
           //edit
@@ -792,16 +793,25 @@ class AdminController extends Controller
                         $user->no_telp = $no_telp;
                         $user->email = $email;
                         $user->save();
+                        $message = "User Profile Edited!";
                     }else{
-                        $user->nama = $nama;
-                        $user->username = $username;
-                        $user->alamat = $alamat;
-                        $user->no_telp = $no_telp;
-                        $user->email = $email;
-                        $user->password = $new_password;
-                        $user->save();
+                        if($confirm!=""){
+                            if($new_password==$confirm){
+                                $user->nama = $nama;
+                                $user->username = $username;
+                                $user->alamat = $alamat;
+                                $user->no_telp = $no_telp;
+                                $user->email = $email;
+                                $user->password = Hash::make($new_password);
+                                $user->save();
+                                $message = "User Profile Edited!";
+                            }else{
+                                $message ="Password and Confirmation Password didn't match!";
+                            }
+                        }else{
+                            $message ="Confirmation Password is Required!";
+                        }
                     }
-                    $message = "User Profile Edited!";
                   }else{
                     $message = "Wrong Password! Failed to Edit!";
                   }
