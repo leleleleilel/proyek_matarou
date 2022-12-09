@@ -20,7 +20,7 @@ return new class extends Migration
                 ->references('id')->on('baju')
                 ->onDelete('cascade');
             $table->text('nama_file');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamp('deleted_at')->nullable()->default(null);
         });
     }
