@@ -15,4 +15,9 @@ class d_baju extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
+
+    public function size()
+    {
+        return $this->belongsTo(size::class);
+    }
 }

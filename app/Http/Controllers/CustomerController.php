@@ -7,7 +7,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Rules\cekpassword;
 use App\Rules\cekterdaftar;
 use Illuminate\Http\Request;
+use App\Models\baju;
+use App\Models\d_baju;
+use App\Models\Dfoto;
+use App\Models\kategori;
+use App\Models\kode_promo;
+use App\Models\size;
 use App\Models\User;
+use App\Models\cart;
 
 class CustomerController extends Controller
 {
@@ -62,8 +69,7 @@ class CustomerController extends Controller
                         "deleted_at"=>null
                     ]
                 );
-                $param['message']   = "registrasi sukses";
-                return redirect("/")->with($param);
+                return redirect("/");
             }
         }
 

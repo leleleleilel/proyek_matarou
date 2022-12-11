@@ -14,4 +14,9 @@ class kode_promo extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
+
+    //1 kode promo bisa dipake banyak htrans
+    public function h_trans(){
+        return $this->hasMany(h_trans::class,'fk_kode_promo','id');
+    }
 }

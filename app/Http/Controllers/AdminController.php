@@ -9,6 +9,7 @@ use App\Models\kategori;
 use App\Models\kode_promo;
 use App\Models\size;
 use App\Models\User;
+use App\Models\cart;
 use App\Rules\CekPanjangTelepon;
 use App\Rules\CekUsername;
 use Illuminate\Http\Request;

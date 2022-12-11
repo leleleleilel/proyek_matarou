@@ -49,4 +49,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function htrans()
+    {
+        return $this->hasMany(h_trans::class,'fk_user','id');
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(cart::class,'id_user','id');
+    }
 }
