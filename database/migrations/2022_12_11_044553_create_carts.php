@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('h_trans', function (Blueprint $table) {
-            $table->string('nomornota')->primary();
-            $table->date('tanggal_trans');
-            $table->unsignedBigInteger('fk_kode_promo');
-            $table->foreign('fk_kode_promo')
-                ->references('id')->on('kode_promo')
+        Schema::create('cart', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_dbaju');
+            $table->foreign('id_dbaju')
+                ->references('id')->on('d_baju')
                 ->onDelete('cascade');
-            $table->integer('status')->default(1);
+            $table->integer('quantity');
+            $table->timestamp('deleted_at')->nullable()->default(null);
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')
                 ->references('id')->on('user')
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('h_trans');
+        Schema::dropIfExists('cart');
     }
 };

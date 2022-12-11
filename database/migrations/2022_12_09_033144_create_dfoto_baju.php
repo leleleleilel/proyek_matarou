@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dfoto_baju');
+        Schema::dropIfExists('d_foto_baju');
     }
 };
