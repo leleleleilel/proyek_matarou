@@ -42,7 +42,7 @@
                     <input type="email" name="email" class="form-control" id="email" style="width: 70%;" placeholder="Email">
                     @error('email')
                     <div class="error">{{$message}}</div>
-                @enderror
+                    @enderror
                 </div>
               <div class="mb-6">
                 <label for="exampleInputPassword1" class="form-label">Password</label>

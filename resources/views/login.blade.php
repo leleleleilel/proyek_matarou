@@ -23,6 +23,9 @@
                 @enderror
               </div>
               <br>
+              @if (session()->has('message'))
+                <h6 class="error">{{ session()->get('message') }}</h6>
+              @endif
               <button type="submit" name="btnlogin" class="btn btn-dark" id="btnsubmitlogin" style="width: 70%;">Login</button>
             </form>
             <a href="{!!url('/register')!!}">

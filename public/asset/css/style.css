@@ -751,3 +751,6 @@ a:hover,a:focus{
 #btnsubmitlogin{
     background-color: black;
 }
+.error{
+    color: red;
+}
