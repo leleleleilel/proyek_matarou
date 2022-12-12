@@ -33,9 +33,15 @@ Route::middleware(['auth'])->group(function() {
     });
     Route::get('/logout', [CustomerController::class, 'logout'])->name('logout');
 });
+
 //customer:
 Route::prefix('customer')->group(function () {
+    Route::get('/cart',[CustomerController::class,'toCart'])->name('toCart');
 
+    //perlu id product
+    Route::get('/product',[CustomerController::class,'toProduct'])->name('toProduct');
+
+    Route::get('/history',[CustomerController::class,'toHistory'])->name('toHistory');
 });
 
 //admin:

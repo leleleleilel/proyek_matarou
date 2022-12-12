@@ -116,4 +116,19 @@ class CustomerController extends Controller
         Auth::logout();
         return redirect("/");
     }
+
+    public function toCart()
+    {
+        return view('cart');
+    }
+
+    public function toProduct()
+    {
+        return view('detailitem');
+    }
+
+    public function toHistory()
+    {
+        return view('history');
+    }
 }
