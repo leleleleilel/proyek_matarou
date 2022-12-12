@@ -14,5 +14,8 @@ class review extends Model
     public $incrementing = true;
     public $timestamps = false;
 
-    
+    public function htrans()
+    {
+        return $this->belongsTo(h_trans::class,'fk_htrans','id');
+    }
 }

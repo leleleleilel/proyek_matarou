@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('rate');
             $table->longText('deskripsi_review');
-            $table->string('fk_htrans');
+            $table->unsignedBigInteger('fk_htrans');
             $table->foreign('fk_htrans')
-                ->references('nomornota')->on('h_trans')
+                ->references('id')->on('h_trans')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('fk_baju');
             $table->foreign('fk_baju')

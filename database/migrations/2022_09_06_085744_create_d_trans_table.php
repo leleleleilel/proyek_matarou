@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('d_trans', function (Blueprint $table) {
-            $table->string('nomornota')->primary();
+            $table->id();
             $table->unsignedBigInteger('fk_dbaju');
             $table->foreign('fk_dbaju')
                 ->references('id')->on('d_baju')

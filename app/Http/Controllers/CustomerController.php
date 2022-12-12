@@ -26,6 +26,11 @@ class CustomerController extends Controller
     {
         return view('login');
     }
+    function cetak()
+    {
+        $dbaju = User::find(1)->d_baju;
+        dd($dbaju);
+    }
     function register(Request $request)
     {
         if($request->btnregister)

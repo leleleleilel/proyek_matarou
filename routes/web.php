@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('/login');
 });
+Route::get('/cetak', [CustomerController::class,"cetak"]);
 
 //login
 Route::get('/login', [CustomerController::class,"gotologin"]);

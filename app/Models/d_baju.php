@@ -18,6 +18,10 @@ class d_baju extends Model
 
     public function size()
     {
-        return $this->belongsTo(size::class);
+        return $this->belongsTo(size::class,'fk_size','id');
+    }
+    public function user()
+    {
+        return $this->belongsToMany(User::class,'cart','id_dbaju','id_user')->withPivot('id','id_dbaju','id_user','quantity','deleted_at');
     }
 }

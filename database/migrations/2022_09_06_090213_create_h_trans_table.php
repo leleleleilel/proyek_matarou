@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('h_trans', function (Blueprint $table) {
-            $table->string('nomornota')->primary();
+            $table->id();
             $table->date('tanggal_trans');
             $table->unsignedBigInteger('fk_kode_promo');
             $table->foreign('fk_kode_promo')
