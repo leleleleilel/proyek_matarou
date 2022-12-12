@@ -25,24 +25,6 @@ class AdminController extends Controller
 {
 
     public function toLoginAdmin(){
-        //jika blm ada users sama sekali (admin) maka tambahkan satu yaitu
-        //username: admin password : admin
-        $users = User::where('role','admin')->get();
-        if(sizeof($users)==0){
-            User::create(
-                [
-                    //saat membuat user baru, username = password
-                    "username"=>"admin",
-                    "password"=>Hash::make("admin"),
-                    "nama"=>"Admin",
-                    "alamat"=>"-",
-                    "no_telp"=>"-",
-                    "email"=>"-",
-                    "role"=>"admin",
-                    "deleted_at"=>null
-                ]
-            );
-        }
         return view('admin.loginadmin');
     }
 
