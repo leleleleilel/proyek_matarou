@@ -6,7 +6,7 @@
             <div class="headsection">
                 <div class="line-dec" style="background-color: black"></div>
                     <br>
-                    <h1>Order Detail</h1><br>
+                    <h1>Product Detail</h1><br>
                     <form action="" method="post">
                     <button type="submit" name="btnback" class="btn btn-dark" style="margin-top: 20px; width: 120px;">Back</button>
                     </form>
