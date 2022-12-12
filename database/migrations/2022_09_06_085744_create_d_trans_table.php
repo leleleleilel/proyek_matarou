@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,6 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Schema::create('d_trans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('fk_dbaju');
@@ -22,7 +24,12 @@ return new class extends Migration
             $table->integer('qty');
             $table->unsignedBigInteger('harga');
             $table->unsignedBigInteger('subtotal');
+            $table->unsignedBigInteger('fk_htrans');
+            $table->foreign('fk_htrans')
+                ->references('id')->on('h_trans')
+                ->onDelete('cascade');
         });
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 
     /**

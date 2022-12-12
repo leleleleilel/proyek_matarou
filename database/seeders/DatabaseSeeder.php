@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\d_baju;
+use App\Models\kategori;
+use App\Models\size;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +24,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call([UserSeeder::class,bajuSeeder::class,cartSeeder::class,d_bajuSeeder::class,d_transSeeder::class,DfotoSeeder::class,h_transSeeder::class,kategoriSeeder::class,kode_promoSeeder::class,reviewSeeder::class,sizeSeeder::class]);
+
     }
 }

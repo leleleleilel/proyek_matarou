@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('/login');
 });
-Route::get('/cetak', [CustomerController::class,"cetak"]);
+// Route::get('/cetak', [CustomerController::class,"cetak"]);
 
 //login
 Route::get('/login', [CustomerController::class,"gotologin"]);
@@ -98,3 +98,7 @@ Route::prefix('admin')->group(function () {
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

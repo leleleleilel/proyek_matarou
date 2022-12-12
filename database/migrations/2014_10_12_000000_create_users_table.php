@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('role');
             $table->timestamp('deleted_at')->nullable()->default(null);
+            $table->timestamp('email_verified_at')->nullable();
         });
     }
 
