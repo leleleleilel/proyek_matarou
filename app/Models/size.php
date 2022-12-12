@@ -15,6 +15,6 @@ class size extends Model
 
     //size dimiliki oleh banyak d_baju
     public function sizeBaju(){
-        return $this-> hasMany(d_baju::class,'fk_size','id');
+        return $this->belongsToMany(baju::class,'d_baju','fk_size','fk_baju')->withPivot('id','fk_baju','stok','fk_size','status','deleted_at');
     }
 }

@@ -18,4 +18,8 @@ class review extends Model
     {
         return $this->belongsTo(h_trans::class,'fk_htrans','id');
     }
+
+    public function Baju(){
+        return $this->belongsTo(baju::class,'fk_baju','id');
+    }
 }

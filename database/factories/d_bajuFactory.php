@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\baju;
+use App\Models\size;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class d_bajuFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'fk_baju' => $this->faker->randomElement(baju::all()->pluck('id')),
+            'stok' => $this->faker->numberBetween(1,20),
+            'fk_size'=> $this->faker->randomElement(size::all()->pluck('id')),
+            'status'=>'1'
         ];
     }
 }

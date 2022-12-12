@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\baju;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class DfotoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id_baju' => $this->faker->randomElement(baju::all()->pluck('id')),
+            'nama_file' => 'EsUGOr3E.jpg',
+            'status'=>'1'
         ];
     }
 }

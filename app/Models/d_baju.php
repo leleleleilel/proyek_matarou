@@ -24,4 +24,8 @@ class d_baju extends Model
     {
         return $this->belongsToMany(User::class,'cart','id_dbaju','id_user')->withPivot('id','id_dbaju','id_user','quantity','deleted_at');
     }
+    public function dBaju()
+    {
+        return $this->hasMany(d_baju::class,'fk_dbaju','id');
+    }
 }

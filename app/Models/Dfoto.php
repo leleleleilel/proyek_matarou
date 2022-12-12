@@ -13,4 +13,8 @@ class Dfoto extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
+
+    public function Baju(){
+        return $this->belongsTo(baju::class,'id_baju','id');
+    }
 }

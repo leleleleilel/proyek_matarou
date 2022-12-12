@@ -21,4 +21,14 @@ class baju extends Model
         return $this->belongsTo(kategori::class,'fk_kategori','id');
     }
 
+    public function Baju(){
+        return $this->hasMany(Dfoto::class,'id_baju','id');
+    }
+
+    public function Review(){
+        return $this->hasMany(review::class,'fk_baju','id');
+    }
+    public function Size(){
+        return $this->belongsToMany(size::class,'d_baju','fk_baju','fk_size')->withPivot('id','fk_baju','stok','fk_size','status','deleted_at');
+    }
 }

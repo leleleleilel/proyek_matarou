@@ -15,8 +15,8 @@ class cart extends Model
     public $incrementing = true;
     public $timestamps = false;
 
-    public function user()
-    {
-        return $this->belongsTo(user::class,'id_user','id');
-    }
+    // public function user()
+    // {
+    //     return $this->belongsTo(user::class,'id_user','id');
+    // }
 }

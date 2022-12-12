@@ -17,7 +17,14 @@ class kode_promoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nama' => $this->faker->unique()->name(),
+            'kode'=>$this->faker->unique()->words(1,true),
+            'besar_potongan'=>$this->faker->numberBetween(1,200000),
+            'jenis_potongan'=> $this->faker->randomElement(['Diskon','Potongan']),
+            'valid_from' => $this->faker->dateTimeBetween('-3 week', '-1 week'),
+            'valid_until' => $this->faker->dateTimeBetween('+2 week', '+4 week'),
+            'minimum_total'=> $this->faker->numberBetween(1000,500000),
+            'status' => '1'
         ];
     }
 }

@@ -56,10 +56,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(h_trans::class,'fk_user','id');
     }
-    public function cart()
-    {
-        return $this->hasMany(cart::class,'id_user','id');
-    }
+    // public function cart()
+    // {
+    //     return $this->hasMany(cart::class,'id_user','id');
+    // }
     public function d_baju()
     {
         return $this->belongsToMany(d_baju::class,'cart','id_user','id_dbaju')->withPivot('id','id_dbaju','id_user','quantity','deleted_at');

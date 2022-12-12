@@ -26,4 +26,8 @@ class h_trans extends Model
     {
         return $this->hasOne(review::class,'fk_htrans','id');
     }
+    public function dTrans()
+    {
+        return $this->hasMany(d_trans::class,'fk_htrans','id');
+    }
 }

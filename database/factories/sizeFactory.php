@@ -17,7 +17,9 @@ class sizeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'kode'=>$this->faker->unique()->words(1,true),
+            'nama' => $this->faker->unique()->name(),
+            'status'=>'1'
         ];
     }
 }

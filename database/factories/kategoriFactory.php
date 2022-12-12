@@ -17,7 +17,8 @@ class kategoriFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nama' => $this->faker->unique()->name(),
+            'status'=>'1'
         ];
     }
 }
