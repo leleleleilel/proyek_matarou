@@ -18,7 +18,7 @@ class kategori extends Model
     public $timestamps = false;
 
      //kategori dimiliki oleh banyak baju
-     public function sizeBaju(){
+     public function kategoriBaju(){
         return $this-> hasMany(baju::class,'fk_kategori','id');
     }
 }
