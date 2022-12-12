@@ -95,10 +95,3 @@ Route::prefix('admin')->group(function () {
     //do edit profile :
     Route::post('/doEditProfile',[AdminController::class,'doEditProfile']);
 });
-
-
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
