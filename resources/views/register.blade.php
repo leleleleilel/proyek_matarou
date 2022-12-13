@@ -52,7 +52,7 @@
                 @enderror
               </div>
                 <div class="mb-6">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
                 <input type="password" name="password_confirmation" class="form-control" id="input_password" style="width: 70%;" placeholder="Confirmation Password">
                 @error('password_confirmation')
                     <div class="error">{{$message}}</div>
