@@ -17,15 +17,13 @@
           </div>
           <div class="col-md-8 col-sm-12">
             <div id="filters" class="button-group" style="margin-top:50px">
-              <form action="products.php" method="POST">
-              <button name="all" class="btnPilihan">All</button>
-                <button name="shirt" class="btnfilter">Shirts</button>
-                <button name="t-shirt" class="btnPilihan">T-Shirts</button>
-                <button name="short" class="btnfilter">Shorts</button>
-                <button name="trousers" class="btnfilter">Trousers</button>
-                <button name="jacket" class="btnPilihan">Jackets</button>
-
-              </form>
+              <select name="filter" id="">
+                @if (isset($kategori))
+                  @foreach ($kategori as $kat)
+                    <option value="{{$kat->id}}">{{$kat->nama}}</option>
+                  @endforeach
+                @endif
+              </select>
             </div>
           </div>
         </div>
@@ -36,18 +34,26 @@
 
         <div class="row posts">
             {{-- start for --}}
-            <div id="1" class="item new col-md-4">
-              <a href="">
-                <div class="featured-item">
-                  <img style="width:280px; height:320px; background-size: cover;" src="{{asset('asset/images/baju1.jpg')}}" alt="">
-                  <h4>Baju A</h4>
-                  <h6 style="color: black;">Rp 5.676.000</h6>
-                  <form action="#" method="post">
-                    <button name="btnTambah" class="btn btn-dark" value="idBaju">Add To Cart</button>
-                  </form>
+            @if (isset($products))
+              @foreach ($products as $product)
+                <div id="1" class="item new col-md-4">
+                  <a href="">
+                    <div class="featured-item">
+                      @if (isset($images))
+                        @foreach($images as $image)
+                          @if ($image->id_baju==$product->id)
+                            <img style="width:280px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$image->nama_file) }}" alt="">
+                          @endif
+                        @endforeach
+                      @endif
+                      <h4>{{$product->nama}}</h4>
+                      <h6 style="color: black;">Rp {{$product->harga}}</h6>
+                      <a href=""><button name="btnTambah" class="btn btn-dark" value="idBaju">Add To Cart</button></a>
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
+              @endforeach
+            @endif
             {{-- end for --}}
         </div>
     </div>

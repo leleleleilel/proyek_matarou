@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('status')->default(1);
             $table->timestamp('deleted_at')->nullable()->default(null);
             $table->integer('terjual')->default(0);
+            $table->text('nama_file');
         });
     }
 

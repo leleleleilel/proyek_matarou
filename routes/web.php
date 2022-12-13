@@ -39,12 +39,16 @@ Route::middleware(['auth', 'verified'])->group(function() {
 
 //customer:
 Route::prefix('customer')->group(function () {
+    //cart
     Route::get('/cart',[CustomerController::class,'toCart'])->name('toCart');
-
-    //perlu id product
+    //list produk
+    Route::get('/catalogue',[CustomerController::class,'tolistproduct'])->name('toListProduct');
+    //perlu id product (DETAIL PRODUCT)
     Route::get('/product',[CustomerController::class,'toProduct'])->name('toProduct');
-
+    //history
     Route::get('/history',[CustomerController::class,'toHistory'])->name('toHistory');
+    //about us
+    Route::get('/aboutus',[CustomerController::class,'toAboutUs'])->name('toAboutUs');
 });
 
 //admin:

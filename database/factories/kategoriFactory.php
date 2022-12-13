@@ -17,7 +17,7 @@ class kategoriFactory extends Factory
     public function definition()
     {
         return [
-            'nama' => $this->faker->unique()->name(),
+            'nama' => $this->faker->unique()->randomElement(['Shirt','T-shirt','Trousers','Jacket','Short']),
             'status'=>'1'
         ];
     }

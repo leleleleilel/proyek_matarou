@@ -19,6 +19,6 @@ class kategoriSeeder extends Seeder
         DB::statement("SET FOREIGN_KEY_CHECKS=0");
         DB::table("kategori")->truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS=1");
-        kategori::factory()->count(10)->create();
+        kategori::factory()->count(5)->create();
     }
 }

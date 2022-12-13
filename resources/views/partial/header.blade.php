@@ -14,31 +14,29 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarresponsive">
-        <form action="#" method="POST">
         <ul class="navbar-nav ml-auto" style="margin-top: 45px;">
         <li class="nav-item"  style="outline: none;border:none">
-                <button name="btnMyAccount" class="nav-link" style="outline: none;border:none">My Account</button>
+                <a href="{!!url('/')!!}"><button name="btnMyAccount" class="nav-link" style="outline: none;border:none">My Account</button></a>
             </li>
         <li class="nav-item">
-                <button name="btnHistory" class="nav-link"  style="outline: none;border:none">History</button>
+                <a href="{!!url('/customer/history')!!}"><button name="btnHistory" class="nav-link" style="outline: none;border:none">History</button></a>
         </li>
             <li class="nav-item">
-                <button name="btnHome" class="nav-link" style="outline: none;border:none;">HOME</button>
+                <a href="{!!url('/home')!!}"><button name="btnHome" class="nav-link" style="outline: none;border:none;">HOME</button></a>
             </li>
             <li class="nav-item">
-                <button name="btnProduct" class="nav-link" style="outline: none;border:none;">PRODUCTS</button>
+                <a href="{!!url('/customer/catalogue')!!}"><button name="btnProduct" class="nav-link" style="outline: none;border:none;">PRODUCTS</button></a>
             </li>
             <li class="nav-item active">
-                <button name="btnAbout" class="nav-link" style="outline: none;border:none;">ABOUT US</button>
+                <a href="{!!url('/customer/aboutus')!!}"><button name="btnAbout" class="nav-link" style="outline: none;border:none;">ABOUT US</button></a>
             </li>
             <li class="nav-item">
                 <button name="btnCart" class="nav-link" style="outline: none;border:none;">CART</button>
             </li>
             <li class="nav-item">
-                <button name="btnLogin" class="nav-link" style="outline: none;border:none;">LOGIN/LOGOUT</button>
+                <a href="{!!url('/logout')!!}"><button name="btnLogin" class="nav-link" style="outline: none;border:none;">LOGIN/LOGOUT</button></a>
             </li>
             </ul>
-        </form>
     </div>
     </div>
 </nav>

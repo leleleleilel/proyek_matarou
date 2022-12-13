@@ -19,6 +19,6 @@ class DfotoSeeder extends Seeder
         DB::statement("SET FOREIGN_KEY_CHECKS=0");
         DB::table("d_foto_baju")->truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS=1");
-        Dfoto::factory()->count(1)->create();
+        Dfoto::factory()->count(3)->create();
     }
 }

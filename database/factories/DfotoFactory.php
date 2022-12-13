@@ -19,7 +19,7 @@ class DfotoFactory extends Factory
     {
         return [
             'id_baju' => $this->faker->randomElement(baju::all()->pluck('id')),
-            'nama_file' => 'EsUGOr3E.jpg',
+            'nama_file' => $this->faker->randomElement(['EsUGOr3E.jpg','hjrDyNo9.jpg','JD5NAk5E.jpg']),
             'status'=>'1'
         ];
     }

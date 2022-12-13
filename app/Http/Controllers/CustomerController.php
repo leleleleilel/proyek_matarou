@@ -61,7 +61,7 @@ class CustomerController extends Controller
             ];
             if($request->validate($rules,$message))
             {
-                //regist
+                //regist (buat email)
                 $user = new User;
                 $user->username = $request->username;
                 $user->password = Hash::make($request->password);
@@ -140,5 +140,17 @@ class CustomerController extends Controller
     public function toHistory()
     {
         return view('history');
+    }
+
+    public function tolistproduct()
+    {
+        $list_products = baju::all();
+        $list_dfotos = Dfoto::all();
+        $kategori = kategori::all();
+        return view('products',[
+            "products"=>$list_products,
+            "images"=>$list_dfotos,
+            "kategori"=>$kategori
+        ]);
     }
 }
