@@ -8,9 +8,11 @@
                     <br>
                     <h1>Product Detail</h1><br>
                     <form action="" method="post">
+                        @csrf
                 </div>
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col-12 col-lg-5" style="">
+                        {{-- Carousel Gambar Baju --}}
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -38,15 +40,50 @@
                             </a>
                           </div>
                     </div>
-                    <div class="col-12 col-lg-7" style="background-color: yellow">
-                        <h2>{{$baju->nama}}</h2>
-                        <div>Rp {{$baju->harga}}</div>
-                        <div>{{$baju->deskripsi}}</div>
-                        <div>Size : </div>
-                        <select name="" id="">
+                    <div class="col-12 col-lg-7">
+                        {{-- Ket Baju --}}
+                        <h2 style="font-weight: bolder">{{$baju->nama}}</h2>
+                        <h2 style="font-weight: lighter">Rp {{$baju->harga}}</h2>
+                        <div class="mb-4">{{$baju->deskripsi}}</div>
+                        <h4 style="font-weight: bolder">Size : </h4>
+                        <select class="form-control" name="" id="">
+                            @foreach ($size as $s)
+                                <option value="{{$s->stok}}">{{$s->nama}}</option>
+                            @endforeach
                         </select>
+                        <br>
+                        <button class="form-control" type="button" class="btn btn-light" style="background-color: #FDFDFD;border-color:#6D6D6D;">Add To Cart</button>
                     </div>
                 <br>
+                </div>
+                <br>
+                <br>
+                {{-- Reviews --}}
+                <div>
+                    <div class="jumbotron" style="background-color: #252525;color:white">
+                        <div class="row mb-4">
+                            {{-- Avg Review & All REviews --}}
+                            <h4 class="col-6">4.9/5</h4>
+                            <h4 class="col-6 d-flex flex-row-reverse">See All (90)</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{-- Template Review --}}
+                                <div class="" style="
+                                    color:#252525;
+                                    padding: 20px;
+                                    border-radius: 0.3rem;
+                                    margin-bottom: 2rem;
+                                    background-color: #FFFFFF">
+                                    <div>User1</div>
+                                    <div>
+                                        <i class="fa fa-star fa-1x mr-2"></i>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum culpa qui id quos odio porro hic beatae, architecto explicabo excepturi.</div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
                 </div>
                 <br>
                 <br>
@@ -56,4 +93,5 @@
         </div>
     </div>
 </div>
+<script src="https://kit.fontawesome.com/06ab807719.js" crossorigin="anonymous"></script>
 @endsection

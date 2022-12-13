@@ -3,10 +3,11 @@
 @section('content')
     <div class="featured-page">
       <div class="container">
-      <form action="products.php" method="POST">
+      <form action="{!!url('/search')!!}" method="post">
+      @csrf
             <input type="text" name="keyword" placeholder="Search..." style="width: 300px;"
             value="">
-            <button name="btnSearch" id="btnsearch">Search</button>
+            <button type="submit" name="btnSearch" id="btnsearch">Search</button>
       </form>
         <div class="row">
           <div class="col-md-4 col-sm-12">
@@ -17,13 +18,21 @@
           </div>
           <div class="col-md-8 col-sm-12">
             <div id="filters" class="button-group" style="margin-top:50px">
-              <select name="filter" id="">
-                @if (isset($kategori))
-                  @foreach ($kategori as $kat)
-                    <option value="{{$kat->id}}">{{$kat->nama}}</option>
-                  @endforeach
-                @endif
-              </select>
+              <form action="{!!url('/gantikategori')!!}" method="post">
+              @csrf
+              <select name="filter" id="filterkategori" class="cmbkategori" onchange="this.form.submit()">
+                  <option value="all" selected>All</option>
+                  @if (isset($kategori))
+                    @foreach ($kategori as $kat)
+                      @if ($kat->id==$temp)
+                        <option value="{{$kat->id}}" selected>{{$kat->nama}}</option>
+                      @else
+                        <option value="{{$kat->id}}">{{$kat->nama}}</option>
+                      @endif
+                    @endforeach
+                  @endif
+                </select>
+              </form>
             </div>
           </div>
         </div>
@@ -39,13 +48,7 @@
                 <div id="1" class="item new col-md-4">
                   <a href="">
                     <div class="featured-item">
-                      @if (isset($images))
-                        @foreach($images as $image)
-                          @if ($image->id_baju==$product->id)
-                            <img style="width:280px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$image->nama_file) }}" alt="">
-                          @endif
-                        @endforeach
-                      @endif
+                      <img style="width:280px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$product->nama_file) }}" alt="">
                       <h4>{{$product->nama}}</h4>
                       <h6 style="color: black;">Rp {{$product->harga}}</h6>
                       <a href=""><button name="btnTambah" class="btn btn-dark" value="idBaju">Add To Cart</button></a>

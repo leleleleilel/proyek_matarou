@@ -29,6 +29,11 @@ Route::post('/login', [CustomerController::class,"login"])->name('login');
 Route::get('/register',[CustomerController::class,"gotoregister"]);
 Route::post('/register',[CustomerController::class,"register"]);
 
+//filter
+Route::post('/gantikategori', [CustomerController::class,"gantikategori"]);
+//search
+Route::post('/search', [CustomerController::class,"keywordsearch"]);
+
 Route::middleware(['auth', 'verified'])->group(function() {
     // customer
     Route::middleware(['checkRole:customer'])->group(function() {
