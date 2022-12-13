@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AdminController;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,12 +24,12 @@ Route::get('/', function () {
 
 //login
 Route::get('/login', [CustomerController::class,"gotologin"]);
-Route::post('/login', [CustomerController::class,"login"]);
+Route::post('/login', [CustomerController::class,"login"])->name('login');
 //register
 Route::get('/register',[CustomerController::class,"gotoregister"]);
 Route::post('/register',[CustomerController::class,"register"]);
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth', 'verified'])->group(function() {
     // customer
     Route::middleware(['checkRole:customer'])->group(function() {
         Route::get('/home', [CustomerController::class,"home"]);
@@ -101,3 +104,24 @@ Route::prefix('admin')->group(function () {
     //do edit profile :
     Route::post('/doEditProfile',[AdminController::class,'doEditProfile']);
 });
+
+Route::get('/email/verify', function () {
+    if (!auth()->user()->hasVerifiedEmail()){
+        return view('verify-email');
+    }
+    else{
+        return redirect('/home');
+    }
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'verification-link-sent');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');

@@ -62,18 +62,28 @@ class CustomerController extends Controller
             if($request->validate($rules,$message))
             {
                 //regist
-                User::create(
-                    [
-                        "username"=>$request->username,
-                        "password"=>Hash::make($request->password),
-                        "nama"=>$request->fullname,
-                        "alamat"=>$request->address,
-                        "no_telp"=>$request->phone,
-                        "email"=>$request->email,
-                        "role"=>"customer",
-                        "deleted_at"=>null
-                    ]
-                );
+                $user = new User;
+                $user->username = $request->username;
+                $user->password = Hash::make($request->password);
+                $user->nama = $request->fullname;
+                $user->alamat = $request->address;
+                $user->no_telp = $request->phone;
+                $user->email = $request->email;
+                $user->role = "customer";
+                $user->save();
+                $user->sendEmailVerificationNotification();
+                // User::create(
+                //     [
+                //         "username"=>$request->username,
+                //         "password"=>Hash::make($request->password),
+                //         "nama"=>$request->fullname,
+                //         "alamat"=>$request->address,
+                //         "no_telp"=>$request->phone,
+                //         "email"=>$request->email,
+                //         "role"=>"customer",
+                //         "deleted_at"=>null
+                //     ]
+                // );
                 return redirect("/");
             }
         }
