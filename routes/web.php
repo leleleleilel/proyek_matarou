@@ -44,7 +44,7 @@ Route::prefix('customer')->group(function () {
     //list produk
     Route::get('/catalogue',[CustomerController::class,'tolistproduct'])->name('toListProduct');
     //perlu id product (DETAIL PRODUCT)
-    Route::get('/product',[CustomerController::class,'toProduct'])->name('toProduct');
+    Route::get('/product/{id}',[CustomerController::class,'toProduct'])->name('toProduct');
     //history
     Route::get('/history',[CustomerController::class,'toHistory'])->name('toHistory');
     //about us
