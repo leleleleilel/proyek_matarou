@@ -616,11 +616,19 @@ class AdminController extends Controller
 
     public function doDeleteFoto(Request $request){
           $id = $request->id; //id dari d_foto_baju
-          $img = Dfoto::where('id',$id);
-          $id_baju = $img->id_baju;
-          $img->forceDelete();
+          $item_id = $request->iditem;
+          //dicek dulu, apakah foto kalau dihapus semua ==0 size e?
+          $message = "";
+          $item = baju::where('id',$item_id)->first();
 
-          $message = "Image Deleted!";
+          $img = Dfoto::where('id',$id)->first();
+          $id_baju = $img->id_baju;
+          if($img->nama_file==$item->nama_file){
+            $message = "First Image Can't be delete!";
+          }else{
+            $img->forceDelete();
+            $message = "Image Deleted!";
+          }
 
           return redirect('/admin/products/edit/'.$id_baju)->with("message",[
             "isi"=>$message
