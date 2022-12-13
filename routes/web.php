@@ -21,7 +21,10 @@ Route::get('/', function () {
     return redirect('/login');
 });
 // Route::get('/cetak', [CustomerController::class,"cetak"]);
-
+//filter
+Route::post('/gantikategori', [CustomerController::class,"gantikategori"]);
+//search
+Route::post('/search', [CustomerController::class,"keywordsearch"]);
 //login
 Route::get('/login', [CustomerController::class,"gotologin"]);
 Route::post('/login', [CustomerController::class,"login"])->name('login');
