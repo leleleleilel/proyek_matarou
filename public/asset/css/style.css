@@ -754,12 +754,13 @@ a:hover,a:focus{
 .error{
     color: red;
 }
-.verifemail{
-    margin-top: 200px;
-}
 .iconverif{
     width: 200px;
+    height: 200px;
 }
 .cmbkategori{
     width: 200px;
+}
+.btnreq{
+    margin-left: 30%;
 }
