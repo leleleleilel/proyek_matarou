@@ -337,11 +337,13 @@ class AdminController extends Controller
         $new_baju->deskripsi = $deskripsi;
         $new_baju->harga = $harga;
         $new_baju->fk_kategori = $fk_kategori;
+        $new_baju->nama_file = "-";
         $new_baju->save();
 
         $last_id = $new_baju->id;
 
         //upload foto
+        $i = 0;
         foreach($request->file("photo") as $photo){
             $data = new Dfoto();
             $namafile = Str::random(8).".".$photo->getClientOriginalExtension();
@@ -349,6 +351,14 @@ class AdminController extends Controller
             $data->nama_file= $namafile;
             $data->id_baju = (int)$last_id;
             $data->save();
+
+            if($i==0){
+                $last_baju = baju::where('id', $last_id)->first();
+                $last_baju->nama_file = $namafile;
+                $last_baju->save();
+            }
+
+            $i = $i+1;
         }
 
         $message = "New Item Inserted!";
