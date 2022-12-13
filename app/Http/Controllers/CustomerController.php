@@ -132,9 +132,13 @@ class CustomerController extends Controller
         return view('cart');
     }
 
-    public function toProduct()
+    public function toProduct(Request $req)
     {
-        return view('detailitem');
+        $param['baju'] = baju::where('id',$req->id)->first();
+        $param['foto_baju'] = Dfoto::where('id_baju',$req->id)->first();
+        $param['size'] = Dfoto::where('id_baju',$req->id)->first();
+
+        return view('detailitem',$param);
     }
 
     public function toHistory()
