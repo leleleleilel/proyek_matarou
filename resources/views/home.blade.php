@@ -34,12 +34,40 @@
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <div class="row">
-
+                  @if (isset($listbaju))
+                    @foreach ($listbaju as $key=> $baju)
+                      @if ($key<3)
+                        <div id="1" class="item new col-md-4">
+                          <a href="">
+                            <div class="featured-item">
+                              <img style="width:300px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
+                              <h4>{{$baju->nama}}</h4>
+                              <h6 style="color: black;">{{$baju->deskripsi}}</h6>
+                            </div>
+                          </a>
+                        </div>
+                      @endif
+                    @endforeach
+                  @endif
                 </div>
               </div>
               <div class="carousel-item">
                 <div class="row">
-
+                  @if (isset($listbaju))
+                    @foreach ($listbaju as $key=> $baju)
+                      @if ($key<3)
+                        <div id="1" class="item new col-md-4">
+                          <a href="">
+                            <div class="featured-item">
+                              <img style="width:300px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
+                              <h4>{{$baju->nama}}</h4>
+                              <h6 style="color: black;">{{$baju->deskripsi}}</h6>
+                            </div>
+                          </a>
+                        </div>
+                      @endif
+                    @endforeach
+                  @endif
                 </div>
               </div>
             </div>

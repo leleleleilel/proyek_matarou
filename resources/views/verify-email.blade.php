@@ -35,7 +35,7 @@
                             </form>
                         </div>
                         <div class="col-2">
-                            <a href="{!!url('/home')!!}"><button type="submit" class="btn btn-dark">Home</button></a>
+                            {{-- <a href="{!!url('/home')!!}"><button type="submit" class="btn btn-dark">Home</button></a> --}}
                         </div>
                         <div class="col-3"></div>
                     </div>

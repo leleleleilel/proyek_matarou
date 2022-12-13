@@ -118,7 +118,10 @@ class CustomerController extends Controller
     function home(){
         if(Auth::user()->role=="customer")
         {
-            return view('home');
+            $baju = baju::orderBy('terjual', 'DESC')->get();
+            return view('home',[
+                "listbaju"=>$baju
+            ]);
         }
     }
     function logout()
@@ -135,7 +138,7 @@ class CustomerController extends Controller
     public function toProduct(Request $req)
     {
         $param['baju'] = baju::where('id',$req->id)->first();
-        
+
         $param['foto_baju'] = Dfoto::where('id_baju',$req->id)->first();
 
         $param['size'] = d_baju::with('size')
@@ -186,17 +189,21 @@ class CustomerController extends Controller
     function keywordsearch(Request $request)
     {
         $key = $request->keyword;
-        $request->validate([
-            'keyword'=>'required'
-        ]);
-        $baju = baju::where('nama','like','%'.$key.'%')->get();
-        $list_dfotos = Dfoto::all();
-        $kategori = kategori::all();
-        return view('products',[
-            "products"=>$baju,
-            "images"=>$list_dfotos,
-            "kategori"=>$kategori,
-            "temp"=>""
-        ]);
+        if($key=="")
+        {
+            return redirect('/customer/catalogue');
+        }
+        else
+        {
+            $baju = baju::where('nama','like','%'.$key.'%')->get();
+            $list_dfotos = Dfoto::all();
+            $kategori = kategori::all();
+            return view('products',[
+                "products"=>$baju,
+                "images"=>$list_dfotos,
+                "kategori"=>$kategori,
+                "temp"=>""
+            ]);
+        }
     }
 }
