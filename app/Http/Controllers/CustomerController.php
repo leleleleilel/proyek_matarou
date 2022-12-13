@@ -135,9 +135,13 @@ class CustomerController extends Controller
     public function toProduct(Request $req)
     {
         $param['baju'] = baju::where('id',$req->id)->first();
+        
         $param['foto_baju'] = Dfoto::where('id_baju',$req->id)->first();
-        // $param['size'] = d_baju::where('fk_baju',$req->id);
-        $param['size'] = d_baju::with('size')->get();
+
+        $param['size'] = d_baju::with('size')
+                                ->join('size','d_baju.fk_size','=','size.id')
+                                ->where('fk_baju',$req->id)
+                                ->get(['d_baju.*','size.nama']);
 
         //dump($param['size']);
         return view('detailitem',$param);
