@@ -44,9 +44,6 @@
                         <div>{{$baju->deskripsi}}</div>
                         <div>Size : </div>
                         <select name="" id="">
-                            @foreach ( as )
-
-                            @endforeach
                         </select>
                     </div>
                 <br>
