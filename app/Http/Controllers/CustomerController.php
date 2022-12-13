@@ -136,8 +136,10 @@ class CustomerController extends Controller
     {
         $param['baju'] = baju::where('id',$req->id)->first();
         $param['foto_baju'] = Dfoto::where('id_baju',$req->id)->first();
-        $param['size'] = Dfoto::where('id_baju',$req->id)->first();
+        // $param['size'] = d_baju::where('fk_baju',$req->id);
+        $param['size'] = d_baju::with('size')->get();
 
+        //dump($param['size']);
         return view('detailitem',$param);
     }
 

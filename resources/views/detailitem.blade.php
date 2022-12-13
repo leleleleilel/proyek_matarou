@@ -8,6 +8,7 @@
                     <br>
                     <h1>Product Detail</h1><br>
                     <form action="" method="post">
+                        @csrf
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-5" style="">
@@ -44,6 +45,9 @@
                         <div>{{$baju->deskripsi}}</div>
                         <div>Size : </div>
                         <select name="" id="">
+                            @foreach ($size as $s)
+                                <option value="{{$s->stok}}">{{$s->fk_size}}</option>
+                            @endforeach
                         </select>
                     </div>
                 <br>
