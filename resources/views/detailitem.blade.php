@@ -40,19 +40,19 @@
                             </a>
                           </div>
                     </div>
-                    <div class="col-12 col-lg-7" style="background-color: yellow">
+                    <div class="col-12 col-lg-7">
                         {{-- Ket Baju --}}
-                        <h2>{{$baju->nama}}</h2>
-                        <div>Rp {{$baju->harga}}</div>
-                        <div>{{$baju->deskripsi}}</div>
-                        <div>Size : </div>
-                        <select name="" id="">
+                        <h2 style="font-weight: bolder">{{$baju->nama}}</h2>
+                        <h2 style="font-weight: lighter">Rp {{$baju->harga}}</h2>
+                        <div class="mb-4">{{$baju->deskripsi}}</div>
+                        <h4 style="font-weight: bolder">Size : </h4>
+                        <select class="form-control" name="" id="">
                             @foreach ($size as $s)
                                 <option value="{{$s->stok}}">{{$s->nama}}</option>
                             @endforeach
                         </select>
                         <br>
-                        <button type="button" class="btn btn-light">Add To Cart</button>
+                        <button class="form-control" type="button" class="btn btn-light" style="background-color: #FDFDFD;border-color:#6D6D6D;">Add To Cart</button>
                     </div>
                 <br>
                 </div>
