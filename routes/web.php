@@ -103,7 +103,7 @@ Route::prefix('admin')->group(function () {
     //to edit product :
     Route::get('/products/edit/{id}',[AdminController::class,'toEditBaju'])->name('toEditBaju');
     //do delete photo on edit :
-    Route::get('/doDeleteFoto/{id}',[AdminController::class,'doDeleteFoto']);
+    Route::get('/doDeleteFoto/{id}/{iditem}',[AdminController::class,'doDeleteFoto']);
     //do edit photo :
     Route::post('/doEditBaju',[AdminController::class,'doEditBaju']);
     //do delete users :

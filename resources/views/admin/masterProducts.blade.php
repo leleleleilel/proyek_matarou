@@ -117,33 +117,33 @@ function rupiah($angka){
                 <td>
 
                     @if ($product->deleted_at==null)
-                    <button type="submit" name="btnsubmit" class="btn btn-success" id="btnsubmit" style="width: 30%;" value="">
+                    <button type="submit" name="btnsubmit" class="btn btn-success" id="btnsubmit" value="">
                         <a href="{{url('/admin/toManageItem/'.$product->id)}}" style="text-decoration: none; color: white">Manage</a>
                    </button>
                     @else
-                    <button type="submit" name="btnsubmit" class="btn btn-success" id="btnsubmit" style="width: 30%;" value="{{url('/admin/toManageItem/'.$product->id)}}" disabled>
+                    <button type="submit" name="btnsubmit" class="btn btn-success" id="btnsubmit"  value="{{url('/admin/toManageItem/'.$product->id)}}" disabled>
                         <a href="" style="text-decoration: none; color: white">Manage</a>
                 </button>
                     @endif
 
 
                     @if ($product->deleted_at==null)
-                        <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 25%;" value="">
+                        <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit"  value="">
                             <a href="{{url('/admin/products/edit/'.$product->id)}}" style="text-decoration: none; color: white">Edit</a>
                        </button>
                     @else
-                    <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit" style="width: 25%;" value="" disabled>
+                    <button type="submit" name="btnsubmit" class="btn btn-dark" id="btnsubmit"  value="" disabled>
                         <a href="{{url('/admin/products/edit/'.$product->id)}}" style="text-decoration: none; color: white">Edit</a>
                    </button>
                     @endif
 
 
                     @if ($product->deleted_at==null)
-                        <button type="submit" name="btnsubmit" class="btn btn-danger" id="btnsubmit" style="width: 35%;" value="" >
+                        <button type="submit" name="btnsubmit" class="btn btn-danger" id="btnsubmit"  value="" >
                              <a href="{{url('/admin/doDeleteProduct/'.$product->id)}}" style="text-decoration: none; color: white">Delete</a>
                         </button>
                     @else
-                        <button type="submit" name="btnsubmit" class="btn btn-info" id="btnsubmit" style="width: 35%;" value="" >
+                        <button type="submit" name="btnsubmit" class="btn btn-info" id="btnsubmit"  value="" >
                              <a href="{{url('/admin/doDeleteProduct/'.$product->id)}}" style="text-decoration: none; color: white">Restore</a>
                         </button>
                     @endif

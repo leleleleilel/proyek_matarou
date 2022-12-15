@@ -29,7 +29,7 @@
                           <img src="{{ url('public/image/bajus/'.$img->nama_file) }}" style="height: 180px; width: 120px; margin-top: 10px" class="rounded mx-auto d-block" alt="Card image cap" >
                           <div class="card-body">
                             <div class="card-footer bg-transparent border-l">
-                                <a href="{{url('/admin/doDeleteFoto/'.$img->id)}}" class="btn btn-danger" style="">Delete</a>
+                                <a href="{{url('/admin/doDeleteFoto/'.$img->id.'/'.$item->id)}}" class="btn btn-danger" style="">Delete</a>
                             </div>
                           </div>
                       </div>

@@ -127,11 +127,11 @@
               <td>
 
                    @if ($dbaju->deleted_at==null)
-                        <button type="submit" name="btnsubmit" class="btn btn-danger" id="btnsubmit" style="width: 45%;" value="" >
+                        <button type="submit" name="btnsubmit" class="btn btn-danger" id="btnsubmit" value="" >
                              <a href="{{url('/admin/doDeleteSizeStock/'.$dbaju->id)}}" style="text-decoration: none; color: white">Delete</a>
                         </button>
                     @else
-                        <button type="submit" name="btnsubmit" class="btn btn-info" id="btnsubmit" style="width: 45%;" value="" >
+                        <button type="submit" name="btnsubmit" class="btn btn-info" id="btnsubmit" value="" >
                              <a href="{{url('/admin/doDeleteSizeStock/'.$dbaju->id)}}" style="text-decoration: none; color: white">Restore</a>
                         </button>
                     @endif
