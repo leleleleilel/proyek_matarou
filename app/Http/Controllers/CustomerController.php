@@ -155,55 +155,94 @@ class CustomerController extends Controller
         return view('history');
     }
 
-    public function tolistproduct()
+    public function tolistproduct(Request $request)
     {
-        $list_products = baju::all();
-        $list_dfotos = Dfoto::all();
-        $kategori = kategori::all();
-        return view('products',[
-            "products"=>$list_products,
-            "images"=>$list_dfotos,
-            "kategori"=>$kategori,
-            "temp"=>""
-        ]);
-    }
-    public function gantikategori(Request $request)
-    {
-        $temp = $request->filter;
-        if($temp==""||$temp=="all"){
-            $baju = baju::all();
-        }
-        else
-        {
-            $baju = baju::where('fk_kategori',$temp)->get();
-        }
-        $list_dfotos = Dfoto::all();
-        $kategori = kategori::all();
-        return view('products',[
-            "products"=>$baju,
-            "images"=>$list_dfotos,
-            "kategori"=>$kategori,
-            "temp"=>$temp
-        ]);
-    }
-    function keywordsearch(Request $request)
-    {
-        $key = $request->keyword;
-        if($key=="")
-        {
-            return redirect('/customer/catalogue');
-        }
-        else
-        {
-            $baju = baju::where('nama','like','%'.$key.'%')->get();
+        if (isset($request->filter)){
+            $temp = $request->filter;
+            if($temp==""||$temp=="all"){
+                $baju = baju::all();
+            }
+            else
+            {
+                $baju = baju::where('fk_kategori',$temp)->get();
+            }
             $list_dfotos = Dfoto::all();
             $kategori = kategori::all();
             return view('products',[
                 "products"=>$baju,
                 "images"=>$list_dfotos,
                 "kategori"=>$kategori,
+                "temp"=>$temp
+            ]);
+        }
+        else if(isset($request->keyword)){
+            $key = $request->keyword;
+            if($key=="")
+            {
+                return redirect('/customer/catalogue');
+            }
+            else
+            {
+                $baju = baju::where('nama','like','%'.$key.'%')->get();
+                $list_dfotos = Dfoto::all();
+                $kategori = kategori::all();
+                return view('products',[
+                    "products"=>$baju,
+                    "images"=>$list_dfotos,
+                    "kategori"=>$kategori,
+                    "temp"=>""
+                ]);
+            }
+        }
+        else{
+            $list_products = baju::all();
+            $list_dfotos = Dfoto::all();
+            $kategori = kategori::all();
+            return view('products',[
+                "products"=>$list_products,
+                "images"=>$list_dfotos,
+                "kategori"=>$kategori,
                 "temp"=>""
             ]);
         }
     }
+    // public function gantikategori(Request $request)
+    // {
+    //     $temp = $request->filter;
+    //     if($temp==""||$temp=="all"){
+    //         $baju = baju::all();
+    //     }
+    //     else
+    //     {
+    //         $baju = baju::where('fk_kategori',$temp)->get();
+    //     }
+    //     $list_dfotos = Dfoto::all();
+    //     $kategori = kategori::all();
+    //     return view('products',[
+    //         "products"=>$baju,
+    //         "images"=>$list_dfotos,
+    //         "kategori"=>$kategori,
+    //         "temp"=>$temp
+    //     ]);
+    // }
+    // function keywordsearch(Request $request)
+    // {
+    //     $key = $request->keyword;
+    //     if($key=="")
+    //     {
+    //         return redirect('/customer/catalogue');
+    //     }
+    //     else
+    //     {
+    //         $baju = baju::where('nama','like','%'.$key.'%')->get();
+    //         $list_dfotos = Dfoto::all();
+    //         $kategori = kategori::all();
+    //         return view('products',[
+    //             "products"=>$baju,
+    //             "images"=>$list_dfotos,
+    //             "kategori"=>$kategori,
+    //             "temp"=>""
+    //         ]);
+    //     }
+    // }
 }

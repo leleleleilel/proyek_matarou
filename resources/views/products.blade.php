@@ -3,8 +3,8 @@
 @section('content')
     <div class="featured-page">
       <div class="container">
-      <form action="{!!url('/search')!!}" method="post">
-      @csrf
+      <form action="" method="get">
+      {{-- @csrf --}}
             <input type="text" name="keyword" placeholder="Search..." style="width: 300px;"
             value="">
             <button type="submit" name="btnSearch" id="btnsearch">Search</button>
@@ -18,8 +18,8 @@
           </div>
           <div class="col-md-8 col-sm-12">
             <div id="filters" class="button-group" style="margin-top:50px">
-              <form action="{!!url('/gantikategori')!!}" method="post">
-              @csrf
+              <form action="" method="get">
+              {{-- @csrf --}}
               <select name="filter" id="filterkategori" class="cmbkategori" onchange="this.form.submit()">
                   <option value="all" selected>All</option>
                   @if (isset($kategori))

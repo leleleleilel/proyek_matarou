@@ -30,9 +30,9 @@ Route::get('/register',[CustomerController::class,"gotoregister"]);
 Route::post('/register',[CustomerController::class,"register"]);
 
 //filter
-Route::post('/gantikategori', [CustomerController::class,"gantikategori"]);
+//Route::post('/gantikategori', [CustomerController::class,"gantikategori"]);
 //search
-Route::post('/search', [CustomerController::class,"keywordsearch"]);
+//Route::post('/search', [CustomerController::class,"keywordsearch"]);
 
 Route::middleware(['auth', 'verified'])->group(function() {
     // customer
