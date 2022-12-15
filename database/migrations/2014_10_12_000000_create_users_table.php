@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('alamat');
             $table->string('no_telp');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('role');
             $table->timestamp('deleted_at')->nullable()->default(null);
             $table->timestamp('email_verified_at')->nullable();

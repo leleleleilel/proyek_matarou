@@ -41,7 +41,7 @@ class CustomerController extends Controller
                 'fullname'=>'required | max:50',
                 'address'=>'min:12',
                 'phone'=>'required | min:8 | max:14',
-                'email'=>'required | email',
+                'email'=>'required | email | unique:user,email',
                 'password'=>['required', 'confirmed', 'regex:/^(?:(?=.*[@_!#$%^&*()<>?\/|}{~:])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/','min:8',new cekpassword($request->username)],
                 'password_confirmation'=>['required']
             ];
@@ -50,6 +50,7 @@ class CustomerController extends Controller
                 'fullname.required'=>"Field harus diisi",
                 'phone.required'=>"Field harus diisi",
                 'email.required'=>"Field harus diisi",
+                'email.unique'=>"Email telah digunakan",
                 'password.required'=>"Field harus diisi",
                 'password_confirmation.required'=>"Field harus diisi",
                 'username.min'=>"Minimal 8 karakter",
