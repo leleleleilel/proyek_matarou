@@ -30,6 +30,9 @@
     {{-- list reviews --}}
     @yield('listReviewsContent')
 
+    {{-- list history --}}
+    @yield('listhistory')
+
     {{-- master kode promo --}}
     @yield('masterPromoCode')
 

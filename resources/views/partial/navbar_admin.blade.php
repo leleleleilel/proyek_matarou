@@ -20,11 +20,11 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link {{$activeReports}} dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link {{$activeReports}} dropdown-toggle" href="{{url('/admin/history')}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Transactions
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">Transactions</a></li>
+              <li><a class="dropdown-item" href="{{url('/admin/history')}}">Transactions</a></li>
               <li><a class="dropdown-item" href="">Reports</a></li>
             </ul>
           </li>

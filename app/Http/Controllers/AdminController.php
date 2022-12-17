@@ -10,6 +10,7 @@ use App\Models\kode_promo;
 use App\Models\size;
 use App\Models\User;
 use App\Models\cart;
+use App\Models\h_trans;
 use App\Rules\CekPanjangTelepon;
 use App\Rules\CekUsername;
 use Illuminate\Http\Request;
@@ -150,7 +151,6 @@ class AdminController extends Controller
         ]);
 
     }
-
 
     public function toEditKategori(Request $request){
         $id = $request->id;
@@ -865,5 +865,20 @@ class AdminController extends Controller
         return $randomString;
     }
 
+    public function gotohistory(){
+        $history = h_trans::all();
+        $promo = kode_promo::all();
+        $user = User::all();
+        return view('admin.historyCust',[
+            "title"=>"List History",
+            "activeMaster"=>"",
+            "activeReports"=>"active",
+            "activeReviews"=>"",
+            "activeProfile"=>"",
+            "history"=>$history,
+            "promos"=>$promo,
+            "users"=>$user
+        ]);
+    }
 
 }

@@ -112,6 +112,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/doLogout',[AdminController::class,'doLogout']);
     //do edit profile :
     Route::post('/doEditProfile',[AdminController::class,'doEditProfile']);
+    //list history :
+    Route::get('/history', [AdminController::class,'gotohistory']);
 });
 
 Route::get('/email/verify', function () {
