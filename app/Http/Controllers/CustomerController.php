@@ -15,8 +15,10 @@ use App\Models\kode_promo;
 use App\Models\size;
 use App\Models\User;
 use App\Models\cart;
+use App\Models\d_trans;
 use App\Models\h_trans;
 use App\Models\review;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -221,6 +223,18 @@ class CustomerController extends Controller
 
     public function toHistory()
     {
+        //Dummy id login
+        //session()->put('idxLogin',11);
+        // $param['h_trans']=h_trans::select('*')
+        //                             ->where('id_user','=',session()->get('idxLogin'))
+        //                             ->get();
+
+        $param['h_trans']=DB::select('SELECT *,sum(d_trans.subtotal) as dSub
+        FROM `d_trans`
+        join h_trans on h_trans.id = d_trans.fk_htrans
+        where h_trans.id_user = ?
+        GROUP BY h_trans.id;',[session()->get('idxLogin')]);
+
         return view('history',[
             'navAccount'=>"",
             'navHistory'=>"active",
@@ -228,7 +242,39 @@ class CustomerController extends Controller
             'navProduct'=>"",
             'navAbout'=>"",
             'navCart'=>""
-        ]);
+        ],$param);
+    }
+
+    public function toHistoryDetail(Request $req)
+    {
+        //Dummy id login
+        //session()->put('idxLogin',11);
+
+        $param['h_trans']=h_trans::join('kode_promo','kode_promo.id','=','h_trans.fk_kode_promo')
+                                    ->where('id_user','=',session()->get('idxLogin'))
+                                    ->first(['h_trans.*','kode_promo.nama']);
+
+        $param['d_trans']=d_trans::join('h_trans','h_trans.id','=','fk_htrans')
+                                    ->join('d_baju','d_baju.id','=','fk_dbaju')
+                                    ->join('baju','baju.id','=','d_baju.fk_baju')
+                                    ->where('fk_htrans','=',$req->id)
+                                    ->get(['baju.*','d_trans.qty','d_trans.subtotal']);
+
+
+        $total = 0;
+        foreach ($param['d_trans'] as $key => $value) {
+            $total+=$value->subtotal;
+        }
+        $param['allSubTotal']=$total;
+
+        return view('detailhistory',[
+            'navAccount'=>"",
+            'navHistory'=>"active",
+            'navHome'=>"",
+            'navProduct'=>"",
+            'navAbout'=>"",
+            'navCart'=>""
+        ],$param);
     }
 
     public function tolistproduct(Request $request)

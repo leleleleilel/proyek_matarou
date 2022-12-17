@@ -4,7 +4,7 @@
     <div class="container">
       <div class="col-md-12">
         <div class="headsection">
-            <h1>History</h1>
+            <h1>Shopping History</h1>
             <div class="line-dec" style="background-color: black"></div>
             <br>
             </div>
@@ -13,10 +13,33 @@
 </div>
 <!-- List History -->
 <div class="contact-page">
-    <div class="container" style="padding-left:10%;">
+    <div class="" style="padding-left:10%;padding-right:10%;">
         <div class="col-md-12 ">
             <div class="row">
-
+                <table class="table table-dark" style="background-color: #252525">
+                    <thead>
+                      <tr>
+                        <th scope="col">INVOICE ID</th>
+                        <th scope="col">SUBTOTAL</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col">ACTION</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($h_trans as $h)
+                            <tr>
+                                <th scope="row">#{{$h->id}}</th>
+                                <td>Rp {{$h->dSub}}</td>
+                                <td>{{$h->tanggal_trans}}</td>
+                                <td>
+                                    <a href="/customer/history/detail/{{$h->id}}">
+                                        <input type="submit" class="btn btn-light" value="Detail">
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                  </table>
             </div>
         </div>
     </div>

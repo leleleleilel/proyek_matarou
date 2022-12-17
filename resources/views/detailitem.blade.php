@@ -52,7 +52,9 @@
                             @endforeach
                         </select>
                         <br>
-                        <button class="form-control" type="button" class="btn btn-light" style="background-color: #FDFDFD;border-color:#6D6D6D;">Add To Cart</button>
+                        <button class="form-control" type="button" class="btn btn-light"
+                        style="background-color: #FDFDFD;
+                        border-color:#6D6D6D;">Add To Cart</button>
                     </div>
                 <br>
                 </div>

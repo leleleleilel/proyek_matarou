@@ -52,6 +52,8 @@ Route::prefix('customer')->group(function () {
     Route::get('/product/{id}',[CustomerController::class,'toProduct'])->name('toProduct');
     //history
     Route::get('/history',[CustomerController::class,'toHistory'])->name('toHistory');
+    //detail history
+    Route::get('/history/detail/{id}',[CustomerController::class,'toHistoryDetail'])->name('toHistoryDetail');
     //about us
     Route::get('/aboutus',[CustomerController::class,'toAboutUs'])->name('toAboutUs');
 });

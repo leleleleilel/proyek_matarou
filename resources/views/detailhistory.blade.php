@@ -6,8 +6,56 @@
             <div class="headsection">
                 <div class="line-dec" style="background-color: black"></div>
                 <br>
-                <h1>Order Detail</h1><br>
+                <h1>Transaction Detail</h1><br>
                 <form action="" method="post">
+                    <div class="jumbotron" style="background-color: #252525;color:white;padding:35px;font-weight:lighter;font-size:25px;">
+                        <div class="row mb-3">
+                            <div class="col-md-4 d-flex justify-content-end">Invoice ID :</div>
+                            <div class="col-md-8">#{{$h_trans->id}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4 d-flex justify-content-end">Transaction Date :</div>
+                            <div class="col-md-8">{{$h_trans->tanggal_trans}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4 d-flex justify-content-end">Promo Code :</div>
+                            <div class="col-md-8">{{$h_trans->nama}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4 d-flex justify-content-end">Subtotal :</div>
+                            <div class="col-md-8">Rp {{$allSubTotal}}</div>
+                        </div>
+                    </div>
+                    <h1>Items</h1><br>
+                    <table class="table table-dark" style="background-color: #252525">
+                        <thead>
+                          <tr>
+                            <th scope="col">ITEM ID</th>
+                            <th scope="col">ITEM NAME</th>
+                            <th scope="col">ITEM PRICE</th>
+                            <th scope="col">QTY</th>
+                            <th scope="col">SUBTOTAL</th>
+                            <th scope="col">ACTION</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($d_trans as $d)
+                                <tr>
+                                    <th scope="row">#{{$d->id}}</th>
+                                    <td>{{$d->nama}}</td>
+                                    <td>Rp {{$d->harga}}</td>
+                                    <td>{{$d->qty}}</td>
+                                    <td>Rp {{$d->subtotal}}</td>
+                                    <td>
+                                        {{-- Ini nyambung ke mana --}}
+                                        <a href="/customer/review/{{$d->id}}">
+                                            <input type="submit" class="btn btn-light" value="Review">
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                      </table>
                     <button type="submit" name="btnback" class="btn btn-dark" style="margin-top: 20px; width: 120px;">Back</button>
                 </form>
             </div>
