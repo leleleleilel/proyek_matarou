@@ -15,6 +15,8 @@ use App\Models\kode_promo;
 use App\Models\size;
 use App\Models\User;
 use App\Models\cart;
+use App\Models\h_trans;
+use App\Models\review;
 
 class CustomerController extends Controller
 {
@@ -134,8 +136,12 @@ class CustomerController extends Controller
         if(Auth::user()->role=="customer")
         {
             $baju = baju::orderBy('terjual', 'DESC')->get();
+            $review = review::orderBy('rate','DESC')->get();
+            $allhtrans = h_trans::all();
             return view('home',[
                 "listbaju"=>$baju,
+                "listreview"=>$review,
+                "listhtrans"=>$allhtrans,
                 'navAccount'=>"",
                 'navHistory'=>"",
                 'navHome'=>"active",

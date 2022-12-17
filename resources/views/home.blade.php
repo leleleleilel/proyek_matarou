@@ -18,6 +18,7 @@
         </div>
     </div>
 </div>
+{{-- carousel product --}}
 <div class="featured-items" style="margin-bottom:100px">
     <div class="container">
       <div class="row">
@@ -39,7 +40,7 @@
                       @if ($key<3)
                         <div id="1" class="item new col-md-4">
                           <a href="">
-                            <div class="featured-item">
+                            <div class="featured-item" style="height: 480px">
                               <img style="width:300px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
                               <h4>{{$baju->nama}}</h4>
                               <h6 style="color: black;">{{$baju->deskripsi}}</h6>
@@ -58,7 +59,7 @@
                       @if ($key<3)
                         <div id="1" class="item new col-md-4">
                           <a href="">
-                            <div class="featured-item">
+                            <div class="featured-item" style="height: 480px">
                               <img style="width:300px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
                               <h4>{{$baju->nama}}</h4>
                               <h6 style="color: black;">{{$baju->deskripsi}}</h6>
@@ -75,7 +76,93 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
+
+  {{-- carousel review --}}
+<div class="featured-items" style="margin-bottom:100px">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="headsection">
+            <div class="line-dec"></div>
+            <h1>Best Reviews</h1>
+          </div>
+          <div class="carousel slide" data-ride="carousel" id="mycarousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target = "#mycarousel"></li>
+              <li data-slide-to ="1" data-target = "#mycarousel"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row">
+                  @if (isset($listreview))
+                    @foreach ($listreview as $key=> $review)
+                      @if ($key<3)
+                        <div id="1" class="item new col-md-4">
+                          <a href="">
+                            <div class="featured-item" style="height: 550px">
+                              <img style="width:300px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
+                              @if (isset($listbaju))
+                                @foreach ($listbaju as $baju)
+                                    @if ($baju->id==$review->fk_baju)
+                                        <h4>{{$baju->nama}}</h4>
+                                    @endif
+                                @endforeach
+                              @endif
+                              @if (isset($listhtrans))
+                                @foreach ($listhtrans as $htrans)
+                                    @if ($htrans->id==$review->fk_htrans)
+                                        <h6>{{$htrans->tanggal_trans}}</h6>
+                                    @endif
+                                @endforeach
+                              @endif
+                              <h6 style="color: black;">{{$review->deskripsi_review}}</h6>
+                            </div>
+                          </a>
+                        </div>
+                      @endif
+                    @endforeach
+                  @endif
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row">
+                  @if (isset($listreview))
+                    @foreach ($listreview as $key=> $review)
+                      @if ($key<3)
+                        <div id="1" class="item new col-md-4">
+                          <a href="">
+                            <div class="featured-item" style="height: 550px">
+                              <img style="width:300px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
+                              @if (isset($listbaju))
+                                @foreach ($listbaju as $baju)
+                                    @if ($baju->id==$review->fk_baju)
+                                        <h4>{{$baju->nama}}</h4>
+                                    @endif
+                                @endforeach
+                              @endif
+                              @if (isset($listhtrans))
+                                @foreach ($listhtrans as $htrans)
+                                    @if ($htrans->id==$review->fk_htrans)
+                                        <h6>{{$htrans->tanggal_trans}}</h6>
+                                    @endif
+                                @endforeach
+                              @endif
+                              <h6 style="color: black;">{{$review->deskripsi_review}}</h6>
+                            </div>
+                          </a>
+                        </div>
+                      @endif
+                    @endforeach
+                  @endif
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 @endsection
 @section('banner')
     <div id="banner2" style="height: 1000px; width: 100%; background-image: url({{asset('asset/images//banner/collection.gif')}}); background-size: cover; background-position: center;">
