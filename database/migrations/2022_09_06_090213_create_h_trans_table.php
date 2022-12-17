@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('h_trans', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal_trans');
-            $table->unsignedBigInteger('fk_kode_promo');
+            $table->unsignedBigInteger('fk_kode_promo')->nullable();
             $table->foreign('fk_kode_promo')
                 ->references('id')->on('kode_promo')
                 ->onDelete('cascade');
