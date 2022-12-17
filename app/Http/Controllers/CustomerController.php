@@ -194,15 +194,29 @@ class CustomerController extends Controller
                                 ->where('fk_baju',$req->id)
                                 ->get(['d_baju.*','size.nama']);
 
-        //dump($param['size']);
-        return view('detailitem',[$param,
+        $param['review'] = review::join('baju','baju.id','=','fk_baju')
+                                ->join('h_trans','h_trans.id','=','fk_htrans')
+                                ->join('user','user.id','=','h_trans.id_user')
+                                ->where('fk_baju',$req->id)
+                                ->get(['user.*','review.*']);
+
+        $total = 0;
+        foreach ($param['review'] as $key => $value) {
+            $total+=$value->rate;
+        }
+
+
+        $param['avg'] = $total;
+
+        // dump($param['foto_baju']);
+        return view('detailitem',[
             'navAccount'=>"",
             'navHistory'=>"",
             'navHome'=>"",
             'navProduct'=>"active",
             'navAbout'=>"",
             'navCart'=>""
-        ]);
+        ],$param);
     }
 
     public function toHistory()

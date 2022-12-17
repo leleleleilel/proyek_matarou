@@ -63,26 +63,39 @@
                     <div class="jumbotron" style="background-color: #252525;color:white">
                         <div class="row mb-4">
                             {{-- Avg Review & All REviews --}}
-                            <h4 class="col-6">4.9/5</h4>
-                            <h4 class="col-6 d-flex flex-row-reverse">See All (90)</h4>
+                            <h4 class="col-6">{{$avg/count($review)}}/5</h4>
+                            {{-- See All perlu onclick biar pindah hal --}}
+                            <h4 class="col-6 d-flex flex-row-reverse">See All ({{count($review)}})</h4>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                {{-- Template Review --}}
-                                <div class="" style="
-                                    color:#252525;
-                                    padding: 20px;
-                                    border-radius: 0.3rem;
-                                    margin-bottom: 2rem;
-                                    background-color: #FFFFFF">
-                                    <div>User1</div>
-                                    <div>
-                                        <i class="fa fa-star fa-1x mr-2"></i>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum culpa qui id quos odio porro hic beatae, architecto explicabo excepturi.</div>
-                                </div>
-                            </div>
+                        <div hidden>
+                          {{$ctr=0}}
                         </div>
+                        @foreach ($review as $r)
+                          @if ($ctr<3)
+                          <div class="row">
+                              <div class="col">
+                                  {{-- Template Review --}}
+                                  <div class="" style="
+                                      color:#252525;
+                                      padding: 20px;
+                                      border-radius: 0.3rem;
+                                      margin-bottom: 2rem;
+                                      background-color: #FFFFFF">
+                                      <div>{{$r->username}}</div>
+                                      <div>
+                                        @for ($i = 0;$i<$r->rate;$i++)
+                                          <i class="fa fa-star fa-1x mr-2"></i>
+                                        @endfor
+                                      </div>
+                                      <div>{{$r->deskripsi_review}}</div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div hidden>
+                            {{$ctr++}}
+                          </div>
+                          @endif
+                        @endforeach
                       </div>
                 </div>
                 <br>
