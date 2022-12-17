@@ -286,6 +286,17 @@ class CustomerController extends Controller
             ]);
         }
     }
+    public function toAboutUs()
+    {
+        return view('about',[
+                'navAccount'=>"",
+                'navHistory'=>"",
+                'navHome'=>"",
+                'navProduct'=>"",
+                'navAbout'=>"active",
+                'navCart'=>""
+            ]);
+    }
     // public function gantikategori(Request $request)
     // {
     //     $temp = $request->filter;
