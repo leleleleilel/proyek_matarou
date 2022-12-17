@@ -20,11 +20,25 @@ class CustomerController extends Controller
 {
     function gotoregister()
     {
-        return view('register');
+        return view('register',[
+            'navAccount'=>"",
+            'navHistory'=>"",
+            'navHome'=>"",
+            'navProduct'=>"",
+            'navAbout'=>"",
+            'navCart'=>""
+        ]);
     }
     function gotologin()
     {
-        return view('login');
+        return view('login',[
+            'navAccount'=>"",
+            'navHistory'=>"",
+            'navHome'=>"",
+            'navProduct'=>"",
+            'navAbout'=>"",
+            'navCart'=>""
+        ]);
     }
     function cetak()
     {
@@ -121,19 +135,39 @@ class CustomerController extends Controller
         {
             $baju = baju::orderBy('terjual', 'DESC')->get();
             return view('home',[
-                "listbaju"=>$baju
+                "listbaju"=>$baju,
+                'navAccount'=>"",
+                'navHistory'=>"",
+                'navHome'=>"active",
+                'navProduct'=>"",
+                'navAbout'=>"",
+                'navCart'=>""
             ]);
         }
     }
     function logout()
     {
         Auth::logout();
-        return redirect("/");
+        return redirect("/",[
+            'navAccount'=>"",
+            'navHistory'=>"",
+            'navHome'=>"",
+            'navProduct'=>"",
+            'navAbout'=>"",
+            'navCart'=>""
+        ]);
     }
 
     public function toCart()
     {
-        return view('cart');
+        return view('cart',[
+            'navAccount'=>"",
+            'navHistory'=>"",
+            'navHome'=>"",
+            'navProduct'=>"",
+            'navAbout'=>"",
+            'navCart'=>"active"
+        ]);
     }
 
     public function toProduct(Request $req)
@@ -148,12 +182,26 @@ class CustomerController extends Controller
                                 ->get(['d_baju.*','size.nama']);
 
         //dump($param['size']);
-        return view('detailitem',$param);
+        return view('detailitem',[$param,
+            'navAccount'=>"",
+            'navHistory'=>"",
+            'navHome'=>"",
+            'navProduct'=>"active",
+            'navAbout'=>"",
+            'navCart'=>""
+        ]);
     }
 
     public function toHistory()
     {
-        return view('history');
+        return view('history',[
+            'navAccount'=>"",
+            'navHistory'=>"active",
+            'navHome'=>"",
+            'navProduct'=>"",
+            'navAbout'=>"",
+            'navCart'=>""
+        ]);
     }
 
     public function tolistproduct(Request $request)
@@ -173,7 +221,13 @@ class CustomerController extends Controller
                 "products"=>$baju,
                 "images"=>$list_dfotos,
                 "kategori"=>$kategori,
-                "temp"=>$temp
+                "temp"=>$temp,
+                'navAccount'=>"",
+                'navHistory'=>"",
+                'navHome'=>"",
+                'navProduct'=>"active",
+                'navAbout'=>"",
+                'navCart'=>""
             ]);
         }
         else if(isset($request->keyword)){
@@ -191,7 +245,13 @@ class CustomerController extends Controller
                     "products"=>$baju,
                     "images"=>$list_dfotos,
                     "kategori"=>$kategori,
-                    "temp"=>""
+                    "temp"=>"",
+                    'navAccount'=>"",
+                    'navHistory'=>"",
+                    'navHome'=>"",
+                    'navProduct'=>"active",
+                    'navAbout'=>"",
+                    'navCart'=>""
                 ]);
             }
         }
@@ -203,7 +263,13 @@ class CustomerController extends Controller
                 "products"=>$list_products,
                 "images"=>$list_dfotos,
                 "kategori"=>$kategori,
-                "temp"=>""
+                "temp"=>"",
+                'navAccount'=>"",
+                'navHistory'=>"",
+                'navHome'=>"",
+                'navProduct'=>"active",
+                'navAbout'=>"",
+                'navCart'=>""
             ]);
         }
     }

@@ -15,22 +15,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarresponsive">
         <ul class="navbar-nav ml-auto" style="margin-top: 45px;">
-        <li class="nav-item"  style="outline: none;border:none">
+        <li class="nav-item {{$navAccount}}"  style="outline: none;border:none">
                 <a href="{!!url('/')!!}"><button name="btnMyAccount" class="nav-link" style="outline: none;border:none">My Account</button></a>
             </li>
-        <li class="nav-item">
+        <li class="nav-item {{$navHistory}}">
                 <a href="{!!url('/customer/history')!!}"><button name="btnHistory" class="nav-link" style="outline: none;border:none">History</button></a>
         </li>
-            <li class="nav-item">
-                <a href="{!!url('/home')!!}"><button name="btnHome" class="nav-link" style="outline: none;border:none;">HOME</button></a>
+            <li class="nav-item {{$navHome}}">
+                <a href="{!!url('/home')!!}"><button name="btnHome" class="nav-link "style="outline: none;border:none;">HOME</button></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{$navProduct}}">
                 <a href="{!!url('/customer/catalogue')!!}"><button name="btnProduct" class="nav-link" style="outline: none;border:none;">PRODUCTS</button></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item {{$navAbout}}">
                 <a href="{!!url('/customer/aboutus')!!}"><button name="btnAbout" class="nav-link" style="outline: none;border:none;">ABOUT US</button></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{$navCart}}">
                 <button name="btnCart" class="nav-link" style="outline: none;border:none;">CART</button>
             </li>
             <li class="nav-item">
