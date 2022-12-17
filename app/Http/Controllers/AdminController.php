@@ -11,6 +11,7 @@ use App\Models\size;
 use App\Models\User;
 use App\Models\cart;
 use App\Models\h_trans;
+use App\Models\review;
 use App\Rules\CekPanjangTelepon;
 use App\Rules\CekUsername;
 use Illuminate\Http\Request;
@@ -76,8 +77,14 @@ class AdminController extends Controller
     }
 
     public function toListReviews(){
+        $review = review::all();
+        $listhtrans = h_trans::all();
+        $baju = baju::all();
         return view('admin.listReviews',[
-            "title"=>"Master Product",
+            "title"=>"List Review",
+            "reviews"=>$review,
+            "htranss"=>$listhtrans,
+            "bajus"=>$baju,
             "activeMaster"=> "",
             "activeReports"=>"",
             "activeReviews"=>"active",
@@ -523,10 +530,7 @@ class AdminController extends Controller
         ]);
 
         $id = $request->id_product;
-
         $size_baju = d_baju::withTrashed()->where('fk_size',$size)->first();
-
-
         if(!$size_baju){
             //jika belum ada
             $new_size = new d_baju();

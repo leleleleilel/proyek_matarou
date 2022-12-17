@@ -101,7 +101,14 @@ class CustomerController extends Controller
                 //         "deleted_at"=>null
                 //     ]
                 // );
-                return redirect("/");
+                return view('login',[
+                    'navAccount'=>"",
+                    'navHistory'=>"",
+                    'navHome'=>"",
+                    'navProduct'=>"",
+                    'navAbout'=>"",
+                    'navCart'=>""
+                ]);
             }
         }
 
@@ -154,7 +161,7 @@ class CustomerController extends Controller
     function logout()
     {
         Auth::logout();
-        return redirect("/",[
+        return view("login",[
             'navAccount'=>"",
             'navHistory'=>"",
             'navHome'=>"",
