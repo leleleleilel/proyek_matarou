@@ -46,7 +46,7 @@
             @if (isset($products))
               @foreach ($products as $product)
                 <div id="1" class="item new col-md-4">
-                  <a href="">
+                  <a href="/customer/product/{{$product->id}}">
                     <div class="featured-item">
                       <img style="width:280px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$product->nama_file) }}" alt="">
                       <h4>{{$product->nama}}</h4>
