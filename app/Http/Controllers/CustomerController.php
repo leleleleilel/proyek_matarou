@@ -175,6 +175,23 @@ class CustomerController extends Controller
 
     public function toCart()
     {
+        session()->put('idxLogin',1);
+        $param['cart'] = cart::join('d_baju','d_baju.id','=','cart.id_dbaju')
+                                ->join('baju','baju.id','=','d_baju.fk_baju')
+                                ->join('d_foto_baju','d_foto_baju.id_baju','=','baju.id')
+                                ->where('id_user','=',session()->get('idxLogin'))
+                                ->get();
+
+        $totalItem = 0;
+        $totalHarga = 0;
+        foreach ($param['cart'] as $key => $value) {
+            $totalItem+=$value->quantity;
+            $totalHarga+=$value->quantity*$value->harga;
+        }
+
+        $param['totalItem'] = $totalItem;
+        $param['totalHarga'] = $totalHarga;
+
         return view('cart',[
             'navAccount'=>"",
             'navHistory'=>"",
@@ -182,7 +199,7 @@ class CustomerController extends Controller
             'navProduct'=>"",
             'navAbout'=>"",
             'navCart'=>"active"
-        ]);
+        ],$param);
     }
 
     public function toProduct(Request $req)
@@ -191,10 +208,9 @@ class CustomerController extends Controller
 
         $param['foto_baju'] = Dfoto::where('id_baju',$req->id)->first();
 
-        $param['size'] = d_baju::with('size')
-                                ->join('size','d_baju.fk_size','=','size.id')
+        $param['size'] = d_baju::join('size','d_baju.fk_size','=','size.id')
                                 ->where('fk_baju',$req->id)
-                                ->get(['d_baju.*','size.nama']);
+                                ->get(['size.*']);
 
         $param['review'] = review::join('baju','baju.id','=','fk_baju')
                                 ->join('h_trans','h_trans.id','=','fk_htrans')

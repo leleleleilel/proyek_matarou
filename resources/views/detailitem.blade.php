@@ -48,7 +48,7 @@
                         <h4 style="font-weight: bolder">Size : </h4>
                         <select class="form-control" name="" id="">
                             @foreach ($size as $s)
-                                <option value="{{$s->stok}}">{{$s->nama}}</option>
+                                <option value="{{$s->id}}">{{$s->nama}}</option>
                             @endforeach
                         </select>
                         <br>

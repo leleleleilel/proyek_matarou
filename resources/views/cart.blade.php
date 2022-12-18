@@ -8,7 +8,26 @@
                 <h1>Shopping Cart</h1>
             </div>
             <div class="row">
-                <div class="col-12 col-lg-8 "></div>
+                <div class="col-12 col-lg-8 ">
+                    @foreach ($cart as $c)
+                    <div class="jumbotron" style="background-color: #252525;color:white;">
+                        <div class="row">
+                            <div class="col-4">
+                                <img class="d-block w-100" style="border-radius: 10px;" src="{{ url('public/image/bajus/'.$c->nama_file) }}">
+                            </div>
+                            <div class="col-8 d-flex align-items-center flex-column pt-4 mt-4">
+                                <h1 class="display-4">{{$c->nama}}</h1>
+                                <h3 style="font-weight: lighter">Rp {{$c->harga * $c->quantity}}</h3>
+                                <div class="row" >
+                                    <div class="col-3" style="padding: 0px;margin:0px;"><input type="button" class="btn" style="text-align: center;width:35px:margin-right:6px;" value="-"></div>
+                                    <div class="col-6 d-flex align-items-center flex-column" style="text-align: center;font-size:25px;">{{$c->quantity}}</div>
+                                    <div class="col-3" style="padding: 0px;margin:0px;"><input type="button" class="btn" style="text-align: center;width:35px;"value="+"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
                 <div class="col-12 col-lg-4">
                     <div class="col-md-12">
                         <form id="contact" action="" method="post">
@@ -16,13 +35,22 @@
                                 <div class="card-header bg-transparent border" style="font-weight: bolder;">Shopping Cart Total</div>
                                 <div class="row">
                                 <div class="card-body text">
-                                    <div class="col-md-6">
-                                    <p class="card-text" style="font-size:15px">Total Item </p>
+                                    <div class="row" style="padding: .75rem 1.25rem">
+                                        <div class="col-md-5">
+                                            <p class="card-text" style="font-size:15px">Total Item</p>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p class="card-text" style="font-size:15px">{{$totalItem}}</p>
+                                        </div>
                                     </div>
                                     <br>
-                                    <div class="col-md-6">
-                                    <p class="card-text" style="font-size:15px">Total
-                                    </p>
+                                    <div class="row"  style="padding: .75rem 1.25rem">
+                                        <div class="col-md-5">
+                                            <p class="card-text" style="font-size:15px">Total</p>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p class="card-text" style="font-size:15px">Rp {{$totalHarga}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
