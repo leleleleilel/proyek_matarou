@@ -116,6 +116,10 @@ Route::prefix('admin')->group(function () {
     Route::post('/doEditProfile',[AdminController::class,'doEditProfile']);
     //list history :
     Route::get('/history', [AdminController::class,'gotohistory']);
+    //list transaction :
+    Route::get('/transactionreport', [AdminController::class,'gototransreport']);
+    //detail transaction :
+    Route::get('/transactiondetail/{id}', [AdminController::class,'toHistoryTrans']);
 });
 
 Route::get('/email/verify', function () {

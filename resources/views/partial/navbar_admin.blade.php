@@ -25,7 +25,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{url('/admin/history')}}">Transactions</a></li>
-              <li><a class="dropdown-item" href="">Reports</a></li>
+              <li><a class="dropdown-item" href="{{url('/admin/transactionreport')}}">Reports</a></li>
             </ul>
           </li>
 

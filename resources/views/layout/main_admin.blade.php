@@ -42,6 +42,14 @@
     {{-- content edit baju --}}
     @yield('editBajuContent')
 
+    {{-- content transaction report --}}
+    @yield('listtransactionreport')
+
+    {{-- content transaction report --}}
+    @yield('transactiondetail')
+
+
+
     <div class="container-fluid bg-light text-white text-center py-3">
         <div class="row">
             <div class="footer col">

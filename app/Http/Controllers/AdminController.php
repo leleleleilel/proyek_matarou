@@ -10,10 +10,12 @@ use App\Models\kode_promo;
 use App\Models\size;
 use App\Models\User;
 use App\Models\cart;
+use App\Models\d_trans;
 use App\Models\h_trans;
 use App\Models\review;
 use App\Rules\CekPanjangTelepon;
 use App\Rules\CekUsername;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -882,6 +884,75 @@ class AdminController extends Controller
             "history"=>$history,
             "promos"=>$promo,
             "users"=>$user
+        ]);
+    }
+
+    public function gototransreport(Request $request){
+        if(isset($request->keydatestart)){
+            if(isset($request->keydateend)){
+                $start = Carbon::createFromFormat('Y-m-d',$request->keydatestart);
+                $end = Carbon::createFromFormat('Y-m-d',$request->keydateend);
+
+                $listhtrans = h_trans::select('id','tanggal_trans','fk_kode_promo','status','id_user')
+                ->where('tanggal_trans','>=',$start)
+                ->where('tanggal_trans','<=',$end)
+                // ->whereBetween('tanggal_trans',[$start,$end])
+                ->get();
+                $promoo = kode_promo::all();
+                    $user = User::all();
+                    return view('admin.transactionReport',[
+                        "title"=>"Transaction Report",
+                        "htranss"=>$listhtrans,
+                        "promo"=>$promoo,
+                        "users"=>$user,
+                        "activeMaster"=> "",
+                        "activeReports"=>"active",
+                        "activeReviews"=>"",
+                        "activeProfile"=>"",
+                    ]);
+            }
+        }
+        else{
+            $listhtrans = h_trans::all();
+            $promoo = kode_promo::all();
+            $user = User::all();
+            return view('admin.transactionReport',[
+                "title"=>"Transaction Report",
+                "htranss"=>$listhtrans,
+                "promo"=>$promoo,
+                "users"=>$user,
+                "activeMaster"=> "",
+                "activeReports"=>"active",
+                "activeReviews"=>"",
+                "activeProfile"=>"",
+            ]);
+        }
+    }
+
+    public function toHistoryTrans(Request $request){
+        $id = $request->id;
+        $listdtrans = d_trans::select('id','fk_dbaju','qty','harga','subtotal','fk_htrans')
+        ->where('fk_htrans','=',$id)
+        ->get();
+        $promoo = kode_promo::all();
+        $dbaju = d_baju::all();
+        $baju = baju::all();
+        $size = size::all();
+        $listhtrans = h_trans::select('id','tanggal_trans','fk_kode_promo','status','id_user')
+        ->where('id','=',$id)
+        ->get();
+        return view('admin.transactionDetail',[
+            "title"=>"Transaction Detail",
+            "htranss"=>$listhtrans,
+            "dtranss"=>$listdtrans,
+            "promo"=>$promoo,
+            "dbajuu" => $dbaju,
+            "bajuu" => $baju,
+            "sizee" => $size,
+            "activeMaster"=> "",
+            "activeReports"=>"active",
+            "activeReviews"=>"",
+            "activeProfile"=>"",
         ]);
     }
 
