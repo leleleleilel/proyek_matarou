@@ -22,7 +22,8 @@ class h_transFactory extends Factory
             'tanggal_trans' => $this->faker->dateTimeBetween('-1 week', '+1 week'),
             'fk_kode_promo' => $this->faker->randomElement(kode_promo::all()->pluck('id')),
             'status'=> '1',
-            'id_user' => $this->faker->randomElement(User::all()->pluck('id'))
+            'id_user' => $this->faker->randomElement(User::all()->pluck('id')),
+            'total'=> $this->faker->numberBetween(1000000,5000000)
         ];
     }
 }
