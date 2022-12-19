@@ -1,4 +1,11 @@
-@extends('layout.master')
+<?php
+function rupiah($angka){
+
+    $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+    return $hasil_rupiah;
+
+}
+?>@extends('layout.master')
 @section('content')
 <div class="contact-page">
     <div class="container">
@@ -43,9 +50,9 @@
                                 <tr>
                                     <th scope="row">#{{$d->id}}</th>
                                     <td>{{$d->nama}}</td>
-                                    <td>Rp {{$d->harga}}</td>
+                                    <td>{{rupiah($d->harga)}}</td>
                                     <td>{{$d->qty}}</td>
-                                    <td>Rp {{$d->subtotal}}</td>
+                                    <td>{{rupiah($d->subtotal)}}</td>
                                     <td>
                                         {{-- Ini nyambung ke mana --}}
                                         <a href="/customer/review/{{$d->id}}">

@@ -1,3 +1,11 @@
+<?php
+function rupiah($angka){
+
+    $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+    return $hasil_rupiah;
+
+}
+?>
 @extends('layout.master')
 @section('content')
 <div class="contact-page">
@@ -17,7 +25,7 @@
                             </div>
                             <div class="col-8 d-flex align-items-center flex-column pt-4 mt-4">
                                 <h1 class="display-4">{{$c->nama}}</h1>
-                                <h3 style="font-weight: lighter">Rp {{$c->harga * $c->quantity}}</h3>
+                                <h3 style="font-weight: lighter">{{rupiah($c->harga * $c->quantity)}}</h3>
                                 <div class="row" >
                                     <div class="col-3" style="padding: 0px;margin:0px;"><input type="button" class="btn" style="text-align: center;width:35px:margin-right:6px;" value="-"></div>
                                     <div class="col-6 d-flex align-items-center flex-column" style="text-align: center;font-size:25px;">{{$c->quantity}}</div>
@@ -49,7 +57,7 @@
                                             <p class="card-text" style="font-size:15px">Total</p>
                                         </div>
                                         <div class="col-md-7">
-                                            <p class="card-text" style="font-size:15px">Rp {{$totalHarga}}</p>
+                                            <p class="card-text" style="font-size:15px">{{rupiah($totalHarga)}}</p>
                                         </div>
                                     </div>
                                 </div>

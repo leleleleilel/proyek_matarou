@@ -1,3 +1,11 @@
+<?php
+function rupiah($angka){
+
+    $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+    return $hasil_rupiah;
+
+}
+?>
 @extends('layout.master')
 @section('content')
 <div class="contact-page">
@@ -29,7 +37,7 @@
                         @foreach ($h_trans as $h)
                             <tr>
                                 <th scope="row">#{{$h->id}}</th>
-                                <td>Rp {{$h->dSub}}</td>
+                                <td>{{rupiah($h->dSub)}}</td>
                                 <td>{{$h->tanggal_trans}}</td>
                                 <td>
                                     <a href="/customer/history/detail/{{$h->id}}">

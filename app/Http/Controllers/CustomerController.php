@@ -175,11 +175,11 @@ class CustomerController extends Controller
 
     public function toCart()
     {
-        session()->put('idxLogin',1);
+        //session()->put('idxLogin',1);
         $param['cart'] = cart::join('d_baju','d_baju.id','=','cart.id_dbaju')
                                 ->join('baju','baju.id','=','d_baju.fk_baju')
                                 ->join('d_foto_baju','d_foto_baju.id_baju','=','baju.id')
-                                ->where('id_user','=',session()->get('idxLogin'))
+                                ->where('id_user','=',Auth::user()->id)
                                 ->get();
 
         $totalItem = 0;
@@ -206,7 +206,7 @@ class CustomerController extends Controller
     {
         $param['baju'] = baju::where('id',$req->id)->first();
 
-        $param['foto_baju'] = Dfoto::where('id_baju',$req->id)->first();
+        $param['foto_baju'] = Dfoto::where('id_baju',$req->id)->get();
 
         $param['size'] = d_baju::join('size','d_baju.fk_size','=','size.id')
                                 ->where('fk_baju',$req->id)
@@ -249,7 +249,7 @@ class CustomerController extends Controller
         FROM `d_trans`
         join h_trans on h_trans.id = d_trans.fk_htrans
         where h_trans.id_user = ?
-        GROUP BY h_trans.id;',[session()->get('idxLogin')]);
+        GROUP BY h_trans.id;',[Auth::user()->id]);
 
         return view('history',[
             'navAccount'=>"",
@@ -267,7 +267,7 @@ class CustomerController extends Controller
         //session()->put('idxLogin',11);
 
         $param['h_trans']=h_trans::join('kode_promo','kode_promo.id','=','h_trans.fk_kode_promo')
-                                    ->where('id_user','=',session()->get('idxLogin'))
+                                    ->where('id_user','=',Auth::user()->id)
                                     ->first(['h_trans.*','kode_promo.nama']);
 
         $param['d_trans']=d_trans::join('h_trans','h_trans.id','=','fk_htrans')
