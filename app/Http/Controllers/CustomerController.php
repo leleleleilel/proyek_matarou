@@ -18,6 +18,7 @@ use App\Models\cart;
 use App\Models\d_trans;
 use App\Models\h_trans;
 use App\Models\review;
+use App\Rules\CekPanjangTelepon;
 use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
@@ -373,6 +374,117 @@ class CustomerController extends Controller
                 'navCart'=>""
             ]);
     }
+
+
+    public function toMyAccount(){
+        $id = Auth::user()->id;
+        $user = User::where('id',$id)->first();
+        return view('myAccount',[
+            'navAccount'=>"active",
+            'navHistory'=>"",
+            'navHome'=>"",
+            'navProduct'=>"",
+            'navAbout'=>"",
+            'navCart'=>"",
+            'user'=>$user
+        ]);
+    }
+
+    public function doEditProfile(Request $request){
+
+        $id = Auth::user()->id;
+
+        $nama = $request->nama;
+        $alamat = $request->alamat;
+        $no_telp = $request->no_telp;
+        $email = $request->email;
+
+        $request->validate([
+            'nama'=>'required|max:50',
+            'alamat'=>'required|min:12',
+            'email'=>'required|email',
+            'no_telp'=>['required','numeric',new CekPanjangTelepon()],
+        ]);
+
+        $user = User::where('id',$id)->first();
+        $users = User::all();
+        $email_lama = $user->email;
+
+        $ada_email = false;
+
+        if($email_lama!=$email){
+
+            foreach ($users as $usr) {
+                if($usr->email==$email){
+                    $ada_email=true;
+                    break;
+                }
+            }
+        }
+
+        if($ada_email==false){
+            $user->nama = $nama;
+            $user->alamat = $alamat;
+            $user->no_telp = $no_telp;
+            $user->email = $email;
+            $user->save();
+            $message = "User Profile Edited!";
+
+        }else{
+            $message = "Email has already taken!";
+        }
+
+        return redirect()->route('toMyAccount')->with("message",[
+            "isi" => $message
+        ]);
+    }
+
+    public function doEditPassword(Request $request){
+        $id = Auth::user()->id;
+
+        $password = $request->password;
+        $new_password = $request->newpassword;
+        $confirm = $request->confirm;
+
+        $user = User::where('id',$id)->first();
+
+        $request->validate([
+            'password'=>'required',
+            'newpassword'=>'required|same:confirm',
+            'confirm'=>'required'
+        ]);
+
+        if($password==Hash::check($password,$user->password)){
+            if($new_password==$confirm){
+                $user->password = Hash::make($new_password);
+                $user->save();
+                $message = "User Password Edited!";
+            }else{
+                $message ="Password and Confirmation Password didn't match!";
+            }
+        }else{
+            $message = "Wrong Password! Failed to Edit!";
+        }
+
+        return redirect()->route('toMyAccount')->with("message",[
+            "isi"=> $message
+        ]);
+
+    }
+
+    public function toReview(Request $request){
+        $product = baju::where('id',$request->id)->first();
+        return view('review',[
+            "baju" => $product,
+            'navAccount'=>"",
+            'navHistory'=>"",
+            'navHome'=>"",
+            'navProduct'=>"",
+            'navAbout'=>"",
+            'navCart'=>"",
+        ]);
+    }
+
     // public function gantikategori(Request $request)
     // {
     //     $temp = $request->filter;

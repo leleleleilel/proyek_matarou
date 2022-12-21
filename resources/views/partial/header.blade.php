@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navbarresponsive">
         <ul class="navbar-nav ml-auto" style="margin-top: 45px;">
         <li class="nav-item {{$navAccount}}"  style="outline: none;border:none">
-                <a href="{!!url('/')!!}"><button name="btnMyAccount" class="nav-link" style="outline: none;border:none">My Account</button></a>
+                <a href="{!!url('/customer/myAccount')!!}"><button name="btnMyAccount" class="nav-link" style="outline: none;border:none">My Account</button></a>
             </li>
         <li class="nav-item {{$navHistory}}">
                 <a href="{!!url('/customer/history')!!}"><button name="btnHistory" class="nav-link" style="outline: none;border:none">History</button></a>

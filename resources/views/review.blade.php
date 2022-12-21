@@ -1,3 +1,11 @@
+<?php
+function rupiah($angka){
+
+    $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+    return $hasil_rupiah;
+
+}
+?>
 @extends('layout.master')
 @section('content')
 <div class="contact-page">
@@ -17,12 +25,11 @@
                 border-radius:20px;">
                     <div class="d-flex justify-content-center">
                         {{-- tolong atur ukuran gambar. gk bisa css -V --}}
-                        <img class="card-img-top" src="{{asset('asset/images/baju1.jpg')}}" style="width: 303px; height:260px;border-radius:20px;">
+                        <img class="card-img-top" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" style="width: 250px; height:300px;border-radius:20px;">
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title" name="namaBaju" id="namaBaju">Baju Bagus</h2>
-                        <h5 name="hargaBaju" id="hargaBaju" style="font-weight: lighter">Rp 2.000.000,00</h5>
-                        <h5 name="sizeBaju" id="sizeBaju" style="font-weight: lighter">Size : XLSM</h5>
+                        <h2 class="card-title" name="namaBaju" id="namaBaju">{{$baju->nama}}</h2>
+                        <h5 name="hargaBaju" id="hargaBaju" style="font-weight: lighter">{{rupiah($baju->harga)}}</h5>
                     </div>
                 </div>
             </div>

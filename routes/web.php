@@ -56,7 +56,19 @@ Route::prefix('customer')->group(function () {
     Route::get('/history/detail/{id}',[CustomerController::class,'toHistoryDetail'])->name('toHistoryDetail');
     //about us
     Route::get('/aboutus',[CustomerController::class,'toAboutUs'])->name('toAboutUs');
+    //profile page
+    Route::get('/myAccount',[CustomerController::class,'toMyAccount'])->name('toMyAccount');
+    //do edit profile
+    Route::post('/myAccount/doEditProfile',[CustomerController::class,'doEditProfile']);
+    //do edit password
+    Route::post('/myAccount/doEditPassword',[CustomerController::class,'doEditPassword']);
+    //to review
+    Route::get('/customer/review/{id}',[CustomerController::class,'toReview'])->name('toReview');
+    //do review
+
 });
+
+Route::get('/customer/review/{id}',[CustomerController::class,'toReview'])->name('toReview');
 
 //admin:
 Route::prefix('admin')->group(function () {
