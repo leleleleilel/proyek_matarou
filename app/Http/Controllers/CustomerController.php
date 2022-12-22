@@ -473,15 +473,45 @@ class CustomerController extends Controller
     }
 
     public function toReview(Request $request){
+        $id_trans = $request->idTrans;
         $product = baju::where('id',$request->id)->first();
+        $reviews = review::where('fk_baju',$request->id)->get();
         return view('review',[
             "baju" => $product,
+            "id_trans"=>$id_trans,
+            "reviews"=>$reviews,
             'navAccount'=>"",
             'navHistory'=>"",
             'navHome'=>"",
             'navProduct'=>"",
             'navAbout'=>"",
             'navCart'=>"",
+        ]);
+    }
+
+    public function doReview(Request $request){
+        $id_trans = $request->id_trans;
+        $id_baju = $request->id_baju;
+        $rate = $request->rate;
+        $deskripsi_review = $request->deskripsi_review;
+        $message = "";
+
+        $request->validate([
+            "rate"=>'required',
+            "deskripsi_review"=>'required'
+        ]);
+
+        $review = new review();
+        $review->rate = $rate;
+        $review->deskripsi_review = $deskripsi_review;
+        $review->fk_htrans = $id_trans;
+        $review->fk_baju = $id_baju;
+        $review->save();
+
+        $message = "Review Success!!";
+
+        return redirect()->back()->with("message",[
+            "isi"=> $message
         ]);
     }
 

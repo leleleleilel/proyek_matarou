@@ -63,12 +63,13 @@ Route::prefix('customer')->group(function () {
     //do edit password
     Route::post('/myAccount/doEditPassword',[CustomerController::class,'doEditPassword']);
     //to review
-    Route::get('/customer/review/{id}',[CustomerController::class,'toReview'])->name('toReview');
+    Route::get('/review/{id}/{idTrans}',[CustomerController::class,'toReview'])->name('toReview');
     //do review
-
+    Route::post('/review/doReview',[CustomerController::class,'doReview']);
 });
 
-Route::get('/customer/review/{id}',[CustomerController::class,'toReview'])->name('toReview');
+// Route::get('/customer/review/{id}/{idTrans}',[CustomerController::class,'toReview'])->name('toReview');
+// Route::post('/customer/review/doReview',[CustomerController::class,'doReview']);
 
 //admin:
 Route::prefix('admin')->group(function () {

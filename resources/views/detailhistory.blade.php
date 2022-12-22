@@ -55,7 +55,8 @@ function rupiah($angka){
                                     <td>{{rupiah($d->subtotal)}}</td>
                                     <td>
                                         {{-- Ini nyambung ke mana --}}
-                                        <a href="/customer/review/{{$d->id}}">
+                                        {{-- /customer/review/{{$d->id}}/{{$h_trans->id}} --}}
+                                        <a href="{{url('/customer/review/'.$id->id."/".$h_trans->id)}}">
                                             <input type="submit" class="btn btn-light" value="Review">
                                         </a>
                                     </td>
