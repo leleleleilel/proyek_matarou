@@ -14,7 +14,7 @@ function rupiah($angka){
       <form action="" method="get">
       {{-- @csrf --}}
             <input type="text" name="keyword" placeholder="Search..." style="width: 300px; border-radius: 5px"
-            value="" >
+            value="{{$keyword}}">
             <button type="submit" name="btnSearch" id="btnsearch"
             style="background-color: black; border-radius: 5px; color: white; padding-left: 15px; padding-right: 15px;"
             >Search</button>

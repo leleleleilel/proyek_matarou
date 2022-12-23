@@ -421,7 +421,8 @@ class CustomerController extends Controller
                 'navHome'=>"",
                 'navProduct'=>"active",
                 'navAbout'=>"",
-                'navCart'=>""
+                'navCart'=>"",
+                "keyword"=>""
             ]);
         }
         else if(isset($request->keyword)){
@@ -445,7 +446,8 @@ class CustomerController extends Controller
                     'navHome'=>"",
                     'navProduct'=>"active",
                     'navAbout'=>"",
-                    'navCart'=>""
+                    'navCart'=>"",
+                    "keyword"=>$key
                 ]);
             }
         }
@@ -463,7 +465,8 @@ class CustomerController extends Controller
                 'navHome'=>"",
                 'navProduct'=>"active",
                 'navAbout'=>"",
-                'navCart'=>""
+                'navCart'=>"",
+                "keyword"=>""
             ]);
         }
     }
