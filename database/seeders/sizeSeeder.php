@@ -19,6 +19,6 @@ class sizeSeeder extends Seeder
         DB::statement("SET FOREIGN_KEY_CHECKS=0");
         DB::table("size")->truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS=1");
-        size::factory()->count(10)->create();
+        size::factory()->count(7)->create();
     }
 }

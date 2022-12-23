@@ -17,8 +17,8 @@ class sizeFactory extends Factory
     public function definition()
     {
         return [
-            'kode'=>$this->faker->unique()->words(1,true),
-            'nama' => $this->faker->unique()->name(),
+            'kode'=>$this->faker->unique()->randomElement(['XXS','XS','S','M','L','XL','XXL']),
+            'nama' => $this->faker->unique()->randomElement(['Extra Extra Small','Extra Small','Small','Medium','Large', 'Extra Large','Extra Extra Large']),
             'status'=>'1'
         ];
     }
