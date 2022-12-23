@@ -20,7 +20,15 @@ function rupiah($angka){
                     Matarou provides a variety of trendy looks for women and is also certainly up to date with current fashion developments.
                     <br><br>Matarou provides a wide selection of women's fashion ranging from korean looks, western looks, with various fashion categories ranging from shorts, jackets, shirts, t-shirts. So what are you waiting for?.</p>
                     <div class="main-button">
-                        <button class="btn btn-dark" name="btnOrder" id="btnshop">Shop Now</button>
+                        @if (auth()->check())
+                            <a href="{{url('customer/catalogue')}}" style="background-color: transparent">
+                        @else
+                            <a href="{{url('/catalogue')}}" style="background-color: transparent">
+                        @endif
+                            <button class="btn btn-dark" name="btnOrder" id="btnshop">
+                                Shop Now
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>

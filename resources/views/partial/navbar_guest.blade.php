@@ -25,7 +25,7 @@
                 <a href="{!!url('/aboutus')!!}"><button name="btnAbout" class="nav-link" style="outline: none;border:none;">ABOUT US</button></a>
             </li>
             <li class="nav-item {{$navCart}}">
-                <button name="btnCart" class="nav-link" style="outline: none;border:none;">CART</button>
+                <a href="{!!url('/login')!!}"><button name="btnCart" class="nav-link" style="outline: none;border:none;">CART</button></a>
             </li>
             <li class="nav-item">
                 <a href="{!!url('/login')!!}"><button name="btnLogin" class="nav-link" style="outline: none;border:none;">LOGIN</button></a>
