@@ -8,6 +8,7 @@ function rupiah($angka){
 ?>
 @extends('layout.master')
 @section('content')
+
     <div class="featured-page">
       <div class="container">
       <form action="" method="get">
@@ -75,41 +76,10 @@ function rupiah($angka){
         </div>
     </div>
 
-    <div class="page-navigation">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <ul>
-                <li>
-                    {{-- Ini << --}}
-                    <a href=""  style="color:white;background-color:#000000;font-size:28px;font-weight:bold">
-                        &laquo
-                    </a>
-                </li>
-                <li>
-                    {{-- Ini Halaman Aktif --}}
-                    <a href="" style="color:white;background-color:gray;font-size:28px;font-weight:bold">
-                        3
-                    </a>
-                </li>
-                <li>
-                    {{-- Ini Halaman Lain --}}
-                    <a href=""style="color:white;background-color:#000000;font-size:28px;font-weight:bold">
-                        4
-                    </a>
-                </li>
-                <li>
-                    {{-- Ini >> --}}
-                    <a href=""style="color:white;background-color:#000000;font-size:28px;font-weight:bold">
-                         &raquo
-                     </a>
-                </li>
-
-            </ul>
-          </div>
-        </div>
+    <div class="h-100 d-flex align-items-center justify-content-center" style="margin-bottom:50px">
+        {{$products->links('pagination::bootstrap-4')}}
       </div>
-    </div>
+
 @endsection
 
 @section('banner')

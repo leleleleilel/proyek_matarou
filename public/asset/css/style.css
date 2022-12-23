@@ -764,3 +764,11 @@ a:hover,a:focus{
 .btnreq{
     margin-left: 30%;
 }
+
+.page-link{
+    background-color: black;
+    color: white;
+    text-decoration: none;
+}
+
+

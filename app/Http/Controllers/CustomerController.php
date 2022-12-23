@@ -403,11 +403,11 @@ class CustomerController extends Controller
         if (isset($request->filter)){
             $temp = $request->filter;
             if($temp==""||$temp=="all"){
-                $baju = baju::all();
+                $baju = baju::paginate(6);
             }
             else
             {
-                $baju = baju::where('fk_kategori',$temp)->get();
+                $baju = baju::where('fk_kategori',$temp)->paginate(6);
             }
             $list_dfotos = Dfoto::all();
             $kategori = kategori::all();
@@ -432,7 +432,7 @@ class CustomerController extends Controller
             }
             else
             {
-                $baju = baju::where('nama','like','%'.$key.'%')->get();
+                $baju = baju::where('nama','like','%'.$key.'%')->paginate(6);
                 $list_dfotos = Dfoto::all();
                 $kategori = kategori::all();
                 return view('products',[
@@ -450,7 +450,7 @@ class CustomerController extends Controller
             }
         }
         else{
-            $list_products = baju::all();
+            $list_products = baju::paginate(6);
             $list_dfotos = Dfoto::all();
             $kategori = kategori::all();
             return view('products',[
@@ -470,24 +470,24 @@ class CustomerController extends Controller
     public function toAboutUs()
     {
 
-        $baju = baju::orderBy('terjual', 'DESC')->get();
-        $dfotos = Dfoto::all();
+         $baju = baju::orderBy('terjual', 'DESC')->get();
+            $dfotos = Dfoto::all();
 
-        foreach ($baju as $key => $b) {
-            $i = 0;
-            foreach ($dfotos as $key => $dfoto) {
-                if($dfoto->id_baju==$b->id){
-                    $i = $i+1;
+            foreach ($baju as $key => $b) {
+                $i = 0;
+                foreach ($dfotos as $key => $dfoto) {
+                    if($dfoto->id_baju==$b->id){
+                        $i = $i+1;
+                    }
+                }
+
+                if($i==0){
+                    $dfoto_baru = new Dfoto();
+                    $dfoto_baru->id_baju = $b->id;
+                    $dfoto_baru->nama_file = $b->nama_file;
+                    $dfoto_baru->save();
                 }
             }
-
-            if($i==0){
-                $dfoto_baru = new Dfoto();
-                $dfoto_baru->id_baju = $b->id;
-                $dfoto_baru->nama_file = $b->nama_file;
-                $dfoto_baru->save();
-            }
-        }
 
 
         return view('about',[
