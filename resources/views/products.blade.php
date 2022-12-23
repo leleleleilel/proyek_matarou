@@ -12,9 +12,11 @@ function rupiah($angka){
       <div class="container">
       <form action="" method="get">
       {{-- @csrf --}}
-            <input type="text" name="keyword" placeholder="Search..." style="width: 300px;"
-            value="">
-            <button type="submit" name="btnSearch" id="btnsearch">Search</button>
+            <input type="text" name="keyword" placeholder="Search..." style="width: 300px; border-radius: 5px"
+            value="" >
+            <button type="submit" name="btnSearch" id="btnsearch"
+            style="background-color: black; border-radius: 5px; color: white; padding-left: 15px; padding-right: 15px;"
+            >Search</button>
       </form>
         <div class="row">
           <div class="col-md-4 col-sm-12">

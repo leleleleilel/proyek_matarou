@@ -84,7 +84,7 @@ function rupiah($angka){
                             @else
                                 <a href="{{url('/product/'.$baju->id)}}">
                             @endif
-                            <div class="featured-item" style="min-height:550px">
+                            <div class="featured-item" style="min-height:550px;">
                               <img style="max-width:100% ; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
                               <h4>{{$baju->nama}}</h4>
                               <h6 style="color: black;">{{$baju->deskripsi}}</h6>
@@ -125,23 +125,23 @@ function rupiah($angka){
                       @if ($key<3)
                         <div id="1" class="item new col-md-4">
                           <a href="">
-                            <div class="featured-item" style="min-height:550px">
-                              <img style="max-width:100% ;background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
+                            <div class="featured-item" style="min-height:250px; background-color: black; ">
+                              {{-- <img style="max-width:100% ;background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt=""> --}}
                               @if (isset($listbaju))
                                 @foreach ($listbaju as $baju)
                                     @if ($baju->id==$review->fk_baju)
-                                        <h4>{{$baju->nama}}</h4>
+                                        <h4 style="color: white">{{$baju->nama}}</h4>
                                     @endif
                                 @endforeach
                               @endif
                               @if (isset($listhtrans))
                                 @foreach ($listhtrans as $htrans)
                                     @if ($htrans->id==$review->fk_htrans)
-                                        <h6>{{$htrans->tanggal_trans}}</h6>
+                                        <h6 style=" color: white">{{$htrans->tanggal_trans}}</h6>
                                     @endif
                                 @endforeach
                               @endif
-                              <h6 style="color: black;">{{$review->deskripsi_review}}</h6>
+                              <h6 style="color: black; color: white">{{$review->deskripsi_review}}</h6>
                             </div>
                           </a>
                         </div>
@@ -157,23 +157,23 @@ function rupiah($angka){
                       @if ($key<3)
                         <div id="1" class="item new col-md-4">
                           <a href="">
-                            <div class="featured-item" style="height: 550px">
-                              <img style="width:300px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
+                            <div class="featured-item" style="min-height:250px; background-color: black">
+                              {{-- <img style="max-width:100%; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt=""> --}}
                               @if (isset($listbaju))
                                 @foreach ($listbaju as $baju)
                                     @if ($baju->id==$review->fk_baju)
-                                        <h4>{{$baju->nama}}</h4>
+                                        <h4 style="color: white">{{$baju->nama}}</h4>
                                     @endif
                                 @endforeach
                               @endif
                               @if (isset($listhtrans))
                                 @foreach ($listhtrans as $htrans)
                                     @if ($htrans->id==$review->fk_htrans)
-                                        <h6>{{$htrans->tanggal_trans}}</h6>
+                                        <h6 style="color: white">{{$htrans->tanggal_trans}}</h6>
                                     @endif
                                 @endforeach
                               @endif
-                              <h6 style="color: black;">{{$review->deskripsi_review}}</h6>
+                              <h6 style="color: black; color: white">{{$review->deskripsi_review}}</h6>
                             </div>
                           </a>
                         </div>
