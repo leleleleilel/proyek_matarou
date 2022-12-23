@@ -23,11 +23,13 @@ function rupiah($angka){
                     <div class="col-12 col-lg-5" style="">
                         {{-- Carousel Gambar Baju --}}
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
+                            @if (count($foto_baju)>1)
+                              <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                              </ol>
+                            @endif
                             <div class="carousel-inner">
                                 @php
                                     $i=0
