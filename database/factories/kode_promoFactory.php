@@ -19,11 +19,11 @@ class kode_promoFactory extends Factory
         return [
             'nama' => $this->faker->unique()->name(),
             'kode'=>$this->faker->unique()->words(1,true),
-            'besar_potongan'=>$this->faker->numberBetween(1,200000),
-            'jenis_potongan'=> $this->faker->randomElement(['Diskon','Potongan']),
+            'besar_potongan'=>$this->faker->numberBetween(25000,200000),
+            'jenis_potongan'=> $this->faker->randomElement(['Potongan']),
             'valid_from' => $this->faker->dateTimeBetween('-3 week', '-1 week'),
             'valid_until' => $this->faker->dateTimeBetween('+2 week', '+4 week'),
-            'minimum_total'=> $this->faker->numberBetween(1000,500000),
+            'minimum_total'=> $this->faker->numberBetween(100000,500000),
             'status' => '1'
         ];
     }

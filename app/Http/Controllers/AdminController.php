@@ -81,8 +81,10 @@ class AdminController extends Controller
     }
 
     public function toMasterProducts(){
+        //pake pagination
+
         $list_categories = kategori::all();
-        $list_products = baju::withTrashed()->get();
+        $list_products = baju::withTrashed()->paginate(10);
         $list_dfotos = Dfoto::all();
         return view('admin.masterProducts',[
             "title"=>"Master Product",

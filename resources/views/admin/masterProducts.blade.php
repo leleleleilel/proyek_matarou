@@ -28,7 +28,7 @@ function rupiah($angka){
         @csrf
         <div class="mb-6">
           <label for="exampleInputEmail1" class="form-label" style="margin-top:50px">Product Name</label>
-          <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" style="width: 70%;" placeholder="Product Name">
+          <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" style="width: 70%;" placeholder="Product Name" value="{{old('name')}}">
           @error('name')
           <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
          @enderror
@@ -42,14 +42,14 @@ function rupiah($angka){
        </div>
         <div class="mb-6">
             <label for="exampleInputAlamat" class="form-label">Product Price</label>
-            <input type="text" name="price" class="form-control" id="price" style="width: 70%;" placeholder="Product Price">
+            <input type="text" name="price" class="form-control" id="price" style="width: 70%;" placeholder="Product Price" value="{{old('price')}}">
             @error('price')
             <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
            @enderror
           </div>
           <div class="mb-6">
             <label for="exampleInputAlamat" class="form-label">Product Description</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" placeholder="Description" style="width: 70%;" ></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" placeholder="Description" style="width: 70%;">{{old('description')}}</textarea>
             @error('description')
             <div class="error" style="color: red;font-weight: bold"> {{$message}} </div>
            @enderror
@@ -110,7 +110,7 @@ function rupiah($angka){
                     @if (isset($images))
                         @foreach($images as $img)
                         @if ($img->id_baju==$product->id)
-                        <img src="{{ url('public/image/bajus/'.$img->nama_file) }}" style="height: 100px; width: 80px">
+                        <img src="{{ url('public/image/bajus/'.$img->nama_file) }}" style="height: 100px; width: 70px">
                         @endif
                         @endforeach
                     @endif
@@ -155,6 +155,10 @@ function rupiah($angka){
             @endif
         </tbody>
       </table>
+
+      <div class="h-100 d-flex align-items-center justify-content-center" style="margin-bottom:50px">
+        {{$products->links('pagination::bootstrap-4')}}
+      </div>
 
 
 </div>

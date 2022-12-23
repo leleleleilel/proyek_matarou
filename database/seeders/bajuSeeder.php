@@ -19,6 +19,6 @@ class bajuSeeder extends Seeder
         DB::statement("SET FOREIGN_KEY_CHECKS=0");
         DB::table("baju")->truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS=1");
-        baju::factory()->count(15)->create();
+        baju::factory()->count(17)->create();
     }
 }
