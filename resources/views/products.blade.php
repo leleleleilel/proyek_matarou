@@ -30,7 +30,7 @@ function rupiah($angka){
             <div id="filters" class="button-group" style="margin-top:50px">
               <form action="" method="get">
               {{-- @csrf --}}
-              <select name="filter" id="filterkategori" class="cmbkategori" onchange="this.form.submit()">
+              <select name="filter" id="filterkategori" class="cmbkategori" onchange="this.form.submit()" style="width: 40%; height: 30px; border-radius: 5px;font-size: 18px; margin-top: 20px; border: 1px solid black">
                   <option value="all" selected>All</option>
                   @if (isset($kategori))
                     @foreach ($kategori as $kat)
