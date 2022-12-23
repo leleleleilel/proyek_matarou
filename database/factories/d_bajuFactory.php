@@ -19,7 +19,7 @@ class d_bajuFactory extends Factory
     public function definition()
     {
         return [
-            'fk_baju' => $this->faker->randomElement(baju::all()->pluck('id')),
+            'fk_baju' => $this->faker->unique()->randomElement(baju::all()->pluck('id')),
             'stok' => $this->faker->numberBetween(1,20),
             'fk_size'=> $this->faker->randomElement(size::all()->pluck('id')),
             'status'=>'1'
