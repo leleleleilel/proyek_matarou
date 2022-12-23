@@ -150,8 +150,6 @@ class CustomerController extends Controller
         }
     }
     function home(){
-        if(Auth::user()->role=="customer")
-        {
             $baju = baju::orderBy('terjual', 'DESC')->get();
             $review = review::orderBy('rate','DESC')->get();
             $allhtrans = h_trans::all();
@@ -166,7 +164,6 @@ class CustomerController extends Controller
                 'navAbout'=>"",
                 'navCart'=>""
             ]);
-        }
     }
     function logout()
     {

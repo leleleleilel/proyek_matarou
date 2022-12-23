@@ -39,9 +39,9 @@
                     @foreach ($listbaju as $key=> $baju)
                       @if ($key<3)
                         <div id="1" class="item new col-md-4">
-                          <a href="">
-                            <div class="featured-item" style="height: 480px">
-                              <img style="width:300px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
+                        <a href="{{url('/customer/product/'.$baju->id)}}">
+                            <div class="featured-item" style="min-height:550px">
+                              <img style="max-width:100% ; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
                               <h4>{{$baju->nama}}</h4>
                               <h6 style="color: black;">{{$baju->deskripsi}}</h6>
                             </div>
@@ -58,9 +58,9 @@
                     @foreach ($listbaju as $key=> $baju)
                       @if ($key<3)
                         <div id="1" class="item new col-md-4">
-                          <a href="">
-                            <div class="featured-item" style="height: 480px">
-                              <img style="width:300px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
+                          <a href="{{url('/customer/product/'.$baju->id)}}">
+                            <div class="featured-item" style="min-height:550px">
+                              <img style="max-width:100% ; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
                               <h4>{{$baju->nama}}</h4>
                               <h6 style="color: black;">{{$baju->deskripsi}}</h6>
                             </div>
@@ -100,8 +100,8 @@
                       @if ($key<3)
                         <div id="1" class="item new col-md-4">
                           <a href="">
-                            <div class="featured-item" style="height: 550px">
-                              <img style="width:300px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
+                            <div class="featured-item" style="min-height:550px">
+                              <img style="max-width:100% ;background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
                               @if (isset($listbaju))
                                 @foreach ($listbaju as $baju)
                                     @if ($baju->id==$review->fk_baju)

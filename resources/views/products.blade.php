@@ -48,10 +48,9 @@
                 <div id="1" class="item new col-md-4">
                   <a href="/customer/product/{{$product->id}}">
                     <div class="featured-item">
-                      <img style="width:280px; height:320px; background-size: cover;" src="{{ url('public/image/bajus/'.$product->nama_file) }}" alt="">
+                      <img style="max-width:100% ; background-size: cover;" src="{{ url('public/image/bajus/'.$product->nama_file) }}" alt="">
                       <h4>{{$product->nama}}</h4>
                       <h6 style="color: black;">Rp {{$product->harga}}</h6>
-                      <a href=""><button name="btnTambah" class="btn btn-dark" value="idBaju">Add To Cart</button></a>
                     </div>
                   </a>
                 </div>
