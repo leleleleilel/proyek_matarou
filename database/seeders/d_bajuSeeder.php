@@ -19,6 +19,6 @@ class d_bajuSeeder extends Seeder
         DB::statement("SET FOREIGN_KEY_CHECKS=0");
         DB::table("d_baju")->truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS=1");
-        d_baju::factory()->count(10)->create();
+        d_baju::factory()->count(15)->create();
     }
 }

@@ -25,7 +25,7 @@ class bajuFactory extends Factory
             'harga'=> $this->faker->numberBetween(150000,1000000),
             'fk_kategori'=> $this->faker->randomElement(kategori::all()->pluck('id')),
             'status'=>'1',
-            'nama_file'=>$this->faker->unique()->randomElement(['2FURnO1A.jpg','F0IJN6VL.jpg','tPpImEFN.jpg','RQhqcqzY.jpg']),
+            'nama_file'=>$this->faker->unique()->randomElement(['2FURnO1A.jpg','F0IJN6VL.jpg','tPpImEFN.jpg','RQhqcqzY.jpg','0pXzMdlb.jpg','aJBTR79K.jpg','Enq45cWq.jpg','hDLUTLWz.jpg','JMwL0sfd.jpg','mDKjdqzV.jpg','S7ky1mLm.jpg','scgUD9pt.jpg','VJniixRd.jpg','MG5Y6CMl.jpg','rL52zEZN.jpg','IyBSPGNk.jpg']),
         ];
     }
 }
