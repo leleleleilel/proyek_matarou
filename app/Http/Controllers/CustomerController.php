@@ -134,7 +134,7 @@ class CustomerController extends Controller
 
             if(Auth::attempt($credential)){
                 if(auth()->user()->role=="customer"){
-                    return redirect('/home');
+                    return redirect('/customer/home');
                 }else{
                     //admin
                 Auth::logout();
@@ -149,6 +149,26 @@ class CustomerController extends Controller
             }
         }
     }
+
+    public function home_logged_in(){
+        if(Auth::user()->role=="customer"){
+            $baju = baju::orderBy('terjual', 'DESC')->get();
+            $review = review::orderBy('rate','DESC')->get();
+            $allhtrans = h_trans::all();
+            return view('home',[
+                "listbaju"=>$baju,
+                "listreview"=>$review,
+                "listhtrans"=>$allhtrans,
+                'navAccount'=>"",
+                'navHistory'=>"",
+                'navHome'=>"active",
+                'navProduct'=>"",
+                'navAbout'=>"",
+                'navCart'=>""
+            ]);
+        }
+    }
+
     function home(){
             $baju = baju::orderBy('terjual', 'DESC')->get();
             $review = review::orderBy('rate','DESC')->get();

@@ -22,7 +22,7 @@
                 <a href="{!!url('/customer/history')!!}"><button name="btnHistory" class="nav-link" style="outline: none;border:none">History</button></a>
         </li>
             <li class="nav-item {{$navHome}}">
-                <a href="{!!url('/home')!!}"><button name="btnHome" class="nav-link "style="outline: none;border:none;">HOME</button></a>
+                <a href="{!!url('/customer/home')!!}"><button name="btnHome" class="nav-link "style="outline: none;border:none;">HOME</button></a>
             </li>
             <li class="nav-item {{$navProduct}}">
                 <a href="{!!url('/customer/catalogue')!!}"><button name="btnProduct" class="nav-link" style="outline: none;border:none;">PRODUCTS</button></a>

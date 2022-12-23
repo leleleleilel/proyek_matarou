@@ -19,10 +19,10 @@
                 <a href="{!!url('/home')!!}"><button name="btnHome" class="nav-link "style="outline: none;border:none;">HOME</button></a>
             </li>
             <li class="nav-item {{$navProduct}}">
-                <a href="{!!url('/customer/catalogue')!!}"><button name="btnProduct" class="nav-link" style="outline: none;border:none;">PRODUCTS</button></a>
+                <a href="{!!url('/catalogue')!!}"><button name="btnProduct" class="nav-link" style="outline: none;border:none;">PRODUCTS</button></a>
             </li>
             <li class="nav-item {{$navAbout}}">
-                <a href="{!!url('/customer/aboutus')!!}"><button name="btnAbout" class="nav-link" style="outline: none;border:none;">ABOUT US</button></a>
+                <a href="{!!url('/aboutus')!!}"><button name="btnAbout" class="nav-link" style="outline: none;border:none;">ABOUT US</button></a>
             </li>
             <li class="nav-item {{$navCart}}">
                 <button name="btnCart" class="nav-link" style="outline: none;border:none;">CART</button>

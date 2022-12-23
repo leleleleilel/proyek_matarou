@@ -30,7 +30,12 @@ Route::get('/', function () {
 //Route::post('/search', [CustomerController::class,"keywordsearch"]);
 
 Route::middleware(['auth', 'verified'])->group(function() {
+    Route::middleware(['checkRole:customer'])->group(function() {
+    //home logged in
+    Route::get('customer/home',[CustomerController::class,'home_logged_in'])->name('homeLoggedIn');
+    //do logout
     Route::get('/logout', [CustomerController::class, 'logout'])->name('logout');
+    });
 });
 
 // customer
@@ -46,35 +51,44 @@ Route::middleware(['guest'])->group(function() {
      Route::get('admin/login',[AdminController::class,'toLoginAdmin'])->name('toLoginAdmin');
      //admin do login :
      Route::post('admin/doLogin',[AdminController::class,'doLogin']);
-
-});
-
-
-//customer:
-Route::prefix('customer')->group(function () {
-    //cart
-    Route::get('/cart',[CustomerController::class,'toCart'])->name('toCart');
-    //list produk
+      //list produk
     Route::get('/catalogue',[CustomerController::class,'tolistproduct'])->name('toListProduct');
     //perlu id product (DETAIL PRODUCT)
     Route::get('/product/{id}',[CustomerController::class,'toProduct'])->name('toProduct');
-    //history
-    Route::get('/history',[CustomerController::class,'toHistory'])->name('toHistory');
-    //detail history
-    Route::get('/history/detail/{id}',[CustomerController::class,'toHistoryDetail'])->name('toHistoryDetail');
     //about us
     Route::get('/aboutus',[CustomerController::class,'toAboutUs'])->name('toAboutUs');
-    //profile page
-    Route::get('/myAccount',[CustomerController::class,'toMyAccount'])->name('toMyAccount');
-    //do edit profile
-    Route::post('/myAccount/doEditProfile',[CustomerController::class,'doEditProfile']);
-    //do edit password
-    Route::post('/myAccount/doEditPassword',[CustomerController::class,'doEditPassword']);
-    //to review
-    Route::get('/review/{id}/{idTrans}',[CustomerController::class,'toReview'])->name('toReview');
-    //do review
-    Route::post('/review/doReview',[CustomerController::class,'doReview']);
 });
+
+Route::middleware(['auth'])->group(function() {
+    Route::middleware(['checkRole:customer'])->group(function() {
+    //customer:
+        Route::prefix('customer')->group(function () {
+            //cart
+            Route::get('/cart',[CustomerController::class,'toCart'])->name('toCart');
+            //history
+            Route::get('/history',[CustomerController::class,'toHistory'])->name('toHistory');
+            //detail history
+            Route::get('/history/detail/{id}',[CustomerController::class,'toHistoryDetail'])->name('toHistoryDetail');
+            //profile page
+            Route::get('/myAccount',[CustomerController::class,'toMyAccount'])->name('toMyAccount');
+            //do edit profile
+            Route::post('/myAccount/doEditProfile',[CustomerController::class,'doEditProfile']);
+            //do edit password
+            Route::post('/myAccount/doEditPassword',[CustomerController::class,'doEditPassword']);
+            //to review
+            Route::get('/review/{id}/{idTrans}',[CustomerController::class,'toReview'])->name('toReview');
+            //do review
+            Route::post('/review/doReview',[CustomerController::class,'doReview']);
+            //catalouge
+            Route::get('/catalogue',[CustomerController::class,'tolistproduct'])->name('toListProduct');
+            //perlu id product (DETAIL PRODUCT)
+            Route::get('/product/{id}',[CustomerController::class,'toProduct'])->name('toProduct');
+            //about us
+            Route::get('/aboutus',[CustomerController::class,'toAboutUs'])->name('toAboutUs');
+        });
+    });
+});
+
 
 // Route::get('/customer/review/{id}/{idTrans}',[CustomerController::class,'toReview'])->name('toReview');
 // Route::post('/customer/review/doReview',[CustomerController::class,'doReview']);

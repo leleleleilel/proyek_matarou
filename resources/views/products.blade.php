@@ -46,7 +46,13 @@
             @if (isset($products))
               @foreach ($products as $product)
                 <div id="1" class="item new col-md-4">
-                  <a href="/customer/product/{{$product->id}}">
+
+                    @if (auth()->check())
+                        <a href="{{url('/customer/product/'.$product->id)}}">
+                    @else
+                        <a href="{{url('/product/'.$product->id)}}">
+                    @endif
+
                     <div class="featured-item">
                       <img style="max-width:100% ; background-size: cover;" src="{{ url('public/image/bajus/'.$product->nama_file) }}" alt="">
                       <h4>{{$product->nama}}</h4>

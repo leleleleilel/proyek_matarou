@@ -39,7 +39,11 @@
                     @foreach ($listbaju as $key=> $baju)
                       @if ($key<3)
                         <div id="1" class="item new col-md-4">
-                        <a href="{{url('/customer/product/'.$baju->id)}}">
+                        @if (auth()->check())
+                            <a href="{{url('/customer/product/'.$baju->id)}}">
+                        @else
+                            <a href="{{url('/product/'.$baju->id)}}">
+                        @endif
                             <div class="featured-item" style="min-height:550px">
                               <img style="max-width:100% ; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
                               <h4>{{$baju->nama}}</h4>
@@ -58,7 +62,11 @@
                     @foreach ($listbaju as $key=> $baju)
                       @if ($key<3)
                         <div id="1" class="item new col-md-4">
-                          <a href="{{url('/customer/product/'.$baju->id)}}">
+                            @if (auth()->check())
+                                <a href="{{url('/customer/product/'.$baju->id)}}">
+                            @else
+                                <a href="{{url('/product/'.$baju->id)}}">
+                            @endif
                             <div class="featured-item" style="min-height:550px">
                               <img style="max-width:100% ; background-size: cover;" src="{{ url('public/image/bajus/'.$baju->nama_file) }}" alt="">
                               <h4>{{$baju->nama}}</h4>
