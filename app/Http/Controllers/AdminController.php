@@ -29,6 +29,25 @@ class AdminController extends Controller
 {
 
     public function toLoginAdmin(){
+        $baju = baju::orderBy('terjual', 'DESC')->get();
+        $dfotos = Dfoto::all();
+
+        foreach ($baju as $key => $b) {
+            $i = 0;
+            foreach ($dfotos as $key => $dfoto) {
+                if($dfoto->id_baju==$b->id){
+                    $i = $i+1;
+                }
+            }
+
+            if($i==0){
+                $dfoto_baru = new Dfoto();
+                $dfoto_baru->id_baju = $b->id;
+                $dfoto_baru->nama_file = $b->nama_file;
+                $dfoto_baru->save();
+            }
+        }
+
         return view('admin.loginadmin');
     }
 

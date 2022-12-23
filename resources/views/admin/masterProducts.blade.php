@@ -106,6 +106,7 @@ function rupiah($angka){
                     @endif
                 </td>
                 <td>
+
                     @if (isset($images))
                         @foreach($images as $img)
                         @if ($img->id_baju==$product->id)

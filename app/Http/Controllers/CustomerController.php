@@ -36,6 +36,26 @@ class CustomerController extends Controller
     }
     function gotologin()
     {
+        $baju = baju::orderBy('terjual', 'DESC')->get();
+        $dfotos = Dfoto::all();
+
+        foreach ($baju as $key => $b) {
+            $i = 0;
+            foreach ($dfotos as $key => $dfoto) {
+                if($dfoto->id_baju==$b->id){
+                    $i = $i+1;
+                }
+            }
+
+            if($i==0){
+                $dfoto_baru = new Dfoto();
+                $dfoto_baru->id_baju = $b->id;
+                $dfoto_baru->nama_file = $b->nama_file;
+                $dfoto_baru->save();
+            }
+        }
+
+
         return view('login',[
             'navAccount'=>"",
             'navHistory'=>"",
@@ -171,6 +191,24 @@ class CustomerController extends Controller
 
     function home(){
             $baju = baju::orderBy('terjual', 'DESC')->get();
+            $dfotos = Dfoto::all();
+
+            foreach ($baju as $key => $b) {
+                $i = 0;
+                foreach ($dfotos as $key => $dfoto) {
+                    if($dfoto->id_baju==$b->id){
+                        $i = $i+1;
+                    }
+                }
+
+                if($i==0){
+                    $dfoto_baru = new Dfoto();
+                    $dfoto_baru->id_baju = $b->id;
+                    $dfoto_baru->nama_file = $b->nama_file;
+                    $dfoto_baru->save();
+                }
+            }
+
             $review = review::orderBy('rate','DESC')->get();
             $allhtrans = h_trans::all();
             return view('home',[
@@ -229,6 +267,27 @@ class CustomerController extends Controller
 
     public function toProduct(Request $req)
     {
+
+        $baju = baju::orderBy('terjual', 'DESC')->get();
+        $dfotos = Dfoto::all();
+
+        foreach ($baju as $key => $b) {
+            $i = 0;
+            foreach ($dfotos as $key => $dfoto) {
+                if($dfoto->id_baju==$b->id){
+                    $i = $i+1;
+                }
+            }
+
+            if($i==0){
+                $dfoto_baru = new Dfoto();
+                $dfoto_baru->id_baju = $b->id;
+                $dfoto_baru->nama_file = $b->nama_file;
+                $dfoto_baru->save();
+            }
+        }
+
+
         $param['baju'] = baju::where('id',$req->id)->first();
 
         $param['foto_baju'] = Dfoto::where('id_baju',$req->id)->get();
@@ -320,6 +379,27 @@ class CustomerController extends Controller
 
     public function tolistproduct(Request $request)
     {
+
+        $baju = baju::orderBy('terjual', 'DESC')->get();
+        $dfotos = Dfoto::all();
+
+        foreach ($baju as $key => $b) {
+            $i = 0;
+            foreach ($dfotos as $key => $dfoto) {
+                if($dfoto->id_baju==$b->id){
+                    $i = $i+1;
+                }
+            }
+
+            if($i==0){
+                $dfoto_baru = new Dfoto();
+                $dfoto_baru->id_baju = $b->id;
+                $dfoto_baru->nama_file = $b->nama_file;
+                $dfoto_baru->save();
+            }
+        }
+
+
         if (isset($request->filter)){
             $temp = $request->filter;
             if($temp==""||$temp=="all"){
@@ -389,6 +469,27 @@ class CustomerController extends Controller
     }
     public function toAboutUs()
     {
+
+        $baju = baju::orderBy('terjual', 'DESC')->get();
+        $dfotos = Dfoto::all();
+
+        foreach ($baju as $key => $b) {
+            $i = 0;
+            foreach ($dfotos as $key => $dfoto) {
+                if($dfoto->id_baju==$b->id){
+                    $i = $i+1;
+                }
+            }
+
+            if($i==0){
+                $dfoto_baru = new Dfoto();
+                $dfoto_baru->id_baju = $b->id;
+                $dfoto_baru->nama_file = $b->nama_file;
+                $dfoto_baru->save();
+            }
+        }
+
+
         return view('about',[
                 'navAccount'=>"",
                 'navHistory'=>"",
