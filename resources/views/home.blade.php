@@ -77,7 +77,7 @@ function rupiah($angka){
                 <div class="row">
                   @if (isset($listbaju))
                     @foreach ($listbaju as $key=> $baju)
-                      @if ($key<3)
+                      @if ($key>3 && $key<7)
                         <div id="1" class="item new col-md-4">
                             @if (auth()->check())
                                 <a href="{{url('/customer/product/'.$baju->id)}}">
@@ -154,7 +154,7 @@ function rupiah($angka){
                 <div class="row">
                   @if (isset($listreview))
                     @foreach ($listreview as $key=> $review)
-                      @if ($key<3)
+                      @if ($key>3 && $key<7)
                         <div id="1" class="item new col-md-4">
                           <a href="">
                             <div class="featured-item" style="min-height:250px; background-color: black">
