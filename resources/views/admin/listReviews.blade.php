@@ -43,7 +43,9 @@
             @endif
         </tbody>
       </table>
-
+      <div class="h-100 d-flex align-items-center justify-content-center" style="margin-bottom:50px">
+        {{$reviews->links('pagination::bootstrap-4')}}
+      </div>
 </div>
 
 @endsection

@@ -52,7 +52,7 @@ class AdminController extends Controller
     }
 
     public function toMasterUsers(){
-        $list_users = User::withTrashed()->get();
+        $list_users = User::withTrashed()->paginate(10);
         return view('admin.masterUser',[
             "title"=>"Master User",
             "activeMaster"=>"active",
@@ -100,7 +100,7 @@ class AdminController extends Controller
     }
 
     public function toListReviews(){
-        $review = review::all();
+        $review = review::paginate(10);
         $listhtrans = h_trans::all();
         $baju = baju::all();
         return view('admin.listReviews',[
@@ -401,7 +401,7 @@ class AdminController extends Controller
 
     public function toPromoCode(){
 
-        $list_kode_promo = kode_promo::withTrashed()->get();
+        $list_kode_promo = kode_promo::withTrashed()->paginate(10);
         $promo=null;
 
         return view('admin.masterKodePromo',[

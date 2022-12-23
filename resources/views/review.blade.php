@@ -107,8 +107,6 @@ function rupiah($angka){
                 @endif
             </tbody>
           </table>
-
-
     </div>
 </div>
 <script src="https://kit.fontawesome.com/06ab807719.js" crossorigin="anonymous"></script>
