@@ -1,5 +1,12 @@
-@extends('layout.master')
+<?php
+function rupiah($angka){
 
+    $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+    return $hasil_rupiah;
+
+}
+?>
+@extends('layout.master')
 @section('content')
     <div class="featured-page">
       <div class="container">
@@ -56,7 +63,7 @@
                     <div class="featured-item">
                       <img style="max-width:100% ; background-size: cover;" src="{{ url('public/image/bajus/'.$product->nama_file) }}" alt="">
                       <h4>{{$product->nama}}</h4>
-                      <h6 style="color: black;">Rp {{$product->harga}}</h6>
+                      <h6 style="color: black;">Rp {{rupiah($product->harga)}}</h6>
                     </div>
                   </a>
                 </div>

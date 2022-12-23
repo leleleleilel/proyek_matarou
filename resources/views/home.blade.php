@@ -1,3 +1,12 @@
+<?php
+function rupiah($angka){
+
+    $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+    return $hasil_rupiah;
+
+}
+?>
+
 @extends('layout.master')
 @section('content')
 <div class="banner" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5),
