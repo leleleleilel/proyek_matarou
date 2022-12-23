@@ -752,11 +752,18 @@ class AdminController extends Controller
                 $user = User::where('username',$username)->first();
                 Session::put("current_user",$user);
                 return redirect('admin/masters/users');
+            }else{
+                Auth::logout();
+                return redirect('admin/login')->with("message",[
+                    "isi"=> "Login Failed!"
+                ]);
             }
         }
         else
         {
-            return redirect('admin/login');
+            return redirect('admin/login')->with("message",[
+                "isi"=> "Login Failed!"
+            ]);
         }
     }
 

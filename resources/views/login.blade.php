@@ -9,6 +9,7 @@
             @csrf
               <div class="mb-6">
                 <h1>Login</h1>
+
                 <label for="exampleInputEmail1" class="form-label" style="margin-top:50px">Username</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp" style="width: 70%;" placeholder="Username">
                 @error('username')

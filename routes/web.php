@@ -136,7 +136,7 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/email/verify', function () {
-    if (!auth()->user()->hasVerifiedEmail()){
+    if (!auth()->user()->hasVerifiedEmail() && auth()->user()->role=="customer"){
         return view('verify-email');
     }
     else{

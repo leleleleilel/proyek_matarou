@@ -35,6 +35,9 @@
             @csrf
                 <div class="mb-6">
                 <h1>Admin Login</h1>
+                @if (Session::has("message"))
+                    <h3 style="color: red; font-weight: bold">{{Session::get("message.isi")}}</h3>
+                @endif
                 <label for="exampleInputEmail1" class="form-label" style="margin-top:50px">Username</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp" style="width: 70%;" placeholder="Username">
                 @error('username')

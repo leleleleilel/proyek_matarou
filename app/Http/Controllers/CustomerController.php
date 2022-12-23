@@ -133,7 +133,14 @@ class CustomerController extends Controller
             ];
 
             if(Auth::attempt($credential)){
-                return redirect('/home');
+                if(auth()->user()->role=="customer"){
+                    return redirect('/home');
+                }else{
+                    //admin
+                Auth::logout();
+                $param['message'] = "Login Failed";
+                return redirect('/login')->with($param);
+                }
             }
             else
             {

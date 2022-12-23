@@ -15,7 +15,14 @@
 <body>
 
     {{-- header --}}
-    @include('partial.header')
+
+    @if (auth()->check() && auth()->user()->role=="customer")
+        @include('partial.header')
+    @else
+        @include('partial.navbar_guest')
+    @endif
+
+
 
     {{-- content --}}
     <div class="content">
@@ -29,6 +36,7 @@
         @include('partial.footer')
     </footer>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{asset('asset/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('asset/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 </body>
