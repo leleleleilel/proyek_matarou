@@ -9,7 +9,7 @@
             @csrf
               <div class="mb-6">
                 <h1>Login</h1>
-
+                <h3 style="color: red; font-weight: bold">{{$message}}</h3>
                 <label for="exampleInputEmail1" class="form-label" style="margin-top:50px">Username</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp" style="width: 70%;" placeholder="Username">
                 @error('username')
@@ -29,7 +29,7 @@
               @endif
               <button type="submit" name="btnlogin" class="btn btn-dark" id="btnsubmitlogin" style="width: 70%;">Login</button>
             </form>
-            <a href="{!!url('/register')!!}">
+            <a href="{!!url('/register')!!}" style="color: white">
               Don't have an account ?
               <button style="
                 background-color:transparent;

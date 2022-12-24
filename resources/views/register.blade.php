@@ -62,7 +62,7 @@
               <button type="submit" name="btnregister" class="btn btn-dark" id="btnsubmitlogin" style="width: 70%;" value="DAFTAR" >Register</button>
               <br>
             </form>
-            <a href="{!!url('/login')!!}">
+            <a href="{!!url('/login')!!}" style="color: white">
               Already has an account ?
               <button style="
                 background-color:transparent;

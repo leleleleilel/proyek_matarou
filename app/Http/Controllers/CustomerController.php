@@ -33,7 +33,7 @@ class CustomerController extends Controller
             'navProduct'=>"",
             'navAbout'=>"",
             'navCart'=>"",
-            "navLogin"=>""
+            "navLogin"=>"",
         ]);
     }
     function gotologin()
@@ -66,6 +66,7 @@ class CustomerController extends Controller
             'navAbout'=>"",
             'navCart'=>"",
             "navLogin"=>"active",
+            "message"=>""
         ]);
     }
     function cetak()
@@ -134,7 +135,8 @@ class CustomerController extends Controller
                     'navProduct'=>"",
                     'navAbout'=>"",
                     'navCart'=>"",
-                    "navLogin"=>"active"
+                    "navLogin"=>"active",
+                    "message"=> "Register Success!"
                 ]);
             }
         }
@@ -239,7 +241,8 @@ class CustomerController extends Controller
             'navProduct'=>"",
             'navAbout'=>"",
             'navCart'=>"",
-            "navLogin"=>"active"
+            "navLogin"=>"active",
+            "message"=>""
         ]);
     }
 
