@@ -723,7 +723,7 @@ class CustomerController extends Controller
         $h_trans->order_id = $json->order_id;
         $h_trans->payment_type = $json->payment_type;
         $h_trans->payment_code =  isset($json->payment_code) ? $json->payment_code : null;
-        $h_trans->pdf_url = $json->pdf_url;
+        $h_trans->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
         $h_trans->transaction_id = $json->transaction_id;
         $h_trans->tanggal_trans =  date("Y/m/d");
         $h_trans->save();
