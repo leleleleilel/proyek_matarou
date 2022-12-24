@@ -40,13 +40,15 @@
                     <tr>
                         <td>{{$htrans->id}}</td>
                         <td>{{$htrans->tanggal_trans}}</td>
+                        <td>
                         @if (isset($promo))
                             @foreach ($promo as $promoo)
                                 @if ($htrans->fk_kode_promo==$promoo->id)
-                                    <td>{{$promoo->nama}}</td>
+                                   {{$promoo->kode}}
                                 @endif
                             @endforeach
                         @endif
+                        </td>
                         @if (isset($users))
                             @foreach ($users as $user)
                                 @if ($htrans->id_user==$user->id)
