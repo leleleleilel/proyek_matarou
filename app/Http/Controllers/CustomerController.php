@@ -376,7 +376,7 @@ class CustomerController extends Controller
             if(count($jumDBaju)==0){
                 //insert
                 $s = new cart();
-                $s->id_dbaju = $req->id;
+                $s->id_dbaju = $idDBaju->id;
                 $s->quantity = 1;
                 $s->id_user  = Auth::user()->id;
                 $s->save();
@@ -384,7 +384,7 @@ class CustomerController extends Controller
             }
             else{
                 //update
-                $s = cart::where('id_dbaju','=',$req->id)
+                $s = cart::where('id_dbaju','=',$idDBaju->id)
                             ->where('id_user','=',Auth::user()->id)
                             ->first();
                 $qty = $s->quantity;
