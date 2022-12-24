@@ -26,6 +26,12 @@ return new class extends Migration
                 ->references('id')->on('user')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('total');
+            $table->string('payment_status');
+            $table->string('transaction_id');
+            $table->string('order_id');
+            $table->string('payment_type');
+            $table->string('payment_code')->nullable();
+            $table->string('pdf_url')->nullable();
         });
     }
 

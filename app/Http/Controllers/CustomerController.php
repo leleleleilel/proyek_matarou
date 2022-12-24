@@ -718,16 +718,22 @@ class CustomerController extends Controller
         ]);
     }
 
+
     public function toPayment(Request $request){
         $id_user = $request->idUser;
+        $fk_kode_promo = $request->fk_kode_promo;
 
         $carts = cart::where('id_user',$id_user)->get();
         $dbajus = d_baju::all();
         $bajus = baju::all();
+        if($fk_kode_promo!=""){
+            $kode_promo = kode_promo::where('id',$fk_kode_promo)->first();
+        }
 
         $i =0;
         $total = 0;
         $totalQty = 0;
+        $harga_asli = 0;
         foreach ($carts as $cart) {
             foreach ($dbajus as $dbaju) { //stok sama id baju
                 if($dbaju->id==$cart->id_dbaju && $dbaju->stok-$cart->quantity>=0){
@@ -741,6 +747,24 @@ class CustomerController extends Controller
             }
         }
 
+        $harga_asli = $total;
+        $potongan = "";
+        if($fk_kode_promo!=""){
+            if($kode_promo->jenis_potongan=="Potongan"){
+               $potongan = "Rp " . number_format($kode_promo->besar_potongan,2,',','.');
+            }else{
+                $potongan = $kode_promo->besar_potongan + "%";
+            }
+        }
+
+        if($fk_kode_promo!=""){
+            if($kode_promo->jenis_potongan=="Potongan"){
+                $total = $total - $kode_promo->besar_potongan;
+            }else{
+                $total = $total - (($total * $kode_promo->besar_potongan)/100);
+            }
+        }
+
          // Set your Merchant Server Key
          \Midtrans\Config::$serverKey = 'SB-Mid-server-ABnb9RhgSBplqDd37hYuwm7Y';
          // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
@@ -750,11 +774,18 @@ class CustomerController extends Controller
          // Set 3DS transaction for credit card to true
          \Midtrans\Config::$is3ds = true;
 
+         if($fk_kode_promo!=""){
+            $kode = $kode_promo->id;
+         }else{
+            $kode = "";
+         }
+
          $params = array(
              'transaction_details' => array(
                  'order_id' => rand(),
                  'gross_amount' => $total,
                  'carts' => $carts,
+                 'kode_promo'=> $kode
              ),
              'customer_details' => array(
                  'first_name' => Auth::user()->nama,
@@ -763,6 +794,11 @@ class CustomerController extends Controller
                  'phone' => Auth::user()->no_telp,
              ),
          );
+
+         $nama_kode = "";
+         if($fk_kode_promo!=""){
+            $nama_kode = $kode_promo->kode;
+         }
 
          $snapToken = \Midtrans\Snap::getSnapToken($params);
          $snapToken = (string)$snapToken;
@@ -780,7 +816,10 @@ class CustomerController extends Controller
             "bajus"=>$bajus,
             "subtotal"=> $total,
             "totalQty"=>$totalQty,
-            "snapToken" => $snapToken
+            "snapToken" => $snapToken,
+            "kode_promo"=> $nama_kode,
+            "potongan"=> $potongan,
+            "harga_asli"=>$harga_asli
         ]);
     }
 
@@ -800,6 +839,7 @@ class CustomerController extends Controller
         $h_trans->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
         $h_trans->transaction_id = $json->transaction_id;
         $h_trans->tanggal_trans =  date("Y/m/d");
+        $h_trans->fk_kode_promo =  $request->get('kode_promo');
         $h_trans->save();
 
         $last_id = $h_trans->id;

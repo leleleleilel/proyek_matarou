@@ -63,7 +63,7 @@ function rupiah($angka){
                                         </div>
                                         <div class="col-md-7">
                                             <p class="card-text" style="font-size:15px">
-                                                <select name="" id="" class="form-control">
+                                                <select name="fk_kode_promo" id="" class="form-control">
                                                     <option value="">-</option>
                                                     @foreach ($kode_promo as $kp)
                                                         <option value="{{$kp->id}}">{{$kp->kode}}</option>

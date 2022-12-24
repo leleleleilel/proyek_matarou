@@ -22,13 +22,32 @@ function rupiah($angka){
                                         Total Cart:
                                         <br><br>
                                         Delivery:
+                                        <br> <br>
+                                        Promo Code:
+                                        <br><br>
+                                        Discount :
+                                        <br><br>
+                                        Subtotal :
                                         </p>
+                                        <br>
+                                        <br>
+                                        <p></p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="card-text" style="font-size: 20px">
-                                           {{rupiah($subtotal)}}
+                                            {{rupiah($harga_asli)}}
                                             <br><br>
                                             Free
+                                            <br> <br>
+                                            @if ($kode_promo!="")
+                                            {{$kode_promo}}
+                                            @else
+                                            -
+                                            @endif
+                                            <br><br>
+                                            {{$potongan}}
+                                            <br><br>
+                                            {{rupiah($subtotal)}}
                                             </p>
                                             </div>
                                     </div>
