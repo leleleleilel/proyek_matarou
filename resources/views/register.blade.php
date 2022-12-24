@@ -11,35 +11,35 @@
               <div class="mb-6">
                 <h1>Register</h1>
                 <label for="exampleInputEmail1" class="form-label" style="margin-top:50px">Username</label>
-                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" style="width: 70%;" placeholder="Username">
+                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" style="width: 70%;" placeholder="Username" value="{{old('username')}}">
                 @error('username')
                     <div class="error">{{$message}}</div>
                 @enderror
             </div>
                 <div class="mb-6">
                 <label for="exampleInputAlamat" class="form-label">Full Name</label>
-                <input type="text" name="fullname" class="form-control" id="fullname" style="width: 70%;" placeholder="Name">
+                <input type="text" name="fullname" class="form-control" id="fullname" style="width: 70%;" placeholder="Name" value="{{old('fullname')}}">
                 @error('fullname')
                     <div class="error">{{$message}}</div>
                 @enderror
               </div>
                 <div class="mb-6">
                 <label for="exampleInputAlamat" class="form-label">Address</label>
-                <input type="text" name="address" class="form-control" id="address" style="width: 70%;" placeholder="Address">
+                <input type="text" name="address" class="form-control" id="address" style="width: 70%;" placeholder="Address" value="{{old('address')}}">
                 @error('address')
                     <div class="error">{{$message}}</div>
                 @enderror
               </div>
                 <div class="mb-6">
                 <label for="exampleInputAlamat" class="form-label">Phone Number</label>
-                <input type="text" name="phone" class="form-control" id="phone" style="width: 70%;" placeholder="Phone Number">
+                <input type="text" name="phone" class="form-control" id="phone" style="width: 70%;" placeholder="Phone Number" value="{{old('phone')}}">
                 @error('phone')
                     <div class="error">{{$message}}</div>
                 @enderror
               </div>
                 <div class="mb-6">
                     <label for="exampleInputAlamat" class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" id="email" style="width: 70%;" placeholder="Email">
+                    <input type="email" name="email" class="form-control" id="email" style="width: 70%;" placeholder="Email" value="{{old('email')}}">
                     @error('email')
                     <div class="error">{{$message}}</div>
                     @enderror
