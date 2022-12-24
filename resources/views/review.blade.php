@@ -47,7 +47,7 @@ function rupiah($angka){
                     <h4>Rate :</h4>
                 </div>
                 <div class="row mb-5 ml-1">
-                    <select class="form-select" aria-label="Default select example" style="width: 50%;" name="rate">
+                    <select class="form-control" aria-label="Default select example" style="width: 50%;" name="rate">
                         <option value="1">★</option>
                         <option value="2">★★</option>
                         <option value="3">★★★</option>

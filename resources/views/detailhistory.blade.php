@@ -14,7 +14,7 @@ function rupiah($angka){
                 <div class="line-dec" style="background-color: black"></div>
                 <br>
                 <h1>Transaction Detail</h1><br>
-                <form action="" method="post">
+
                     <div class="jumbotron" style="background-color: #252525;color:white;padding:35px;font-weight:lighter;font-size:25px;">
                         <div class="row mb-3">
                             <div class="col-md-4 d-flex justify-content-end">Invoice ID :</div>
@@ -56,7 +56,7 @@ function rupiah($angka){
                                     <td>
                                         {{-- Ini nyambung ke mana --}}
                                         {{-- /customer/review/{{$d->id}}/{{$h_trans->id}} --}}
-                                        <a href="{{url('/customer/review/'.$id->id."/".$h_trans->id)}}">
+                                        <a href="{{url('/customer/review/'.$d->id."/".$h_trans->id)}}">
                                             <input type="submit" class="btn btn-light" value="Review">
                                         </a>
                                     </td>
@@ -65,7 +65,6 @@ function rupiah($angka){
                         </tbody>
                       </table>
                     <button type="submit" name="btnback" class="btn btn-dark" style="margin-top: 20px; width: 120px;">Back</button>
-                </form>
             </div>
         </div>
     </div>
