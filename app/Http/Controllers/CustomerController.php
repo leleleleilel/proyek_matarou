@@ -237,6 +237,40 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function plusItem(Request $req)
+    {
+        $cekStok = d_baju::join('cart','cart.id_dbaju','=','d_baju.id')
+                            ->where('id_dbaju','=',$req->idDBaju)
+                            ->where('cart.id','=',$req->idCart)
+                            ->first();
+
+        $qty = cart::where('id','=',$req->idCart)->first();
+        if($cekStok->stok>=($qty->quantity)+1){
+            //tambah
+            $s = cart::where('id','=',$req->idCart)->first();
+            $tambah = $s->quantity;
+            $s->quantity=$tambah+1;
+            $s->save();
+        }
+        return redirect('/customer/cart');
+    }
+
+    public function minItem(Request $req)
+    {
+        $qty = cart::where('id','=',$req->idCart)->first();
+        if($qty->quantity-1>0){
+            //ngurang
+            $s = cart::where('id','=',$req->idCart)->first();
+            $tambah = $s->quantity;
+            $s->quantity=$tambah-1;
+            $s->save();
+        }
+        else{
+            cart::destroy($req->idCart);
+        }
+        return redirect('/customer/cart');
+    }
+
     public function toCart()
     {
         //session()->put('idxLogin',1);
@@ -244,7 +278,8 @@ class CustomerController extends Controller
                                 ->join('baju','baju.id','=','d_baju.fk_baju')
                                 ->join('d_foto_baju','d_foto_baju.id_baju','=','baju.id')
                                 ->where('id_user','=',Auth::user()->id)
-                                ->get();
+                                ->get(['d_foto_baju.nama_file','baju.nama','cart.id','cart.id_dbaju','baju.harga','cart.quantity']);
+
 
         $totalItem = 0;
         $totalHarga = 0;
@@ -255,6 +290,10 @@ class CustomerController extends Controller
 
         $param['totalItem'] = $totalItem;
         $param['totalHarga'] = $totalHarga;
+
+        $param['kode_promo'] = kode_promo::where('valid_until','>=',date('Y-m-d'))
+                                            ->where('minimum_total','<=',$totalHarga)
+                                            ->get();
 
         return view('cart',[
             'navAccount'=>"",
@@ -320,6 +359,41 @@ class CustomerController extends Controller
             'navAbout'=>"",
             'navCart'=>""
         ],$param);
+    }
+
+    public function addToCart(Request $req)
+    {
+        if($req->btnAddToCart){
+
+            $idDBaju = d_baju::where('fk_baju','=',$req->id)
+                                ->where('fk_size','=',$req->selectSize)
+                                ->first();
+
+            $jumDBaju = cart::where('id_dbaju','=',$idDBaju->id)
+                            ->where('id_user','=',Auth::user()->id)
+                            ->get();
+
+            if(count($jumDBaju)==0){
+                //insert
+                $s = new cart();
+                $s->id_dbaju = $req->id;
+                $s->quantity = 1;
+                $s->id_user  = Auth::user()->id;
+                $s->save();
+                session()->flash('msg','Success Add to Cart');
+            }
+            else{
+                //update
+                $s = cart::where('id_dbaju','=',$req->id)
+                            ->where('id_user','=',Auth::user()->id)
+                            ->first();
+                $qty = $s->quantity;
+                $s->quantity = $qty+1;
+                $s->save();
+                session()->flash('msg','Success Update Item in Cart');
+            }
+            return redirect('/customer/product/'.$req->id);
+        }
     }
 
     public function toHistory()

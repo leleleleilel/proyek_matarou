@@ -86,8 +86,12 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/catalogue',[CustomerController::class,'tolistproduct'])->name('toListProduct');
             //perlu id product (DETAIL PRODUCT)
             Route::get('/product/{id}',[CustomerController::class,'toProduct'])->name('toProduct');
+            Route::post('/product/{id}',[CustomerController::class,'addToCart'])->name('addToCart');
             //about us
             Route::get('/aboutus',[CustomerController::class,'toAboutUs'])->name('toAboutUs');
+
+            Route::get('/min/{idCart}/{idDBaju}',[CustomerController::class,'minItem'])->name('minItem');
+            Route::get('/plus/{idCart}/{idDBaju}',[CustomerController::class,'plusItem'])->name('plusItem');
         });
     });
 });

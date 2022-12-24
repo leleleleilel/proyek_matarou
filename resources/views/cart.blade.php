@@ -32,9 +32,17 @@ function rupiah($angka){
                                 <h1 class="display-4">{{$c->nama}}</h1>
                                 <h3 style="font-weight: lighter">{{rupiah($c->harga * $c->quantity)}}</h3>
                                 <div class="row" >
-                                    <div class="col-3" style="padding: 0px;margin:0px;"><input type="button" class="btn" style="text-align: center;width:35px:margin-right:6px;" value="-"></div>
+                                    <div class="col-3" style="padding: 0px;margin:0px;">
+                                        <a href="/customer/min/{{$c->id}}/{{$c->id_dbaju}}">
+                                            <input type="button" class="btn" style="text-align: center;width:35px:margin-right:6px;" value="-">
+                                        </a>
+                                    </div>
                                     <div class="col-6 d-flex align-items-center flex-column" style="text-align: center;font-size:25px;">{{$c->quantity}}</div>
-                                    <div class="col-3" style="padding: 0px;margin:0px;"><input type="button" class="btn" style="text-align: center;width:35px;"value="+"></div>
+                                    <div class="col-3" style="padding: 0px;margin:0px;">
+                                        <a href="/customer/plus/{{$c->id}}/{{$c->id_dbaju}}">
+                                            <input type="button" class="btn" style="text-align: center;width:35px;"value="+">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -49,6 +57,21 @@ function rupiah($angka){
                                 <div class="card-header bg-transparent border" style="font-weight: bolder;">Shopping Cart Total</div>
                                 <div class="row">
                                 <div class="card-body text">
+                                    <div class="row" style="padding: .75rem 1.25rem">
+                                        <div class="col-md-5">
+                                            <p class="card-text" style="font-size:15px">Promo Code</p>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p class="card-text" style="font-size:15px">
+                                                <select name="" id="" class="form-control">
+                                                    <option value="">-</option>
+                                                    @foreach ($kode_promo as $kp)
+                                                        <option value="{{$kp->id}}">{{$kp->kode}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div class="row" style="padding: .75rem 1.25rem">
                                         <div class="col-md-5">
                                             <p class="card-text" style="font-size:15px">Total Item</p>

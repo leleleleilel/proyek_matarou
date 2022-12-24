@@ -64,15 +64,19 @@ function rupiah($angka){
                         <h2 style="font-weight: lighter">{{rupiah($baju->harga)}}</h2>
                         <div class="mb-4">{{$baju->deskripsi}}</div>
                         <h4 style="font-weight: bolder">Size : </h4>
-                        <select class="form-control" name="" id="">
+                        <select class="form-control" name="selectSize" id="">
                             @foreach ($size as $s)
                                 <option value="{{$s->id}}">{{$s->kode}}</option>
                             @endforeach
                         </select>
                         <br>
-                        <button class="form-control" type="button" class="btn btn-light" name="btnAddToCart"
+                        <input class="form-control" type="submit" class="btn btn-light" name="btnAddToCart"
                         style="background-color: #FDFDFD;
-                        border-color:#6D6D6D;">Add To Cart</button>
+                        border-color:#6D6D6D;" value="Add To Cart">
+
+                        <div style="font-weight: bolder" style="color: red;font-size:50px;">
+                            {{session()->get('msg')}}
+                        </div>
                     </div>
                 <br>
                 </div>

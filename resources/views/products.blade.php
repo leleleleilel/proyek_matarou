@@ -66,7 +66,7 @@ function rupiah($angka){
                     <div class="featured-item">
                       <img style="max-width:100% ; background-size: cover;" src="{{ url('public/image/bajus/'.$product->nama_file) }}" alt="">
                       <h4>{{$product->nama}}</h4>
-                      <h6 style="color: black;">Rp {{rupiah($product->harga)}}</h6>
+                      <h6 style="color: black;">{{rupiah($product->harga)}}</h6>
                     </div>
                   </a>
                 </div>
