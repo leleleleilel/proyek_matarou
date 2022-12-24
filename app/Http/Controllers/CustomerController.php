@@ -643,6 +643,49 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function toPayment(Request $request){
+        $id_user = $request->idUser;
+
+        $carts = cart::where('id_user',$id_user)->get();
+        $dbajus = d_baju::all();
+        $bajus = baju::all();
+
+        $total = 0;
+        $totalQty = 0;
+        foreach ($carts as $cart) {
+            foreach ($dbajus as $dbaju) { //stok sama id baju
+                if($dbaju->id==$cart->id_dbaju && $dbaju->stok-$cart->quantity>=0){
+                    foreach ($bajus as $baju) {
+                        if($baju->id==$dbaju->fk_baju){
+                            $total = $total+($cart->quantity*$baju->harga);
+                        }
+                    }
+                }
+            }
+            $totalQty = $totalQty + $cart->quantity;
+        }
+
+
+        return view('pembayaran',[
+            'navAccount'=>"",
+            'navHistory'=>"",
+            'navHome'=>"",
+            'navProduct'=>"",
+            'navAbout'=>"",
+            'navCart'=>"",
+            "id_user"=> $id_user,
+            "carts"=>$carts,
+            "dbajus" => $dbajus,
+            "bajus"=>$bajus,
+            "subtotal"=> $total,
+            "totalQty"=>$totalQty
+        ]);
+    }
+
+    public function doPay(Request $request){
+
+    }
+
     // public function gantikategori(Request $request)
     // {
     //     $temp = $request->filter;

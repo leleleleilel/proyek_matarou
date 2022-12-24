@@ -38,7 +38,9 @@ function rupiah($angka){
                 </div>
                 <div class="col-12 col-lg-4">
                     <div class="col-md-12">
-                        <form id="contact" action="" method="post">
+                        <form id="contact" action="{{url('customer/payment')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="idUser" value="{{auth()->user()->id}}">
                             <div class="card border mb-3" style="max-width: 25rem;">
                                 <div class="card-header bg-transparent border" style="font-weight: bolder;">Shopping Cart Total</div>
                                 <div class="row">
@@ -63,7 +65,7 @@ function rupiah($angka){
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <button type="submit" name="btnbayar" class="btn btn-dark" style="margin-top: 10px; width: 290px; margin-bottom: 10px;">Continue To Payment</button>
+                                    <button type="submit" name="btnbayar" class="btn btn-dark" style="margin-top: 10px; width: 290px; margin-bottom: 10px;">Continue To Payment</button>
                             </div>
                         </form>
                     </div>

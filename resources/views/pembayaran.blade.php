@@ -1,5 +1,12 @@
-@extends('layout.master')
+<?php
+function rupiah($angka){
 
+    $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+    return $hasil_rupiah;
+
+}
+?>
+@extends('layout.master')
 @section('content')
         <div class="about-page" style="margin-top: 80px;">
             <div class="container">
@@ -19,42 +26,55 @@
                                         </div>
                                         <div class="col-md-6">
                                             <p class="card-text" style="font-size: 20px">
-                                            Rp 5.000.000
+                                           {{rupiah($subtotal)}}
                                             <br><br>
                                             Free
                                             </p>
                                             </div>
                                     </div>
                                     <div class="main-button" style="margin-top: 30px">
-                                    <button id="pay-button" class="btn btn-dark">Pay</button>
+                                        <form action="">
+                                            <button id="pay-button" class="btn btn-dark">Pay</button>
+                                        </form>
                               </div>
                                   </div>
                             </div>
                     </div>
                     <div class="col-md-3"></div>
                   </div>
-                <div class="about-page">
+                <div class="about-page" style="margin-bottom: 50px">
                 <div class="container">
                     <div class="row">
                         {{-- For disini (?) --}}
+
                         <div class="col-md-2"></div>
                         <div class="col-md-12 col-lg-8">
-                        <div class="card mb-3" style="max-width: 800px;">
-                        <div class="row g-0">
-                            <div class="col-md-3">
-                            <img src="{{asset('asset/images/baju1.jpg')}}" class="img-fluid rounded-start" style="height:100%;width:110%">
-                            </div>
-                            <div class="col-md-6 d-flex justify-content-center">
-                            <div class="card-body">
-                                <h5 class="card-title" style="margin-top: 8%">Baju Baru</h5>
-                                <p class="card-text" style="font-size: 15px;">Ini baru baju</p>
-                                <p class="card-text" style="font-size: 15px;">Qty   : 11</p>
-                                <p class="card-text" style="font-size: 15px;">Price : Rp 567.431</p>
-                            </div>
-                            </div>
-                            <div class="col-md-3"></div>
-                        </div>
-                        </div>
+                            @foreach ($carts as $cart)
+                            @foreach ($dbajus as $dbaju)
+                                @if ($dbaju->id==$cart->id_dbaju && $dbaju->stok-$cart->quantity>=0)
+                                    @foreach ($bajus as $baju )
+                                        @if ($baju->id==$dbaju->fk_baju)
+                                        <div class="card mb-3" style="max-width: 800px;">
+                                            <div class="row g-0">
+                                                <div class="col-md-3">
+                                                <img src="{{asset('public/image/bajus/'.$baju->nama_file)}}" class="img-fluid rounded-start" style="height:100%;width:110%">
+                                                </div>
+                                                <div class="col-md-6 d-flex justify-content-center">
+                                                <div class="card-body">
+                                                    <h5 class="card-title" style="margin-top: 8%">{{$baju->nama}}</h5>
+                                                    <p class="card-text" style="font-size: 15px;">{{$baju->deskripsi}}</p>
+                                                    <p class="card-text" style="font-size: 15px;">Quantity : {{$cart->quantity}}</p>
+                                                    <p class="card-text" style="font-size: 15px;">{{rupiah($baju->harga)}}</p>
+                                                </div>
+                                                </div>
+                                                <div class="col-md-3"></div>
+                                            </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        @endforeach
                             </div>
                             <div class="col-md-2"></div>
 
