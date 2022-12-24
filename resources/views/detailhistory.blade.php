@@ -30,14 +30,14 @@ function rupiah($angka){
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4 d-flex justify-content-end">Subtotal :</div>
-                            <div class="col-md-8">Rp {{$allSubTotal}}</div>
+                            <div class="col-md-8">{{rupiah($allSubTotal)}}</div>
                         </div>
                     </div>
                     <h1>Items</h1><br>
                     <table class="table table-dark" style="background-color: #252525">
                         <thead>
                           <tr>
-                            <th scope="col">ITEM ID</th>
+                            <th scope="col">ID</th>
                             <th scope="col">ITEM NAME</th>
                             <th scope="col">ITEM PRICE</th>
                             <th scope="col">QTY</th>
@@ -56,38 +56,34 @@ function rupiah($angka){
                                     <td>
                                         {{-- Ini nyambung ke mana --}}
                                         {{-- /customer/review/{{$d->id}}/{{$h_trans->id}} --}}
-                                        <a href="{{url('/customer/review/'.$d->id."/".$h_trans->id)}}">
 
-                                            @foreach ($dbajus as $db)
-                                                    @if ($db->id==$d->fk_dbaju)
-                                                        @foreach ($bajus as $b)
-                                                            @if ($b->id==$db->fk_baju)
-                                                            @foreach ($reviews as $r)
-                                                            @if ($b->id==$r->fk_baju)
-                                                                @php
-                                                                    $ada = true
-                                                                @endphp
-                                                            @endif
-                                                        @endforeach
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                            @endforeach
-                                            @if ($ada==true)
-                                                <input type="submit" class="btn btn-light" value="Review" disabled>
-
-                                            @else
-                                            <input type="submit" class="btn btn-light" value="Review">
+                                        @foreach ($reviews as $r)
+                                            @if ($r->fk_baju==$d->id)
+                                                @php
+                                                    $ada = true;
+                                                @endphp
                                             @endif
-                                            @php
-                                                $ada = false
-                                            @endphp
-                                        </a>
+                                        @endforeach
+
+                                        @if ($ada==true)
+                                            <a href="{{url('/customer/review/'.$d->id."/".$h_trans->id)}}">
+                                                <input type="submit" class="btn btn-light" value="Review" disabled>
+                                            </a>
+                                        @else
+                                            <a href="{{url('/customer/review/'.$d->id."/".$h_trans->id)}}">
+                                                <input type="submit" class="btn btn-light" value="Review">
+                                            </a>
+                                        @endif
+
+                                        @php
+                                            $ada = false
+                                        @endphp
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                       </table>
+                    <button type="submit" name="btnback" class="btn btn-dark" style="margin-top: 20px; width: 120px;">Back</button>
             </div>
         </div>
     </div>

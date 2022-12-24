@@ -467,7 +467,8 @@ class CustomerController extends Controller
             "reviews"=> $reviews,
             "bajus"=>$baju,
             "dbajus"=>$d_baju,
-            "ada"=>false
+            "ada"=>false,
+            "id_baju"=>-1
         ],$param);
     }
 
