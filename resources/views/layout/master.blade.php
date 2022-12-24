@@ -11,9 +11,10 @@
     <link href="{{asset('asset/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('asset/css/fontawesome.css')}}">
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 </head>
 <body>
-
     {{-- header --}}
 
     @if (auth()->check() && auth()->user()->role=="customer")

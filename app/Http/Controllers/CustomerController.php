@@ -32,7 +32,8 @@ class CustomerController extends Controller
             'navHome'=>"",
             'navProduct'=>"",
             'navAbout'=>"",
-            'navCart'=>""
+            'navCart'=>"",
+            "navLogin"=>""
         ]);
     }
     function gotologin()
@@ -63,7 +64,8 @@ class CustomerController extends Controller
             'navHome'=>"",
             'navProduct'=>"",
             'navAbout'=>"",
-            'navCart'=>""
+            'navCart'=>"",
+            "navLogin"=>"active",
         ]);
     }
     function cetak()
@@ -131,7 +133,8 @@ class CustomerController extends Controller
                     'navHome'=>"",
                     'navProduct'=>"",
                     'navAbout'=>"",
-                    'navCart'=>""
+                    'navCart'=>"",
+                    "navLogin"=>"active"
                 ]);
             }
         }
@@ -185,7 +188,8 @@ class CustomerController extends Controller
                 'navHome'=>"active",
                 'navProduct'=>"",
                 'navAbout'=>"",
-                'navCart'=>""
+                'navCart'=>"",
+                "navLogin"=>""
             ]);
         }
     }
@@ -221,7 +225,8 @@ class CustomerController extends Controller
                 'navHome'=>"active",
                 'navProduct'=>"",
                 'navAbout'=>"",
-                'navCart'=>""
+                'navCart'=>"",
+                "navLogin"=>""
             ]);
     }
     function logout()
@@ -233,7 +238,8 @@ class CustomerController extends Controller
             'navHome'=>"",
             'navProduct'=>"",
             'navAbout'=>"",
-            'navCart'=>""
+            'navCart'=>"",
+            "navLogin"=>"active"
         ]);
     }
 
@@ -301,7 +307,8 @@ class CustomerController extends Controller
             'navHome'=>"",
             'navProduct'=>"",
             'navAbout'=>"",
-            'navCart'=>"active"
+            'navCart'=>"active",
+            "navLogin"=>""
         ],$param);
     }
 
@@ -357,7 +364,8 @@ class CustomerController extends Controller
             'navHome'=>"",
             'navProduct'=>"active",
             'navAbout'=>"",
-            'navCart'=>""
+            'navCart'=>"",
+            "navLogin"=>""
         ],$param);
     }
 
@@ -416,7 +424,8 @@ class CustomerController extends Controller
             'navHome'=>"",
             'navProduct'=>"",
             'navAbout'=>"",
-            'navCart'=>""
+            'navCart'=>"",
+            "navLogin"=>""
         ],$param);
     }
 
@@ -448,7 +457,8 @@ class CustomerController extends Controller
             'navHome'=>"",
             'navProduct'=>"",
             'navAbout'=>"",
-            'navCart'=>""
+            'navCart'=>"",
+            "navLogin"=>""
         ],$param);
     }
 
@@ -497,7 +507,8 @@ class CustomerController extends Controller
                 'navProduct'=>"active",
                 'navAbout'=>"",
                 'navCart'=>"",
-                "keyword"=>""
+                "keyword"=>"",
+                "navLogin"=>""
             ]);
         }
         else if(isset($request->keyword)){
@@ -522,7 +533,8 @@ class CustomerController extends Controller
                     'navProduct'=>"active",
                     'navAbout'=>"",
                     'navCart'=>"",
-                    "keyword"=>$key
+                    "keyword"=>$key,
+                    "navLogin"=>""
                 ]);
             }
         }
@@ -541,7 +553,8 @@ class CustomerController extends Controller
                 'navProduct'=>"active",
                 'navAbout'=>"",
                 'navCart'=>"",
-                "keyword"=>""
+                "keyword"=>"",
+                "navLogin"=>""
             ]);
         }
     }
@@ -574,7 +587,8 @@ class CustomerController extends Controller
                 'navHome'=>"",
                 'navProduct'=>"",
                 'navAbout'=>"active",
-                'navCart'=>""
+                'navCart'=>"",
+                "navLogin"=>""
             ]);
     }
 
@@ -589,7 +603,8 @@ class CustomerController extends Controller
             'navProduct'=>"",
             'navAbout'=>"",
             'navCart'=>"",
-            'user'=>$user
+            'user'=>$user,
+            "navLogin"=>""
         ]);
     }
 
@@ -689,6 +704,7 @@ class CustomerController extends Controller
             'navProduct'=>"",
             'navAbout'=>"",
             'navCart'=>"",
+            "navLogin"=>""
         ]);
     }
 
@@ -819,7 +835,8 @@ class CustomerController extends Controller
             "snapToken" => $snapToken,
             "kode_promo"=> $nama_kode,
             "potongan"=> $potongan,
-            "harga_asli"=>$harga_asli
+            "harga_asli"=>$harga_asli,
+            "navLogin"=>""
         ]);
     }
 
