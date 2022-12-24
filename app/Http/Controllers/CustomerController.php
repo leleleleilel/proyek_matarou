@@ -351,14 +351,9 @@ class CustomerController extends Controller
         //Dummy id login
         //session()->put('idxLogin',11);
 
-        $param['h_trans']=h_trans::join('kode_promo','kode_promo.id','=','h_trans.fk_kode_promo')
+        $param['h_trans']=h_trans::leftJoin('kode_promo','kode_promo.id','=','h_trans.fk_kode_promo')
                                     ->where('id_user','=',Auth::user()->id)
                                     ->first(['h_trans.*','kode_promo.nama']);
-
-        if(count($param['h_trans'])<1){
-            $param['h_trans']=h_trans::where('id_user','=',Auth::user()->id)
-                                    ->first(['h_trans.*','kode_promo.nama']);
-        }
 
         $param['d_trans']=d_trans::join('h_trans','h_trans.id','=','fk_htrans')
                                     ->join('d_baju','d_baju.id','=','fk_dbaju')
