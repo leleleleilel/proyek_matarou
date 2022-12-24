@@ -871,6 +871,10 @@ class CustomerController extends Controller
                                 $d_trans->fk_htrans = $last_id;
                                 $d_trans->save();
 
+                                $bj = baju::where('id',$baju->id)->first();
+                                $bj->terjual = $bj->terjual + $cart->quantity;
+                                $bj->save();
+
                                 //delete cart
                                 cart::destroy($cart->id);
                             }
