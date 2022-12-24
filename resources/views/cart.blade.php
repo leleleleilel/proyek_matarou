@@ -17,6 +17,11 @@ function rupiah($angka){
             </div>
             <div class="row">
                 <div class="col-12 col-lg-8 ">
+
+                    @if (Session::has("message"))
+                        <h3 style="color: red; font-weight: bold">{{Session::get("message.isi")}}</h3>
+                    @endif
+
                     @foreach ($cart as $c)
                     <div class="jumbotron" style="background-color: #252525;color:white;">
                         <div class="row">
@@ -38,8 +43,7 @@ function rupiah($angka){
                 </div>
                 <div class="col-12 col-lg-4">
                     <div class="col-md-12">
-                        <form id="contact" action="{{url('customer/payment')}}" method="post">
-                            @csrf
+                        <form id="contact" action="{{url('customer/payment')}}" method="GET">
                             <input type="hidden" name="idUser" value="{{auth()->user()->id}}">
                             <div class="card border mb-3" style="max-width: 25rem;">
                                 <div class="card-header bg-transparent border" style="font-weight: bolder;">Shopping Cart Total</div>

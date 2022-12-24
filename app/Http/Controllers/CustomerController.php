@@ -651,6 +651,7 @@ class CustomerController extends Controller
         $dbajus = d_baju::all();
         $bajus = baju::all();
 
+        $i =0;
         $total = 0;
         $totalQty = 0;
         foreach ($carts as $cart) {
@@ -659,11 +660,11 @@ class CustomerController extends Controller
                     foreach ($bajus as $baju) {
                         if($baju->id==$dbaju->fk_baju){
                             $total = $total+($cart->quantity*$baju->harga);
+                             $totalQty = $totalQty + $cart->quantity;
                         }
                     }
                 }
             }
-            $totalQty = $totalQty + $cart->quantity;
         }
 
          // Set your Merchant Server Key
@@ -679,6 +680,7 @@ class CustomerController extends Controller
              'transaction_details' => array(
                  'order_id' => rand(),
                  'gross_amount' => $total,
+                 'carts' => $carts,
              ),
              'customer_details' => array(
                  'first_name' => Auth::user()->nama,
@@ -710,6 +712,67 @@ class CustomerController extends Controller
 
     public function doPay(Request $request){
 
+        $message = "";
+
+        $json = json_decode($request->get('json'));
+        $h_trans = new h_trans();
+        $h_trans->status = $json->status_code;
+        $h_trans->id_user = Auth::user()->id;
+        $h_trans->total = $json->gross_amount;
+        $h_trans->payment_status = $json->transaction_status;
+        $h_trans->order_id = $json->order_id;
+        $h_trans->payment_type = $json->payment_type;
+        $h_trans->payment_code =  isset($json->payment_code) ? $json->payment_code : null;
+        $h_trans->pdf_url = $json->pdf_url;
+        $h_trans->transaction_id = $json->transaction_id;
+        $h_trans->tanggal_trans =  date("Y/m/d");
+        $h_trans->save();
+
+        $last_id = $h_trans->id;
+
+        $result = $h_trans;
+        if($result){
+             //kurangi stok, hapus cart
+            $id_user = Auth::user()->id;
+
+            $carts = cart::where('id_user',$id_user)->get();
+            $dbajus = d_baju::all();
+            $bajus = baju::all();
+
+            foreach ($carts as $cart) {
+                foreach ($dbajus as $dbaju) {
+                    if($dbaju->id==$cart->id_dbaju && $dbaju->stok-$cart->quantity>=0){
+                        foreach ($bajus as $baju) {
+                            if($baju->id==$dbaju->fk_baju){
+                                $dbaju_edit = d_baju::where('id', $dbaju->id)->first();
+                                $dbaju_edit->stok = $dbaju->stok - $cart->quantity;
+                                $dbaju_edit->save();
+
+                                //masukin ke d_trans
+                                $d_trans = new d_trans();
+                                $d_trans->fk_dbaju = $dbaju->id;
+                                $d_trans->qty = $cart->quantity;
+                                $d_trans->harga = $baju->harga;
+                                $d_trans->subtotal = $baju->harga * $cart->quantity;
+                                $d_trans->fk_htrans = $last_id;
+                                $d_trans->save();
+
+                                //delete cart
+                                cart::destroy($cart->id);
+                            }
+                        }
+                    }
+                }
+            }
+
+             $message = "Payment Success!!";
+        }else{
+            //
+            $message = "Payment Failed!";
+        }
+        return redirect()->route('toCart')->with("message",[
+            "isi"=> $message
+        ]);
     }
 
     // public function gantikategori(Request $request)

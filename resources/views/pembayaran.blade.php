@@ -40,6 +40,12 @@ function rupiah($angka){
                                         </form> --}}
 
                                         <button id="pay-button" class="btn btn-dark">Pay</button>
+
+                                        <form action="{{url('customer/payment')}}" id="submit_form" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="json" id="json_callback">
+                                        </form>
+
                                         <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-ruBcktegSYjKWFQv"></script>
                                         <script type="text/javascript">
                                             document.getElementById('pay-button').onclick = function(){
@@ -47,18 +53,27 @@ function rupiah($angka){
                                               window.snap.pay('<?=$snapToken?>', {
                                                 // Optional
                                                 onSuccess: function(result){
-                                                  /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                                                    console.log(result);
+                                                    send_response_to_form(result);
                                                 },
                                                 // Optional
                                                 onPending: function(result){
-                                                  /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                                                    console.log(result);
+                                                    send_response_to_form(result);
                                                 },
                                                 // Optional
                                                 onError: function(result){
-                                                  /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                                                    console.log(result);
+                                                    send_response_to_form(result);
                                                 }
                                               });
                                             };
+
+                                            function send_response_to_form(result){
+                                                document.getElementById('json_callback').value = JSON.stringify(result);
+                                                $('#submit_form').submit();
+                                            }
+
                                           </script>
                               </div>
                                   </div>
