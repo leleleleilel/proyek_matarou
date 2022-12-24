@@ -47,12 +47,6 @@ function rupiah($angka){
                                 </div>
 
                                 @endforeach
-                              {{-- <div class="carousel-item">
-                                <img class="d-block w-100" src="{{ url('public/image/bajus/'.$foto_baju[0]->nama_file) }}" alt="Second slide">
-                              </div>
-                              <div class="carousel-item">
-                                <img class="d-block w-100" src="{{ url('public/image/bajus/'.$foto_baju[0]->nama_file) }}" alt="Third slide">
-                              </div> --}}
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -76,7 +70,7 @@ function rupiah($angka){
                             @endforeach
                         </select>
                         <br>
-                        <button class="form-control" type="button" class="btn btn-light"
+                        <button class="form-control" type="button" class="btn btn-light" name="btnAddToCart"
                         style="background-color: #FDFDFD;
                         border-color:#6D6D6D;">Add To Cart</button>
                     </div>

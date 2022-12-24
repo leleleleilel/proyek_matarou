@@ -82,7 +82,7 @@ class CustomerController extends Controller
                 'address'=>'min:12',
                 'phone'=>'required | min:8 | max:14',
                 'email'=>'required | email | unique:user,email',
-                'password'=>['required', 'confirmed', 'regex:/^(?:(?=.*[@_!#$%^&*()<>?\/|}{~:])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/','min:8',new cekpassword($request->username)],
+                'password'=>['required', 'confirmed','min:8',new cekpassword($request->username)],
                 'password_confirmation'=>['required']
             ];
             $message = [
@@ -354,6 +354,11 @@ class CustomerController extends Controller
         $param['h_trans']=h_trans::join('kode_promo','kode_promo.id','=','h_trans.fk_kode_promo')
                                     ->where('id_user','=',Auth::user()->id)
                                     ->first(['h_trans.*','kode_promo.nama']);
+
+        if(count($param['h_trans'])<1){
+            $param['h_trans']=h_trans::where('id_user','=',Auth::user()->id)
+                                    ->first(['h_trans.*','kode_promo.nama']);
+        }
 
         $param['d_trans']=d_trans::join('h_trans','h_trans.id','=','fk_htrans')
                                     ->join('d_baju','d_baju.id','=','fk_dbaju')
