@@ -20,6 +20,7 @@ use App\Models\h_trans;
 use App\Models\review;
 use App\Rules\CekPanjangTelepon;
 use Illuminate\Support\Facades\DB;
+use App\Services\Midtrans\CreateSnapTokenService;
 
 class CustomerController extends Controller
 {
@@ -665,6 +666,30 @@ class CustomerController extends Controller
             $totalQty = $totalQty + $cart->quantity;
         }
 
+         // Set your Merchant Server Key
+         \Midtrans\Config::$serverKey = 'SB-Mid-server-ABnb9RhgSBplqDd37hYuwm7Y';
+         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+         \Midtrans\Config::$isProduction = false;
+         // Set sanitization on (default)
+         \Midtrans\Config::$isSanitized = true;
+         // Set 3DS transaction for credit card to true
+         \Midtrans\Config::$is3ds = true;
+
+         $params = array(
+             'transaction_details' => array(
+                 'order_id' => rand(),
+                 'gross_amount' => $total,
+             ),
+             'customer_details' => array(
+                 'first_name' => Auth::user()->nama,
+                 'last_name' => ' ',
+                 'email' => Auth::user()->email,
+                 'phone' => Auth::user()->no_telp,
+             ),
+         );
+
+         $snapToken = \Midtrans\Snap::getSnapToken($params);
+         $snapToken = (string)$snapToken;
 
         return view('pembayaran',[
             'navAccount'=>"",
@@ -678,7 +703,8 @@ class CustomerController extends Controller
             "dbajus" => $dbajus,
             "bajus"=>$bajus,
             "subtotal"=> $total,
-            "totalQty"=>$totalQty
+            "totalQty"=>$totalQty,
+            "snapToken" => $snapToken
         ]);
     }
 

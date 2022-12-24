@@ -60,6 +60,7 @@ Route::middleware(['guest'])->group(function() {
 });
 
 Route::post('customer/payment',[CustomerController::class,'toPayment'])->name('toPayment');
+Route::post('customer/doPay',[CustomerController::class,'doPay']);
 
 Route::middleware(['auth'])->group(function() {
     Route::middleware(['checkRole:customer'])->group(function() {

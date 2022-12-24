@@ -33,9 +33,33 @@ function rupiah($angka){
                                             </div>
                                     </div>
                                     <div class="main-button" style="margin-top: 30px">
-                                        <form action="">
+                                        {{-- <form action="{{url('customer/doPay')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id_user" value="{{auth()->user()->id}}">
                                             <button id="pay-button" class="btn btn-dark">Pay</button>
-                                        </form>
+                                        </form> --}}
+
+                                        <button id="pay-button" class="btn btn-dark">Pay</button>
+                                        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-ruBcktegSYjKWFQv"></script>
+                                        <script type="text/javascript">
+                                            document.getElementById('pay-button').onclick = function(){
+                                              // SnapToken acquired from previous step
+                                              window.snap.pay('<?=$snapToken?>', {
+                                                // Optional
+                                                onSuccess: function(result){
+                                                  /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                                                },
+                                                // Optional
+                                                onPending: function(result){
+                                                  /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                                                },
+                                                // Optional
+                                                onError: function(result){
+                                                  /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                                                }
+                                              });
+                                            };
+                                          </script>
                               </div>
                                   </div>
                             </div>
