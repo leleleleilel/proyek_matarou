@@ -451,6 +451,11 @@ class CustomerController extends Controller
         }
         $param['allSubTotal']=$total;
 
+        $reviews = review::where('fk_htrans',$req->id)->get();
+        $d_baju = d_baju::all();
+        $baju = baju::all();
+
+
         return view('detailhistory',[
             'navAccount'=>"",
             'navHistory'=>"active",
@@ -458,7 +463,11 @@ class CustomerController extends Controller
             'navProduct'=>"",
             'navAbout'=>"",
             'navCart'=>"",
-            "navLogin"=>""
+            "navLogin"=>"",
+            "reviews"=> $reviews,
+            "bajus"=>$baju,
+            "dbajus"=>$d_baju,
+            "ada"=>false
         ],$param);
     }
 
@@ -739,6 +748,7 @@ class CustomerController extends Controller
         $id_user = $request->idUser;
         $fk_kode_promo = $request->fk_kode_promo;
 
+
         $carts = cart::where('id_user',$id_user)->get();
         $dbajus = d_baju::all();
         $bajus = baju::all();
@@ -746,7 +756,6 @@ class CustomerController extends Controller
             $kode_promo = kode_promo::where('id',$fk_kode_promo)->first();
         }
 
-        $i =0;
         $total = 0;
         $totalQty = 0;
         $harga_asli = 0;
@@ -781,14 +790,7 @@ class CustomerController extends Controller
             }
         }
 
-         // Set your Merchant Server Key
-         \Midtrans\Config::$serverKey = 'SB-Mid-server-ABnb9RhgSBplqDd37hYuwm7Y';
-         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-         \Midtrans\Config::$isProduction = false;
-         // Set sanitization on (default)
-         \Midtrans\Config::$isSanitized = true;
-         // Set 3DS transaction for credit card to true
-         \Midtrans\Config::$is3ds = true;
+
 
          if($fk_kode_promo!=""){
             $kode = $kode_promo->id;
@@ -796,48 +798,63 @@ class CustomerController extends Controller
             $kode = "";
          }
 
-         $params = array(
-             'transaction_details' => array(
-                 'order_id' => rand(),
-                 'gross_amount' => $total,
-                 'carts' => $carts,
-                 'kode_promo'=> $kode
-             ),
-             'customer_details' => array(
-                 'first_name' => Auth::user()->nama,
-                 'last_name' => ' ',
-                 'email' => Auth::user()->email,
-                 'phone' => Auth::user()->no_telp,
-             ),
-         );
-
          $nama_kode = "";
          if($fk_kode_promo!=""){
             $nama_kode = $kode_promo->kode;
          }
 
-         $snapToken = \Midtrans\Snap::getSnapToken($params);
-         $snapToken = (string)$snapToken;
+         if($total>0){
+                // Set your Merchant Server Key
+                \Midtrans\Config::$serverKey = 'SB-Mid-server-ABnb9RhgSBplqDd37hYuwm7Y';
+                // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+                \Midtrans\Config::$isProduction = false;
+                // Set sanitization on (default)
+                \Midtrans\Config::$isSanitized = true;
+                // Set 3DS transaction for credit card to true
+                \Midtrans\Config::$is3ds = true;
 
-        return view('pembayaran',[
-            'navAccount'=>"",
-            'navHistory'=>"",
-            'navHome'=>"",
-            'navProduct'=>"",
-            'navAbout'=>"",
-            'navCart'=>"",
-            "id_user"=> $id_user,
-            "carts"=>$carts,
-            "dbajus" => $dbajus,
-            "bajus"=>$bajus,
-            "subtotal"=> $total,
-            "totalQty"=>$totalQty,
-            "snapToken" => $snapToken,
-            "kode_promo"=> $nama_kode,
-            "potongan"=> $potongan,
-            "harga_asli"=>$harga_asli,
-            "navLogin"=>""
-        ]);
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => rand(),
+                    'gross_amount' => $total,
+                    'carts' => $carts,
+                    'kode_promo'=> $kode
+                ),
+                'customer_details' => array(
+                    'first_name' => Auth::user()->nama,
+                    'last_name' => ' ',
+                    'email' => Auth::user()->email,
+                    'phone' => Auth::user()->no_telp,
+                ),
+            );
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            $snapToken = (string)$snapToken;
+
+            return view('pembayaran',[
+                'navAccount'=>"",
+                'navHistory'=>"",
+                'navHome'=>"",
+                'navProduct'=>"",
+                'navAbout'=>"",
+                'navCart'=>"",
+                "id_user"=> $id_user,
+                "carts"=>$carts,
+                "dbajus" => $dbajus,
+                "bajus"=>$bajus,
+                "subtotal"=> $total,
+                "totalQty"=>$totalQty,
+                "snapToken" => $snapToken,
+                "kode_promo"=> $nama_kode,
+                "potongan"=> $potongan,
+                "harga_asli"=>$harga_asli,
+                "navLogin"=>""
+            ]);
+        }else{
+            return redirect()->route('toCart')->with("message",[
+                "isi"=> "Checkout Failed! Check your cart!"
+            ]);
+        }
     }
 
     public function doPay(Request $request){

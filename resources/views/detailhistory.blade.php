@@ -57,14 +57,37 @@ function rupiah($angka){
                                         {{-- Ini nyambung ke mana --}}
                                         {{-- /customer/review/{{$d->id}}/{{$h_trans->id}} --}}
                                         <a href="{{url('/customer/review/'.$d->id."/".$h_trans->id)}}">
+
+                                            @foreach ($dbajus as $db)
+                                                    @if ($db->id==$d->fk_dbaju)
+                                                        @foreach ($bajus as $b)
+                                                            @if ($b->id==$db->fk_baju)
+                                                            @foreach ($reviews as $r)
+                                                            @if ($b->id==$r->fk_baju)
+                                                                @php
+                                                                    $ada = true
+                                                                @endphp
+                                                            @endif
+                                                        @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                            @endforeach
+                                            @if ($ada==true)
+                                                <input type="submit" class="btn btn-light" value="Review" disabled>
+
+                                            @else
                                             <input type="submit" class="btn btn-light" value="Review">
+                                            @endif
+                                            @php
+                                                $ada = false
+                                            @endphp
                                         </a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                       </table>
-                    <button type="submit" name="btnback" class="btn btn-dark" style="margin-top: 20px; width: 120px;">Back</button>
             </div>
         </div>
     </div>
