@@ -59,8 +59,6 @@ Route::middleware(['guest'])->group(function() {
     Route::get('/aboutus',[CustomerController::class,'toAboutUs'])->name('toAboutUs');
 });
 
-Route::get('customer/payment',[CustomerController::class,'toPayment'])->name('toPayment');
-Route::post('customer/payment',[CustomerController::class,'doPay']);
 
 Route::middleware(['auth'])->group(function() {
     Route::middleware(['checkRole:customer'])->group(function() {
@@ -92,6 +90,10 @@ Route::middleware(['auth'])->group(function() {
 
             Route::get('/min/{idCart}/{idDBaju}',[CustomerController::class,'minItem'])->name('minItem');
             Route::get('/plus/{idCart}/{idDBaju}',[CustomerController::class,'plusItem'])->name('plusItem');
+
+            Route::get('/payment',[CustomerController::class,'toPayment'])->name('toPayment');
+            Route::post('/payment',[CustomerController::class,'doPay']);
+
         });
     });
 });

@@ -742,7 +742,7 @@ class CustomerController extends Controller
 
         $message = "Review Success!!";
 
-        return redirect()->back()->with("message",[
+        return redirect('customer/history/detail/'.$id_trans)->with("message",[
             "isi"=> $message
         ]);
     }

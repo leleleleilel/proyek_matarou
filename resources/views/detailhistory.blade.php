@@ -15,12 +15,22 @@ function rupiah($angka){
                 <br>
                 <h1>Transaction Detail</h1><br>
 
+                  {{-- sesssion error message --}}
+                    @if (Session::has("message"))
+                        <h3 style="color: red">
+                        {{Session::get("message.isi")}}
+                        </h3>
+                     @endif
+
                     <div class="jumbotron" style="background-color: #252525;color:white;padding:35px;font-weight:lighter;font-size:25px;">
                         <div class="row mb-3">
                             <div class="col-md-4 d-flex justify-content-end">Invoice ID :</div>
                             <div class="col-md-8">#{{$h_trans->id}}</div>
                         </div>
                         <div class="row mb-3">
+                            <div class="col-md-4 d-flex justify-content-end">Transaction Date :</div>
+                            <div class="col-md-8">{{$h_trans->tanggal_trans}}</div>
+                        </div> <div class="row mb-3">
                             <div class="col-md-4 d-flex justify-content-end">Transaction Date :</div>
                             <div class="col-md-8">{{$h_trans->tanggal_trans}}</div>
                         </div>
@@ -42,6 +52,7 @@ function rupiah($angka){
                             <th scope="col">ITEM PRICE</th>
                             <th scope="col">QTY</th>
                             <th scope="col">SUBTOTAL</th>
+                            <th scope="col">ITEM PHOTO</th>
                             <th scope="col">ACTION</th>
                           </tr>
                         </thead>
@@ -53,6 +64,9 @@ function rupiah($angka){
                                     <td>{{rupiah($d->harga)}}</td>
                                     <td>{{$d->qty}}</td>
                                     <td>{{rupiah($d->subtotal)}}</td>
+                                    <td>
+                                        <img src="{{ url('public/image/bajus/'.$d->nama_file) }}" style="height: 100px; width: 70px">
+                                    </td>
                                     <td>
                                         {{-- Ini nyambung ke mana --}}
                                         {{-- /customer/review/{{$d->id}}/{{$h_trans->id}} --}}
