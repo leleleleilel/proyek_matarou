@@ -869,7 +869,8 @@ class CustomerController extends Controller
                 "kode_promo"=> $nama_kode,
                 "potongan"=> $potongan,
                 "harga_asli"=>$harga_asli,
-                "navLogin"=>""
+                "navLogin"=>"",
+                "fk_promo"=>$fk_kode_promo
             ]);
         }else{
             return redirect()->route('toCart')->with("message",[
@@ -894,7 +895,7 @@ class CustomerController extends Controller
         $h_trans->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
         $h_trans->transaction_id = $json->transaction_id;
         $h_trans->tanggal_trans =  date("Y/m/d");
-        $h_trans->fk_kode_promo =  $request->get('kode_promo');
+        $h_trans->fk_kode_promo =  $request->fk_promo;
         $h_trans->save();
 
         $last_id = $h_trans->id;

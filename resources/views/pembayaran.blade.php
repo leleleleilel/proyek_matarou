@@ -62,6 +62,7 @@ function rupiah($angka){
 
                                         <form action="{{url('customer/payment')}}" id="submit_form" method="POST">
                                             @csrf
+                                            <input type="hidden" name="fk_promo" value="{{$fk_promo}}">
                                             <input type="hidden" name="json" id="json_callback">
                                         </form>
 

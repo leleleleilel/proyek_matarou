@@ -97,7 +97,6 @@ function rupiah($angka){
                             @endforeach
                         </tbody>
                       </table>
-                    <button type="submit" name="btnback" class="btn btn-dark" style="margin-top: 20px; width: 120px;">Back</button>
             </div>
         </div>
     </div>
