@@ -119,7 +119,9 @@
               <td>
                     @if (isset($sizes_dbaju))
                         @foreach ($sizes_dbaju as $sz )
-                            {{$sz->nama}}
+                                @if ($sz->id==$dbaju->fk_size)
+                                {{$sz->nama}}
+                                @endif
                         @endforeach
                     @endif
               </td>

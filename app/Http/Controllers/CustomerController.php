@@ -372,6 +372,17 @@ class CustomerController extends Controller
         ],$param);
     }
 
+    public function addToCart2(Request $req){
+        if($req->btnAddToCart){
+
+            if(auth()->check()){
+                return redirect('/customer/product/'.$req->id);
+            }else{
+                return redirect('/login');
+            }
+        }
+    }
+
     public function addToCart(Request $req)
     {
         if($req->btnAddToCart){
@@ -403,7 +414,11 @@ class CustomerController extends Controller
                 $s->save();
                 session()->flash('msg','Success Update Item in Cart');
             }
-            return redirect('/customer/product/'.$req->id);
+            if(auth()->check()){
+                return redirect('/customer/product/'.$req->id);
+            }else{
+                return redirect('/login');
+            }
         }
     }
 

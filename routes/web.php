@@ -55,6 +55,7 @@ Route::middleware(['guest'])->group(function() {
     Route::get('/catalogue',[CustomerController::class,'tolistproduct'])->name('toListProduct');
     //perlu id product (DETAIL PRODUCT)
     Route::get('/product/{id}',[CustomerController::class,'toProduct'])->name('toProduct');
+    Route::post('/product/{id}',[CustomerController::class,'addToCart2'])->name('addToCart2');
     //about us
     Route::get('/aboutus',[CustomerController::class,'toAboutUs'])->name('toAboutUs');
 });

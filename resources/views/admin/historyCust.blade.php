@@ -35,7 +35,7 @@
                                 @endif
                             @endforeach
                         @endif
-                        <td>{{$hist->status}}</td>
+                        <td>{{$hist->payment_status}}</td>
                     </tr>
                 @endforeach
             @endif

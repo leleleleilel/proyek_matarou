@@ -13,7 +13,6 @@
             <th scope="col">REVIEW DESCRIPTION</th>
             <th scope="col">HTRANS DATE</th>
             <th scope="col">PRODUCT NAME</th>
-            <th scope="col">STATUS</th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +36,6 @@
                                 @endif
                             @endforeach
                         @endif
-                        <td>{{$review->status}}</td>
                     </tr>
                 @endforeach
             @endif

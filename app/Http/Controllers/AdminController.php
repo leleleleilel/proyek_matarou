@@ -215,7 +215,7 @@ class AdminController extends Controller
 
         if($id_user==-1){
             $validate = $request->validate([
-                'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha',new CekUsername()],
+                'username'=>['required','min:8','alpha',new CekUsername()],
                 'full_name'=>'required|max:50',
                 'alamat'=>'required|min:12',
                 'email'=>'required|email|unique:user,email',
@@ -303,7 +303,7 @@ class AdminController extends Controller
     public function toEditUsers(Request $request){
         $id = $request->id;
 
-        $list_users = User::withTrashed()->get();
+        $list_users = User::withTrashed()->paginate(6);
         $user = User::where('id',$id)->first();
         return view('admin.masterUser',[
             "title"=>"Master User",
@@ -489,7 +489,7 @@ class AdminController extends Controller
         $id = $request->id;
         $promo = kode_promo::where('id',$id)->first();
 
-        $list_kode_promo = kode_promo::withTrashed()->get();
+        $list_kode_promo = kode_promo::withTrashed()->paginate(6);
 
         return view('admin.masterKodePromo',[
             "title"=>"Master Promo Code",
@@ -524,8 +524,7 @@ class AdminController extends Controller
         $images = Dfoto::where('id_baju',$id)->get();
         $sizes = size::all();
         $dbaju = d_baju::withTrashed()->where('fk_baju',$id)->get();
-        $sizes_dbaju = size::with('sizeBaju')->get();
-
+        $sizes_dbaju = size::all();
 
         return view('admin.manageSizeStok',[
             "title"=>"Manage Sizes and Stocks",
@@ -553,7 +552,7 @@ class AdminController extends Controller
         ]);
 
         $id = $request->id_product;
-        $size_baju = d_baju::withTrashed()->where('fk_size',$size)->first();
+        $size_baju = d_baju::withTrashed()->where('fk_size',$size)->where('fk_baju',$id)->first();
         if(!$size_baju){
             //jika belum ada
             $new_size = new d_baju();
@@ -810,9 +809,9 @@ class AdminController extends Controller
           $user = User::where('id',$id_user)->first();
 
           $validate = $request->validate([
-              'username'=>['required','min:8','regex:/^[a-zA-Z]+$/u','alpha'],
+              'username'=>['required','regex:/^[a-zA-Z]+$/u','alpha'],
               'full_name'=>'required|max:50',
-              'alamat'=>'required|min:12',
+              'alamat'=>'required',
               'email'=>'required|email',
               'phone'=>['required','numeric',new CekPanjangTelepon()],
               'password'=>'required'
