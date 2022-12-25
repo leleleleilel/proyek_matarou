@@ -28,13 +28,15 @@
                                 @endif
                             @endforeach
                         @endif
+                        <td>
                         @if (isset($promos))
                             @foreach ($promos as $promo)
                                 @if ($promo->id==$hist->fk_kode_promo)
-                                    <td>{{$promo->nama}}</td>
+                                    {{$promo->kode}}
                                 @endif
                             @endforeach
                         @endif
+                    </td>
                         <td>{{$hist->payment_status}}</td>
                     </tr>
                 @endforeach
