@@ -36,7 +36,7 @@ function rupiah($angka){
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4 d-flex justify-content-end">Promo Code :</div>
-                            <div class="col-md-8">{{$h_trans->nama}}</div>
+                            <div class="col-md-8">{{$h_trans->kode}}</div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4 d-flex justify-content-end">Subtotal :</div>
