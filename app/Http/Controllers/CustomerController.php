@@ -288,7 +288,8 @@ class CustomerController extends Controller
                                 ->join('d_foto_baju','d_foto_baju.id_baju','=','baju.id')
                                 ->join('size','size.id','=','d_baju.fk_size')
                                 ->where('id_user','=',Auth::user()->id)
-                                ->get(['d_foto_baju.nama_file','baju.nama','cart.id','cart.id_dbaju','baju.harga','cart.quantity']);
+                                ->groupBy('id_dbaju')
+                                ->get(['d_foto_baju.nama_file','baju.nama','cart.id','cart.id_dbaju','baju.harga','cart.quantity','size.kode']);
 
 
         $totalItem = 0;

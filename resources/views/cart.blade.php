@@ -30,6 +30,7 @@ function rupiah($angka){
                             </div>
                             <div class="col-8 d-flex align-items-center flex-column pt-4 mt-4">
                                 <h1 class="display-4">{{$c->nama}}</h1>
+                                <h4>Size : {{$c->kode}}</h4>
                                 <h3 style="font-weight: lighter">{{rupiah($c->harga * $c->quantity)}}</h3>
                                 <div class="row" >
                                     <div class="col-3" style="padding: 0px;margin:0px;">
