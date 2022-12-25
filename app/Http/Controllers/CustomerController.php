@@ -286,6 +286,7 @@ class CustomerController extends Controller
         $param['cart'] = cart::join('d_baju','d_baju.id','=','cart.id_dbaju')
                                 ->join('baju','baju.id','=','d_baju.fk_baju')
                                 ->join('d_foto_baju','d_foto_baju.id_baju','=','baju.id')
+                                ->join('size','size.id','=','d_baju.fk_size')
                                 ->where('id_user','=',Auth::user()->id)
                                 ->get(['d_foto_baju.nama_file','baju.nama','cart.id','cart.id_dbaju','baju.harga','cart.quantity']);
 
