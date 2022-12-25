@@ -456,6 +456,7 @@ class CustomerController extends Controller
 
         $param['h_trans']=h_trans::leftJoin('kode_promo','kode_promo.id','=','h_trans.fk_kode_promo')
                                     ->where('id_user','=',Auth::user()->id)
+                                    ->where('h_trans.id','=',$req->id)
                                     ->first(['h_trans.*','kode_promo.nama']);
 
         $param['d_trans']=d_trans::join('h_trans','h_trans.id','=','fk_htrans')
