@@ -101,12 +101,12 @@ class AdminController extends Controller
 
     public function toListReviews(){
         $review = review::paginate(10);
-        $listhtrans = h_trans::all();
+        $h_trans = h_trans::all();
         $baju = baju::all();
         return view('admin.listReviews',[
             "title"=>"List Review",
             "reviews"=>$review,
-            "htranss"=>$listhtrans,
+            "htranss"=>$h_trans,
             "bajus"=>$baju,
             "activeMaster"=> "",
             "activeReports"=>"",

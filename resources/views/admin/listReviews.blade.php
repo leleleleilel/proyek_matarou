@@ -17,21 +17,21 @@
         </thead>
         <tbody>
             @if (isset($reviews))
-                @foreach ($reviews as $review)
+                @foreach ($reviews as $rev)
                     <tr>
-                        <td>{{$review->id}}</td>
-                        <td>{{$review->rate}}</td>
-                        <td>{{$review->deskripsi_review}}</td>
+                        <td>{{$rev->id}}</td>
+                        <td>{{$rev->rate}}</td>
+                        <td>{{$rev->deskripsi_review}}</td>
                         @if (isset($htranss))
                             @foreach ($htranss as $htrans)
-                                @if ($htrans->id==$review->fk_htrans)
+                                @if ($htrans->id==$rev->fk_htrans)
                                     <td>{{$htrans->tanggal_trans}}</td>
                                 @endif
                             @endforeach
                         @endif
                         @if (isset($bajus))
                             @foreach ($bajus as $baju)
-                                @if ($baju->id==$review->fk_baju)
+                                @if ($baju->id==$rev->fk_baju)
                                     <td>{{$baju->nama}}</td>
                                 @endif
                             @endforeach
